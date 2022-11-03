@@ -5,20 +5,20 @@ import { useNavigation } from '@react-navigation/native';
 
 function FuelSavingTips() {
 
-    const [wallets, setWallets] = useState([]);
+    const [tips, setTips] = useState([]);
     const navigation = useNavigation();
 
-    const getWalletItems = async () => {
+    const getFuelTips = async () => {
         try {
-            const response = await axios.get(`http://192.168.1.111:5050/wallet`);
-            setWallets(response.data);
+            const response = await axios.get(`http://192.168.1.111:5050/FuelTips/`);
+            setTips(response.data);
         } catch (error) {
             console.log(error);
         }
     };
 
     useEffect(() => {
-        getWalletItems();
+        getFuelTips();
     }, [])
 
     return (
@@ -33,16 +33,16 @@ function FuelSavingTips() {
                 Fuel Saving Tips
             </Text>
 
-            {wallets.map(wallet => (
-                <View key={wallet._id}>
+            {tips.map(tip => (
+                <View key={tip._id}>
 
                     <TouchableOpacity style={styles.cardButton} >
 
                         <Text style={{ fontSize: 16, fontWeight: "700", color: "#26B787", alignSelf: "flex-start" }}>
-                            {wallet.accountBalance}
+                            {tip.tipTitle}
                         </Text>
                         <Text style={{ fontSize: 14, alignSelf: "flex-start" }}>
-                            {wallet.passengerId}
+                            {tip.tipDescription.slice(0, 120)} ...
                         </Text>
 
                     </TouchableOpacity>
@@ -60,7 +60,6 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         marginTop: 20
     },
-
     button: {
         width: '80%',
         paddingTop: 2,
@@ -85,7 +84,6 @@ const styles = StyleSheet.create({
         padding: 30,
         fontWeight: "500"
     },
-
     img: {
         width: 150,
         height: 150,
@@ -96,5 +94,4 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         marginTop: 15,
     },
-
 });

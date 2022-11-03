@@ -58,7 +58,6 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         marginTop: 20
     },
-
     button: {
         width: '80%',
         paddingTop: 2,
@@ -75,12 +74,10 @@ const styles = StyleSheet.create({
         padding: 30,
         fontWeight: "500"
     },
-
     img: {
         width: 150,
         height: 150,
         marginBottom: 5,
         marginTop: 10
     },
-
 });
