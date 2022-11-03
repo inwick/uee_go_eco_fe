@@ -10,7 +10,6 @@ function FuelEfficiencyCalculator() {
     const [newDistance, setNewDistance] = useState('');
     const [amount, setAmount] = useState('');
 
-
     return (
 
         <View style={styles.MainContainer}>

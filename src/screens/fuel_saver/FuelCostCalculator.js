@@ -220,7 +220,6 @@ const styles = StyleSheet.create({
         backgroundColor: "#E4E4E4",
         color: "black"
     },
-
     lableClass4: {
         textAlign: 'center',
         height: 40,
@@ -246,5 +245,4 @@ const styles = StyleSheet.create({
         flex: 1,
         flexDirection: "row",
     },
-
 });
