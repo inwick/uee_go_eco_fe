@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { StyleSheet, View, TouchableOpacity, Text, TextInput, Button, Alert } from "react-native";
 import { useNavigation } from '@react-navigation/native';
 
@@ -9,6 +9,32 @@ function FuelEfficiencyCalculator() {
     const [preDistance, setPreDistance] = useState('');
     const [newDistance, setNewDistance] = useState('');
     const [amount, setAmount] = useState('');
+
+    const Calculate = async () => {
+
+        if (preDistance == "") {
+            alert("Please Enter Previous ODO Meater")
+            return false;
+        } else if (newDistance == "") {
+            alert("Please Enter Current ODO Meater")
+            return false;
+        } else if (amount == "") {
+            alert("Please Enter Fuel Amount You added to the tank")
+            return false;
+        }
+
+        else {
+            const Result = (newDistance - preDistance) / amount
+            console.log("The Cost is ", Result);
+            Alert.alert(
+                "Individual Cost",
+                Result.toString() + " KMPL",
+                [
+                    { text: "OK", onPress: () => navigation.navigate("FuelEfficiencyCalculator") }
+                ]
+            );
+        }
+    }
 
     return (
 
@@ -65,7 +91,7 @@ function FuelEfficiencyCalculator() {
             </View>
 
             <View style={styles.fixToText}>
-                <TouchableOpacity style={styles.CalBtn} >
+                <TouchableOpacity style={styles.CalBtn} onPress={() => Calculate()}>
                     <Text style={styles.CalBtnText}>Calculate</Text>
                 </TouchableOpacity>
             </View>

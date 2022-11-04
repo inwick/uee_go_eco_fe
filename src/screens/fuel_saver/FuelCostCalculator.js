@@ -1,6 +1,5 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { StyleSheet, View, TouchableOpacity, Text, TextInput, Button, Alert } from "react-native";
-import axios from 'react-native-axios';
 import { useNavigation } from '@react-navigation/native';
 
 function FuelCostCalculator() {
@@ -12,6 +11,58 @@ function FuelCostCalculator() {
     const [consumption, setConsumption] = useState('');
     const [price, setPrice] = useState('');
     const [seats, setSeats] = useState('');
+
+    const totalCost = async () => {
+
+        if (distance == "") {
+            alert("Please Enter Travel Distance")
+            return false;
+        } else if (consumption == "") {
+            alert("Please Enter Fuel Consumption")
+            return false;
+        } else if (price == "") {
+            alert("Please Enter Latest Fuel Price")
+            return false;
+        } else {
+
+            const cost = (distance / consumption) * price
+            console.log("The Cost is ", cost);
+            Alert.alert(
+                "Total Cost",
+                "LKR." + cost.toString(),
+                [
+                    { text: "OK", onPress: () => navigation.navigate("FuelCostCalculator") }
+                ]
+            );
+        }
+    }
+
+    const individualCost = async () => {
+
+        if (distance == "") {
+            alert("Please Enter Travel Distance")
+            return false;
+        } else if (consumption == "") {
+            alert("Please Enter Fuel Consumption")
+            return false;
+        } else if (price == "") {
+            alert("Please Enter Latest Fuel Price")
+            return false;
+        } else if (seats == "") {
+            alert("Please Enter Seat Count")
+            return false;
+        } else {
+            const inCost = ((distance / consumption) * price) / seats
+            console.log("The Cost is ", inCost);
+            Alert.alert(
+                "Individual Cost",
+                "LKR." + inCost.toString(),
+                [
+                    { text: "OK", onPress: () => navigation.navigate("FuelCostCalculator") }
+                ]
+            );
+        }
+    }
 
     return (
 
@@ -97,10 +148,10 @@ function FuelCostCalculator() {
             </Text>
 
             <View style={styles.fixToText}>
-                <TouchableOpacity style={styles.CalBtn} >
+                <TouchableOpacity style={styles.CalBtn} onPress={() => totalCost()}>
                     <Text style={styles.CalBtnText}>Total Cost</Text>
                 </TouchableOpacity>
-                <TouchableOpacity style={styles.CalBtn} >
+                <TouchableOpacity style={styles.CalBtn} onPress={() => individualCost()}>
                     <Text style={styles.CalBtnText}>Individual cost</Text>
                 </TouchableOpacity>
             </View>
