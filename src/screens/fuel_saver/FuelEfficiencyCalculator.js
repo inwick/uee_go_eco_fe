@@ -25,7 +25,6 @@ function FuelEfficiencyCalculator() {
 
         else {
             const Result = (newDistance - preDistance) / amount
-            console.log("The Cost is ", Result);
             Alert.alert(
                 "Individual Cost",
                 Result.toString() + " KMPL",
