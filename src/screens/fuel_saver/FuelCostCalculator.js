@@ -26,7 +26,6 @@ function FuelCostCalculator() {
         } else {
 
             const cost = (distance / consumption) * price
-            console.log("The Cost is ", cost);
             Alert.alert(
                 "Total Cost",
                 "LKR." + cost.toString(),
@@ -53,7 +52,6 @@ function FuelCostCalculator() {
             return false;
         } else {
             const inCost = ((distance / consumption) * price) / seats
-            console.log("The Cost is ", inCost);
             Alert.alert(
                 "Individual Cost",
                 "LKR." + inCost.toString(),
