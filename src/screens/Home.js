@@ -22,16 +22,14 @@ function Home() {
         <Text style={styles.text}>Fuel</Text>
       </TouchableOpacity>
 
-      <TouchableOpacity
-        style={styles.button}
-        onPress={() => navigation.navigate('')}>
-        <Text style={styles.text}>Food</Text>
-      </TouchableOpacity>
+            <TouchableOpacity style={styles.button} onPress={() => navigation.navigate("WaterSaverDashBoard")}>
+                <Text style={styles.text}>Water</Text>
+            </TouchableOpacity>
 
       <TouchableOpacity
         style={styles.button}
         onPress={() => navigation.navigate('')}>
-        <Text style={styles.text}>Water</Text>
+        <Text style={styles.text}>Food</Text>
       </TouchableOpacity>
 
       <TouchableOpacity
