@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { StyleSheet, View, TouchableOpacity, Text, Image } from "react-native";
+import { StyleSheet, View, TouchableOpacity, Text } from "react-native";
 import axios from 'react-native-axios';
 import { useNavigation } from '@react-navigation/native';
 
@@ -36,7 +36,7 @@ function FuelSavingTips() {
             {tips.map(tip => (
                 <View key={tip._id}>
 
-                    <TouchableOpacity style={styles.cardButton} >
+                    <TouchableOpacity style={styles.cardButton} onPress={() => navigation.navigate("FuelTipView", { id: tip._id })}>
 
                         <Text style={{ fontSize: 16, fontWeight: "700", color: "#26B787", alignSelf: "flex-start" }}>
                             {tip.tipTitle}
