@@ -10,7 +10,7 @@ function FoodSaverDashboard() {
 
     const getWalletItems = async () => {
         try {
-            const response = await axios.get(`http://192.168.1.111:5050/wallet`);
+            const response = await axios.get(`http://192.168.1.100:5050/wallet`);
             setWallets(response.data);
         } catch (error) {
             console.log(error);
@@ -66,11 +66,12 @@ const styles = StyleSheet.create({
         backgroundColor: '#ffc107',
         borderRadius: 20,
         marginTop: 20,
+        marginBottom: 60,
         height: 100
     },
     text: {
         color: '#000',
-        fontSize: 20,
+        fontSize: 18,
         textAlign: 'center',
         padding: 30,
         fontWeight: "500"

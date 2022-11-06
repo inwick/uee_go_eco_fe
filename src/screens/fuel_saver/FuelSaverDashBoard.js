@@ -10,7 +10,7 @@ function FuelSaverDashBoard() {
 
     const getWalletItems = async () => {
         try {
-            const response = await axios.get(`http://192.168.1.111:5050/wallet`);
+            const response = await axios.get(`http://192.168.1.100:5050/wallet`);
             setWallets(response.data);
         } catch (error) {
             console.log(error);
@@ -58,7 +58,6 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         marginTop: 20
     },
-
     button: {
         width: '80%',
         paddingTop: 2,
@@ -75,12 +74,10 @@ const styles = StyleSheet.create({
         padding: 30,
         fontWeight: "500"
     },
-
     img: {
         width: 150,
         height: 150,
         marginBottom: 5,
         marginTop: 10
     },
-
 });

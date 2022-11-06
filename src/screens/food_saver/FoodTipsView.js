@@ -3,14 +3,14 @@ import { StyleSheet, View, TouchableOpacity, Text, Image } from "react-native";
 import axios from 'react-native-axios';
 import { useNavigation } from '@react-navigation/native';
 
-function FuelSavingTips() {
+function FoodSavingTipsView() {
 
     const [tips, setTips] = useState([]);
     const navigation = useNavigation();
 
-    const getFuelTips = async () => {
+    const getFoodTips = async () => {
         try {
-            const response = await axios.get(`http://192.168.1.100:5050/FuelTips/`);
+            const response = await axios.get(`http://192.168.1.100:5050/FoodSaver/`);
             setTips(response.data);
         } catch (error) {
             console.log(error);
@@ -18,7 +18,7 @@ function FuelSavingTips() {
     };
 
     useEffect(() => {
-        getFuelTips();
+        getFoodTips();
     }, [])
 
     return (
@@ -30,19 +30,19 @@ function FuelSavingTips() {
                 fontWeight: 'bold',
                 color: 'black'
             }}>
-                Fuel Saving Tips
+                Food Waste Reducing Tips
             </Text>
 
             {tips.map(tip => (
                 <View key={tip._id}>
 
-                    <TouchableOpacity style={styles.cardButton} >
+                    <TouchableOpacity style={styles.cardButton} onPress={() => navigation.navigate("FoodSavingTipsGetOneByOne" , {id: tip._id})}>
 
-                        <Text style={{ fontSize: 16, fontWeight: "700", color: "#26B787", alignSelf: "flex-start" }}>
-                            {tip.tipTitle}
+                        <Text style={{ fontSize: 16, fontWeight: "700", color: "#ffc107", alignSelf: "flex-start" }}>
+                            {tip.title}
                         </Text>
                         <Text style={{ fontSize: 14, alignSelf: "flex-start" }}>
-                            {tip.tipDescription.slice(0, 120)} ...
+                            {tip.description.slice(0, 120)} ...
                         </Text>
 
                     </TouchableOpacity>
@@ -52,7 +52,7 @@ function FuelSavingTips() {
 
     );
 }
-export default FuelSavingTips
+export default FoodSavingTipsView
 
 const styles = StyleSheet.create({
     MainContainer: {
@@ -64,7 +64,7 @@ const styles = StyleSheet.create({
         width: '80%',
         paddingTop: 2,
         paddingBottom: 2,
-        backgroundColor: '#26B787',
+        backgroundColor: '#ffc107',
         borderRadius: 20,
         marginTop: 20,
         height: 100
