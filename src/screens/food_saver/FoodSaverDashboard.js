@@ -3,7 +3,7 @@ import { StyleSheet, View, TouchableOpacity, Text, Image } from "react-native";
 import axios from 'react-native-axios';
 import { useNavigation } from '@react-navigation/native';
 
-function FuelSaverDashBoard() {
+function FoodSaverDashboard() {
 
     const [wallets, setWallets] = useState([]);
     const navigation = useNavigation();
@@ -30,27 +30,27 @@ function FuelSaverDashBoard() {
                 fontWeight: 'bold',
                 color: 'black'
             }}>
-                Fuel Saver
+                Food Waste Reducing
             </Text>
-            <Image source={require('../../assets/fuel_saver/fuelSaverIcon.png')} style={styles.img} />
+            <Image source={require('../../assets/food_waste_saver/food1.png')} style={styles.img} />
 
-            <TouchableOpacity style={styles.button} onPress={() => navigation.navigate("FuelSavingTips")}>
-                <Text style={styles.text}>Fuel Saving Tips</Text>
+            <TouchableOpacity style={styles.button} onPress={() => navigation.navigate("AddFoodSavingTips")}>
+                <Text style={styles.text}>Add Food Waste Reducing Tips</Text>
             </TouchableOpacity>
 
-            <TouchableOpacity style={styles.button} onPress={() => navigation.navigate("FuelCostCalculator")}>
-                <Text style={styles.text}>Fuel Cost Calculator</Text>
+            <TouchableOpacity style={styles.button} onPress={() => navigation.navigate("FoodSavingTips")}>
+                <Text style={styles.text}>Food Waste Reducing Tips</Text>
             </TouchableOpacity>
-
+{/* 
             <TouchableOpacity style={styles.button} onPress={() => navigation.navigate("FuelEfficiencyCalculator")}>
                 <Text style={styles.text}>Fuel Efficiency Calculator</Text>
-            </TouchableOpacity>
+            </TouchableOpacity> */}
 
         </View>
 
     );
 }
-export default FuelSaverDashBoard
+export default FoodSaverDashboard
 
 const styles = StyleSheet.create({
     MainContainer: {
@@ -58,26 +58,30 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         marginTop: 20
     },
+
     button: {
         width: '80%',
         paddingTop: 2,
         paddingBottom: 2,
-        backgroundColor: '#26B787',
+        backgroundColor: '#ffc107',
         borderRadius: 20,
         marginTop: 20,
+        marginBottom: 60,
         height: 100
     },
     text: {
         color: '#000',
-        fontSize: 20,
+        fontSize: 18,
         textAlign: 'center',
         padding: 30,
         fontWeight: "500"
     },
+
     img: {
         width: 150,
         height: 150,
         marginBottom: 5,
         marginTop: 10
     },
+
 });

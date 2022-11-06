@@ -10,7 +10,7 @@ function FuelSavingTips() {
 
     const getFuelTips = async () => {
         try {
-            const response = await axios.get(`http://192.168.1.111:5050/FuelTips/`);
+            const response = await axios.get(`http://192.168.1.100:5050/FuelTips/`);
             setTips(response.data);
         } catch (error) {
             console.log(error);

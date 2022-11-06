@@ -1,6 +1,6 @@
-import React, {useState, useEffect} from 'react';
-import {StyleSheet, View, TouchableOpacity, Text, Image} from 'react-native';
-import {useNavigation} from '@react-navigation/native';
+import React, { useState, useEffect } from 'react';
+import { StyleSheet, View, TouchableOpacity, Text, Image } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 
 function Home() {
   const navigation = useNavigation();
@@ -22,14 +22,12 @@ function Home() {
         <Text style={styles.text}>Fuel</Text>
       </TouchableOpacity>
 
-            <TouchableOpacity style={styles.button} onPress={() => navigation.navigate("WaterSaverDashBoard")}>
-                <Text style={styles.text}>Water</Text>
-            </TouchableOpacity>
-
-      <TouchableOpacity
-        style={styles.button}
-        onPress={() => navigation.navigate('')}>
+      <TouchableOpacity style={styles.button} onPress={() => navigation.navigate("FoodSaverDashboard")}>
         <Text style={styles.text}>Food</Text>
+      </TouchableOpacity>
+
+      <TouchableOpacity style={styles.button} onPress={() => navigation.navigate("WaterSaverDashBoard")}>
+        <Text style={styles.text}>Water</Text>
       </TouchableOpacity>
 
       <TouchableOpacity
