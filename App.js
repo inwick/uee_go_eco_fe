@@ -6,6 +6,7 @@ import FuelSaverDashBoard from './src/screens/fuel_saver/FuelSaverDashBoard';
 import FuelSavingTips from './src/screens/fuel_saver/FuelSavingTips';
 import FuelCostCalculator from './src/screens/fuel_saver/FuelCostCalculator';
 import FuelEfficiencyCalculator from './src/screens/fuel_saver/FuelEfficiencyCalculator';
+import FuelTipView from './src/screens/fuel_saver/FuelTipView';
 
 import FoodSaverDashboard from './src/screens/food_saver/FoodSaverDashboard';
 import AddFoodWasteReducingTips from './src/screens/food_saver/AddFoodWasteReducingTips';
@@ -36,6 +37,7 @@ const App = () => {
         <Stack.Screen name="FuelSavingTips" component={FuelSavingTips} options={{ title: 'Fuel Saving Tips' }} />
         <Stack.Screen name="FuelCostCalculator" component={FuelCostCalculator} options={{ title: 'Fuel Cost Calculator' }} />
         <Stack.Screen name="FuelEfficiencyCalculator" component={FuelEfficiencyCalculator} options={{ title: 'Fuel Efficiency Calculator' }} />
+        <Stack.Screen name="FuelTipView" component={FuelTipView} options={{ title: 'Tip View' }} />
 
 
         {/* food waste saver */}

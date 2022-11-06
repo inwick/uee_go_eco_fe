@@ -26,7 +26,7 @@ function FuelEfficiencyCalculator() {
         else {
             const Result = (newDistance - preDistance) / amount
             Alert.alert(
-                "Individual Cost",
+                "Fuel Efficiency",
                 Result.toString() + " KMPL",
                 [
                     { text: "OK", onPress: () => navigation.navigate("FuelEfficiencyCalculator") }
