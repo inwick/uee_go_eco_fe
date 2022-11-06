@@ -1,7 +1,6 @@
 import React, { useState , useEffect} from "react";
-import { StyleSheet, View, TouchableOpacity, Text, TextInput, Button, Alert } from "react-native";
+import { StyleSheet, View, TouchableOpacity, Text, TextInput, Button, Alert, Image, ScrollView, SafeAreaView } from "react-native";
 import { useNavigation } from '@react-navigation/native';
-import { Dropdown } from 'react-native-material-dropdown';
 import axios from 'react-native-axios';
 
 function FoodWasteTipsViewOneByOne({ route }) {
@@ -20,9 +19,10 @@ function FoodWasteTipsViewOneByOne({ route }) {
     const getFoodTip = async () => {
         try {
             const response = await axios.get('http://localhost:5050/FoodSaver/'+ id);
-            console.debug("response all" , response)
-            setTitle(response.data.title)
-            console.log("titleeeeeee" , response.data.title)
+            setTitle(response.data.title);
+            // console.log("titleeeeeee" , response.data.title)
+            setDescription(response.data.description);
+            setImage(response.data.image);
             setItem(response.data);
         } catch (error) {
             console.log(error);
@@ -35,85 +35,17 @@ function FoodWasteTipsViewOneByOne({ route }) {
 
     return (
 
-        <View style={styles.MainContainer}>
-
-            <Text style={{
-                fontSize: 22,
-                fontWeight: 'bold',
-                color: 'black'
-            }}>
-                {title}
-            </Text>
-
-            <View style={styles.container}>
-
-                <Text style={styles.lableClass}>Title : </Text>
-                <TextInput
-                    defaultValue={title}
-                    underlineColorAndroid='transparent'
-                    style={styles.SmallTextInputStyleClass}
-                />
-
-            </View>
-
-            <View style={styles.container}>
-
-                <Text style={styles.lableClass2}>category :</Text>
-                <TextInput
-                    defaultValue={category}
-                    underlineColorAndroid='transparent'
-                    style={styles.SmallTextInputStyleClass2}
-                />
-            </View>
-
-            <View style={styles.container}>
-
-                <Text style={styles.lableClass3}>description : </Text>
-                <TextInput
-                    underlineColorAndroid='transparent'
-                    style={styles.SmallTextInputStyleClass3}
-                    defaultValue={description}
-                />
-            </View>
-
-            <View style={styles.container}>
-
-                <Text style={styles.lableClass4}> Video URL :</Text>
-                <TextInput
-                    underlineColorAndroid='transparent'
-                    style={styles.SmallTextInputStyleClass4}
-                    defaultValue={video}
-                />
-            </View>
-
-            <View style={styles.container}>
-
-                <Text style={styles.lableClass5}> Image URL :</Text>
-                <TextInput
-                    underlineColorAndroid='transparent'
-                    style={styles.SmallTextInputStyleClass5}
-                    defaultValue={image}
-                />
-            </View>
-
-            <View style={{
-                width: 450,
-                alignItems: 'center',
-                borderBottomColor: '#ffc107',
-                borderBottomWidth: StyleSheet.hairlineWidth,
-                marginTop: 250,
-            }}>
-            </View>
-
-            {/* <View style={styles.fixToText}>
-                <TouchableOpacity style={styles.CalBtn} onPress={() => insertData()}>
-                    <Text style={styles.CalBtnText}>Update</Text>
-                </TouchableOpacity>
-                <TouchableOpacity style={styles.CalBtn} onPress={() => navigation.navigate("FoodSaverDashboard")}>
-                    <Text style={styles.CalBtnText}>Delete</Text>
-                </TouchableOpacity>
-            </View> */}
-        </View>
+        <SafeAreaView>
+            <ScrollView>
+                <View>
+                    <Text>{title}</Text>
+                </View>
+                <Image source={{uri: image}}/>
+                <View>
+                    <Text>{description}</Text>
+                </View>
+            </ScrollView>
+        </SafeAreaView>
 
     );
 }

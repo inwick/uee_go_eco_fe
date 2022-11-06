@@ -17,27 +17,27 @@ function AddFoodWasteReducingTips() {
     const [category, setCategory] = useState('');
     const [userId, setUserId] = useState('003');
 
-    // const options = ["Ways to Reduce Food Waste", "Food Preservation methods", "Replanting Using Food Waste Parts"];
-    const option = [{
-        value: 'Ways to Reduce Food Waste',
-    }, {
-        value: 'Food Preservation methods',
-    }, {
-        value: 'Replanting Using Food Waste Parts',
-    }];
 
-    // const [data, setData] = useState({
-    //     title: "",
-    //     description: "",
-    //     video: "",
-    //     image: "",
-    //     category: option[0]
-    // });
+    const onChangeTextTitle = (value) => {
+        setTitle(value)
+    }
+    const onChangeTextDescription = (value) => {
+        setDescription(value)
+    }
+    const onChangeTextVideo = (value) => {
+        setVideo(value)
+    }
+    const onChangeTextImage = (value) => {
+        setImage(value)
+    }
+    const onChangeTextCategory = (value) => {
+        setCategory(value)
+    }
 
-    const insertData = (e) => {
-        //    e.preventDefault();
 
-        const insertData = {
+    const insertData = () => {
+
+        var data = {
             title: title,
             category: category,
             description: description,
@@ -45,19 +45,23 @@ function AddFoodWasteReducingTips() {
             video: video,
             userId: userId
         }
-        try {
-            axios.post('http://192.168.1.100:5050/FoodSaver/add' + insertData)
+        axios({
+            url: "http://192.168.1.100:5050/FoodSaver/add",
+            method: "POST",
+            data: data
+        }).then((response) => {
+            setList(response.data)
+        })
 
-            Alert.alert(
-                "Done",
-                "Successfully Inserted!",
-                [
-                    { text: "OK", onPress: () => navigation.navigate("FoodSaverDashboard") }
-                ]
-            );
-        } catch (error) {
-            alert('Please Try Again, Something Went Wrong!');
-        }
+
+        Alert.alert(
+            "Done",
+            "Successfully Inserted!",
+            [
+                { text: "OK", onPress: () => navigation.navigate("FoodSavingTips") }
+            ]
+        );
+
     }
 
     return (
@@ -76,8 +80,8 @@ function AddFoodWasteReducingTips() {
 
                 <Text style={styles.lableClass}>Title : </Text>
                 <TextInput
-                    onChangeText={title => setTitle(title)}
-                    defaultValue={title}
+                    onChangeText={onChangeTextTitle}
+                    value={title}
                     name="title"
                     underlineColorAndroid='transparent'
                     style={styles.SmallTextInputStyleClass}
@@ -88,40 +92,24 @@ function AddFoodWasteReducingTips() {
             <View style={styles.container}>
 
                 <Text style={styles.lableClass2}>category :</Text>
-                <RNPickerSelect
-                    onValueChange={(value) => console.log(value)}
-                    items={[
-                        { label: "JavaScript", value: "JavaScript" },
-                        { label: "TypeScript", value: "TypeScript" },
-                        { label: "Python", value: "Python" },
-                        { label: "Java", value: "Java" },
-                        { label: "C++", value: "C++" },
-                        { label: "C", value: "C" },
-                    ]}
-                />
-                {/* <Picker defaultValue={category} onValueChange={category => setCategory(category)} style={{ height: 50, width: 150, marginLeft: 100 }}>
-                    <Picker.Item label = "aaaaaaaaaa" value="aaaaaaaaaaa" />
-                    <Picker.Item label = "bbbbbbbbbbbb" value="bbbbbbbbb" />
-                    <Picker.Item label = "cccccccccccccc" value="cccccccccccccc" />
-                </Picker > */}
-                {/* <TextInput
-                    onChangeText={category => setCategory(category)}
-                    defaultValue={category}
+                <TextInput
+                    onChangeText={onChangeTextCategory}
+                    value={category}
                     name='category'
                     underlineColorAndroid='transparent'
                     style={styles.SmallTextInputStyleClass2}
-                /> */}
+                />
             </View>
 
             <View style={styles.container}>
 
                 <Text style={styles.lableClass3}>description : </Text>
                 <TextInput
-                    onChangeText={description => setDescription(description)}
+                    onChangeText={onChangeTextDescription}
                     underlineColorAndroid='transparent'
                     style={styles.SmallTextInputStyleClass3}
                     name='description'
-                    defaultValue={description}
+                    value={description}
                 />
             </View>
 
@@ -129,11 +117,11 @@ function AddFoodWasteReducingTips() {
 
                 <Text style={styles.lableClass4}> Video URL :</Text>
                 <TextInput
-                    onChangeText={video => setVideo(video)}
+                    onChangeText={onChangeTextVideo}
                     underlineColorAndroid='transparent'
                     style={styles.SmallTextInputStyleClass4}
                     name='video'
-                    defaultValue={video}
+                    value={video}
                 />
             </View>
 
@@ -141,11 +129,11 @@ function AddFoodWasteReducingTips() {
 
                 <Text style={styles.lableClass5}> Image URL :</Text>
                 <TextInput
-                    onChangeText={image => setImage(image)}
+                    onChangeText={onChangeTextImage}
                     underlineColorAndroid='transparent'
                     style={styles.SmallTextInputStyleClass5}
                     name='image'
-                    defaultValue={image}
+                    value={image}
                 />
             </View>
 
@@ -178,7 +166,7 @@ function AddFoodWasteReducingTips() {
             </Text> */}
 
             <View style={styles.fixToText}>
-                <TouchableOpacity style={styles.CalBtn} onPress={() => insertData()}>
+                <TouchableOpacity style={styles.CalBtn} onPress={insertData}>
                     <Text style={styles.CalBtnText}>Save</Text>
                 </TouchableOpacity>
                 <TouchableOpacity style={styles.CalBtn} onPress={() => navigation.navigate("FoodSaverDashboard")}>
