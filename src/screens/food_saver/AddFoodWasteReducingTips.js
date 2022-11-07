@@ -1,9 +1,7 @@
 import React, { useState } from "react";
 import { StyleSheet, View, TouchableOpacity, Text, TextInput, Button, Alert, Picker } from "react-native";
 import { useNavigation } from '@react-navigation/native';
-import { Dropdown } from 'react-native-material-dropdown';
 import axios from 'react-native-axios';
-import RNPickerSelect from "react-native-picker-select";
 
 function AddFoodWasteReducingTips() {
 
@@ -180,6 +178,11 @@ function AddFoodWasteReducingTips() {
 export default AddFoodWasteReducingTips
 
 const styles = StyleSheet.create({
+    dropdownList: {
+        textAlign: 'center',
+        height: 40,
+        width: '50%',
+    },
     MainContainer: {
         justifyContent: 'center',
         alignItems: 'center',

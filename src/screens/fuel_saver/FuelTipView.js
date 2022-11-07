@@ -12,7 +12,7 @@ function FuelTipView({ route }) {
 
     const getFuelTip = async () => {
         try {
-            const response = await axios.get("http://192.168.1.111:5050/FuelTips/" + id);
+            const response = await axios.get("http://192.168.1.100:5050/FuelTips/" + id);
             setTip(response.data);
         } catch (error) {
             console.log(error);
