@@ -23,6 +23,7 @@ import AddBillInformation from './src/screens/electricity_saver/AddBillInformati
 import ElectricitySaverTips from './src/screens/electricity_saver/ElectricitySaverTips';
 import ElectricitySaverBillHistory from './src/screens/electricity_saver/ElectricitySaverBillHistory';
 import ElectricitySaverReport from './src/screens/electricity_saver/ElectricitySaverReport';
+import WaterSaverCategories from './src/screens/water_saver/WaterSaverCategories';
 
 
 const Stack = createNativeStackNavigator();
@@ -52,6 +53,7 @@ const App = () => {
         <Stack.Screen name="WaterSavingTips" component={WaterSavingTips} options={{ title: 'Water Saving Tips' }} />
         <Stack.Screen name="WaterTipView" component={WaterTipView} options={{ title: 'Water Tip View' }} />
         <Stack.Screen name="AddNewTip" component={AddNewTip} options={{ title: 'Add New Idea' }} />
+        <Stack.Screen name="WaterSaverCategories" component={WaterSaverCategories} options={{title:'Water Saver Categories'}} />
 
         <Stack.Screen
           name="ElectricitySaverDashBoard"

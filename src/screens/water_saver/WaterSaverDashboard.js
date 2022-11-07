@@ -32,13 +32,13 @@ function WaterSaverDashBoard() {
             }}>
                 Water Saver
             </Text>
-            <Image source={require('../../assets/fuel_saver/fuelSaverIcon.png')} style={styles.img} />
+            <Image source={require('../../assets/water_saver/water_icon.png')} style={styles.img} />
 
             <TouchableOpacity style={styles.button} onPress={() => navigation.navigate("WaterSavingTips")}>
                 <Text style={styles.text}>Latest Ideas</Text>
             </TouchableOpacity>
 
-            <TouchableOpacity style={styles.button} onPress={() => navigation.navigate("")}>
+            <TouchableOpacity style={styles.button} onPress={() => navigation.navigate("WaterSaverCategories")}>
                 <Text style={styles.text}>Categories</Text>
             </TouchableOpacity>
 
@@ -75,9 +75,9 @@ const styles = StyleSheet.create({
         fontWeight: "500"
     },
     img: {
-        width: 150,
-        height: 150,
-        marginBottom: 5,
-        marginTop: 10
+        width: 140,
+        height: 140,
+        marginBottom: 20,
+        marginTop: 20
     },
 });

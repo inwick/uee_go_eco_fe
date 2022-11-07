@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Text, StyleSheet, View, TextInput, Button, SafeAreaView, TouchableOpacity } from 'react-native';
 
+
 function AddNewTip() {
 
     const [text, onChangeText] = React.useState("");
@@ -74,7 +75,7 @@ function AddNewTip() {
                 />
             </View>
 
-            
+
 
             {/* <View style={styles.fixToText}>
                 <TouchableOpacity style={styles.CalBtn} onPress={() => totalCost()}>
@@ -84,6 +85,9 @@ function AddNewTip() {
                     <Text style={styles.CalBtnText}>Individual cost</Text>
                 </TouchableOpacity>
             </View> */}
+
+            
+
         </View>
 
     );
