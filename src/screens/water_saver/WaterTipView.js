@@ -14,7 +14,7 @@ function WaterTipView({ route }) {
 
     const getWalletItems = async () => {
         try {
-            const response = await axios.get(`http://192.168.1.100:5050/WaterTips/` + id);
+            const response = await axios.get(`http://10.0.2.2:5050/WaterTips/` + id);
             setTitle(response.data.tipTitle);
             setDescription(response.data.tipDescription);
             setImage(response.data.image);
@@ -44,10 +44,10 @@ function WaterTipView({ route }) {
 
                     <View style={styles.fixToText}>
                         <TouchableOpacity style={styles.CalBtn} onPress={() => totalCost()}>
-                            <Text style={styles.CalBtnText}>Total Cost</Text>
+                            <Text style={styles.CalBtnText}>ADD COMMENT</Text>
                         </TouchableOpacity>
                         <TouchableOpacity style={styles.CalBtn} onPress={() => individualCost()}>
-                            <Text style={styles.CalBtnText}>Individual cost</Text>
+                            <Text style={styles.CalBtnText}>VIEW COMMENTS</Text>
                         </TouchableOpacity>
                     </View>
                 </View>
