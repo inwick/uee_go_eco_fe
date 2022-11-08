@@ -11,11 +11,12 @@ import FuelTipView from './src/screens/fuel_saver/FuelTipView';
 import FoodSaverDashboard from './src/screens/food_saver/FoodSaverDashboard';
 import AddFoodWasteReducingTips from './src/screens/food_saver/AddFoodWasteReducingTips';
 import FoodSavingTipsView from './src/screens/food_saver/FoodTipsView';
-import FoodWasteTipsViewOneByOne from './src/screens/food_saver/FoodViewOneByOne';
 import WaterSaverDashBoard from './src/screens/water_saver/WaterSaverDashboard';
 import WaterSavingTips from './src/screens/water_saver/WaterSavingTips';
 import WaterTipView from './src/screens/water_saver/WaterTipView';
 import AddNewTip from './src/screens/water_saver/AddNewTip';
+import AddCommentForFoodTips from './src/screens/food_saver/food_comments/AddCommentsFoeFoodTips';
+import ViewReviewForFoodTips from './src/screens/food_saver/food_comments/ViewCommentsForFoodTips';
 
 import ElectricitySaverDashBoard from './src/screens/electricity_saver/ElectricitySaverDashBoard';
 import ElectricityCostCalculator from './src/screens/electricity_saver/ElectricityCostCalculator';
@@ -79,11 +80,11 @@ const App = () => {
           component={FoodSavingTipsView}
           options={{title: 'Food Waste Reducing Tips'}}
         />
-        <Stack.Screen
+        {/* <Stack.Screen
           name="FoodSavingTipsGetOneByOne"
           component={FoodWasteTipsViewOneByOne}
           options={{title: 'Food Waste Reducing Tips Get One By One'}}
-        />
+        /> */}
 
         <Stack.Screen
           name="WaterSaverDashBoard"
@@ -110,7 +111,16 @@ const App = () => {
           component={WaterSaverCategories}
           options={{title: 'Water Saver Categories'}}
         />
-
+        <Stack.Screen
+          name="ViewReviewsInFoodSavingTips"
+          component={ViewReviewForFoodTips}
+          options={{title: 'Reviews'}}
+        />
+        <Stack.Screen
+          name="AddCommentForFoodSavingTips"
+          component={AddCommentForFoodTips}
+          options={{title: 'Add Review'}}
+        />
         <Stack.Screen
           name="ElectricitySaverDashBoard"
           component={ElectricitySaverDashBoard}
