@@ -12,15 +12,34 @@ function FuelTipView({ route }) {
 
     const getFuelTip = async () => {
         try {
-            const response = await axios.get("http://192.168.1.111:5050/FuelTips/" + id);
+            const response = await axios.get("http://10.0.2.2:5050/FuelTips/" + id);
             setTip(response.data);
         } catch (error) {
             console.log(error);
         }
     };
 
+    const getComments = async () => {
+        let temp = [];
+        try {
+            const response = await axios.get("http://10.0.2.2:5050/FuelComment/tipcomment/" + id);
+            for (let i = 0; i < response.data.length; i++) {
+                temp.push(response.data[i].comments);
+            }
+            if (temp[0] == null) {
+                setComment(["Currently no Comments"]);
+            } else {
+                setComment(temp);
+            }
+            console.log('a', temp);
+        } catch (err) {
+            console.log(err);
+        }
+    }
+
     useEffect(() => {
         getFuelTip();
+        getComments();
     }, [])
 
     return (
@@ -38,19 +57,17 @@ function FuelTipView({ route }) {
                 underlineColorAndroid='transparent'
                 style={styles.SmallTextInputStyleClass3}
             />
+
             <ScrollView>
-                <Text style={styles.cardButton}>
-                    {tip.tipTitle}
-                </Text>
-                <Text style={styles.cardButton}>
-                    {tip.tipTitle}
-                </Text>
-                <Text style={styles.cardButton}>
-                    {tip.tipTitle}
-                </Text>
-                <Text style={styles.cardButton}>
-                    {tip.tipTitle}
-                </Text>
+
+                {comment.map((comments, index) => (
+                    <View key={index} >
+                        <Text style={styles.cardButton}>
+                            {comments}
+                        </Text>
+                    </View>
+                ))}
+
             </ScrollView>
 
         </View>

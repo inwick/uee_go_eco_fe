@@ -7,34 +7,49 @@ function Home() {
 
   return (
     <View style={styles.MainContainer}>
-      {/* <Text style={{
-                fontSize: 30,
-                fontWeight: 'bold',
-                color: 'black'
-            }}>
-                Fuel Saver
-            </Text> */}
-      {/* <Image source={require('../../assets/fuel_saver/fuelSaverIcon.png')} style={styles.img} /> */}
+      <Text style={{
+        fontSize: 30,
+        fontWeight: 'bold',
+        color: 'black',
+        marginTop: 30,
+      }}>
+        GO ECO
+      </Text>
+      <Text style={{
+        fontSize: 12,
+        color: 'black'
+      }}>
+        Together We Can
+      </Text>
 
-      <TouchableOpacity
-        style={styles.button}
-        onPress={() => navigation.navigate('FuelSaverDashBoard')}>
-        <Text style={styles.text}>Fuel</Text>
-      </TouchableOpacity>
+      <View style={styles.fixToText}>
 
-      <TouchableOpacity style={styles.button} onPress={() => navigation.navigate("FoodSaverDashboard")}>
-        <Text style={styles.text}>Food</Text>
-      </TouchableOpacity>
+        <TouchableOpacity
+          style={styles.HomeBtnElec}
+          onPress={() => navigation.navigate('ElectricitySaverDashBoard')}>
+          <Text style={styles.ElecBtnText}>Electricity Saver</Text>
+        </TouchableOpacity>
 
-      <TouchableOpacity style={styles.button} onPress={() => navigation.navigate("WaterSaverDashBoard")}>
-        <Text style={styles.text}>Water</Text>
-      </TouchableOpacity>
+        <TouchableOpacity style={styles.HomeBtnWater} onPress={() => navigation.navigate("WaterSaverDashBoard")}>
+          <Text style={styles.WaterBtnText}>Water Saver</Text>
+        </TouchableOpacity>
 
-      <TouchableOpacity
-        style={styles.button}
-        onPress={() => navigation.navigate('ElectricitySaverDashBoard')}>
-        <Text style={styles.text}>Electricity</Text>
-      </TouchableOpacity>
+      </View>
+
+      <View style={styles.fixToText}>
+
+        <TouchableOpacity
+          style={styles.HomeBtnFuel}
+          onPress={() => navigation.navigate('FuelSaverDashBoard')}>
+          <Text style={styles.FuelBtnText}>Fuel Saver</Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity style={styles.HomeBtnFood} onPress={() => navigation.navigate("FoodSaverDashboard")}>
+          <Text style={styles.FoodBtnText}>Food Saver</Text>
+        </TouchableOpacity>
+
+      </View>
+
     </View>
   );
 }
@@ -46,22 +61,82 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     marginTop: 20,
   },
-  button: {
-    width: '80%',
+
+  HomeBtnElec: {
+    width: '35%',
+    paddingTop: 2,
+    paddingBottom: 2,
+    backgroundColor: '#FA8072',
+    borderRadius: 10,
+    marginTop: 170,
+    height: 100
+  },
+  ElecBtnText: {
+    color: '#000',
+    fontSize: 18,
+    textAlign: 'center',
+    padding: 10,
+    paddingTop: 23,
+    fontWeight: "500",
+  },
+  HomeBtnWater: {
+    width: '35%',
+    paddingTop: 2,
+    paddingBottom: 2,
+    backgroundColor: '#52B1E2',
+    borderRadius: 10,
+    marginTop: 170,
+    marginLeft: 20,
+    height: 100
+  },
+  WaterBtnText: {
+    color: '#000',
+    fontSize: 18,
+    textAlign: 'center',
+    padding: 10,
+    fontWeight: "500",
+    paddingTop: 33,
+  },
+  fixToText: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+  },
+  HomeBtnFuel: {
+    width: '35%',
     paddingTop: 2,
     paddingBottom: 2,
     backgroundColor: '#26B787',
-    borderRadius: 20,
+    borderRadius: 10,
     marginTop: 20,
-    height: 100,
+    height: 100
   },
-  text: {
+  FuelBtnText: {
     color: '#000',
-    fontSize: 20,
+    fontSize: 18,
     textAlign: 'center',
-    padding: 30,
-    fontWeight: '500',
+    padding: 10,
+    fontWeight: "500",
+    paddingTop: 33,
   },
+  HomeBtnFood: {
+    width: '35%',
+    paddingTop: 2,
+    paddingBottom: 2,
+    backgroundColor: '#FFC107',
+    borderRadius: 10,
+    marginTop: 20,
+    marginLeft: 20,
+    height: 100
+  },
+  FoodBtnText: {
+    color: '#000',
+    fontSize: 18,
+    textAlign: 'center',
+    padding: 10,
+    fontWeight: "500",
+    paddingTop: 33,
+  },
+
   img: {
     width: 150,
     height: 150,
