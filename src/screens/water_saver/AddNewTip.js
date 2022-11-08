@@ -1,236 +1,222 @@
-import React, { useState } from 'react';
-import { Text, StyleSheet, View, TextInput, Button, SafeAreaView, TouchableOpacity } from 'react-native';
-
+import axios from 'react-native-axios';
+import React, { Component, useState } from 'react';
+import { Button, View, StyleSheet, Text, TextInput, TouchableOpacity, Alert } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
+import { Dropdown } from 'react-native-element-dropdown';
 
 function AddNewTip() {
 
-    const [text, onChangeText] = React.useState("");
-    const [number, onChangeNumber] = React.useState(null);
+    const navigation = useNavigation();
+
+    const [title, setTitle] = useState('');
+    const [description, setDescription] = useState('');
+    const [category, setCategory] = useState('');
+    const [image, setImage] = useState('');
+
+
+    const onChangeTextTitle = (value) => {
+        setTitle(value)
+    }
+    const onChangeTextDescription = (value) => {
+        setDescription(value)
+    }
+
+    const onChangeTextImage = (value) => {
+        setImage(value)
+    }
+    const onChangeTextCategory = (value) => {
+        setCategory(value)
+    }
+
+    const insertData = () => {
+
+        var data = {
+            userId: '1234',
+            image: image,
+            tipTitle: title,
+            tipDescription: description,
+            tipCategory: category
+        }
+        axios({
+            url: "http://10.0.2.2:5050/Watertips/add",
+            method: "POST",
+            data: data
+        }).then((response) => {
+            Alert.alert(
+                "Done",
+                "Successfully Inserted!",
+                [
+                    { text: "OK", onPress: () => navigation.navigate("WaterSavingTips") }
+                ]
+            );
+        })
+
+
+    }
+
+    const dataa = [
+        { label: 'Industrial', value: 'Industrial' },
+        { label: 'Household', value: 'Household' },
+    ];
 
     return (
-        <View style={styles.MainContainer}>
-
+        <View style={styles.app}>
             <Text style={{
                 fontSize: 25,
                 fontWeight: 'bold',
-                color: 'black'
+                color: 'black',
+                marginBottom: 30
             }}>
                 Add New Tip
             </Text>
+            <View style={styles.row}>
+                <View style={styles[`2col`]}>
+                    <Text style={styles.texts}>Title :</Text>
+                </View>
+                <View style={styles[`2col`]}>
+                    <TextInput
+                        onChangeText={onChangeTextTitle}
+                        defaultValue={title}
+                        underlineColorAndroid='transparent'
+                        style={styles.SmallTextInputStyleClass}
+                        keyboardType="default"
+                    />
+                </View>
+            </View>
+            <View style={styles.row}>
+                <View style={styles[`2col`]}>
+                    <Text style={styles.texts}> Description :</Text>
+                </View>
+                <View style={styles[`2col`]}>
+                    <TextInput
+                        onChangeText={onChangeTextDescription}
+                        defaultValue={description}
+                        underlineColorAndroid='transparent'
+                        style={styles.SmallTextInputStyleClass}
+                        keyboardType="numeric"
+                    />
+                </View>
+            </View>
+            <View style={styles.row}>
+                <View style={styles[`2col`]}>
+                    <Text style={styles.texts}> Category</Text>
+                </View>
+                <View style={styles[`2col`]}>
+                    <Dropdown
+                        style={styles.dropdown}
+                        placeholderStyle={styles.placeholderStyle}
+                        itemTextStyle={styles.itemTextStyle}
+                        selectedTextStyle={styles.itemTextStyle}
+                        data={dataa}
+                        search
+                        maxHeight={300}
+                        labelField="label"
+                        valueField="value"
+                        value={category}
+                        onChange={item => {
+                            setCategory(item.value);
+                        }}
 
-            <View style={styles.container}>
+                    />
 
-                <Text style={styles.lableClass}>
-                    Title :
-                </Text>
-
-                <TextInput
-                    // onChangeText={distance => setDistance(distance)}
-                    // defaultValue={distance}
-                    underlineColorAndroid='transparent'
-                    style={styles.SmallTextInputStyleClass}
-                    keyboardType="numeric"
-                />
+                </View>
+            </View>
+            <View style={styles.row}>
+                <View style={styles[`2col`]}>
+                    <Text style={styles.texts}> Image Link</Text>
+                </View>
+                <View style={styles[`2col`]}>
+                    <TextInput
+                        onChangeText={onChangeTextImage}
+                        defaultValue={image}
+                        underlineColorAndroid='transparent'
+                        style={styles.SmallTextInputStyleClass}
+                        keyboardType="numeric"
+                    />
+                </View>
             </View>
 
-            <View style={styles.container}>
-
-                <Text style={styles.lableClass2}>
-                    Description :
-                </Text>
-
-                <TextInput
-                    onChangeText={consumption => setConsumption(consumption)}
-                    underlineColorAndroid='transparent'
-                    style={styles.SmallTextInputStyleClass2}
-                    keyboardType="numeric"
-                />
-            </View>
-
-            <View style={styles.container}>
-
-                <Text style={styles.lableClass3}>
-                    Category :
-                </Text>
-
-                <TextInput
-                    onChangeText={price => setPrice(price)}
-                    underlineColorAndroid='transparent'
-                    style={styles.SmallTextInputStyleClass3}
-                    keyboardType="numeric"
-                />
-            </View>
-
-            <View style={styles.container}>
-
-                <Text style={styles.lableClass4}>
-                    Image :
-                </Text>
-
-                <TextInput
-                    onChangeText={price => setPrice(price)}
-                    underlineColorAndroid='transparent'
-                    style={styles.SmallTextInputStyleClass4}
-                    keyboardType="numeric"
-                />
-            </View>
-
-
-
-            {/* <View style={styles.fixToText}>
-                <TouchableOpacity style={styles.CalBtn} onPress={() => totalCost()}>
-                    <Text style={styles.CalBtnText}>Total Cost</Text>
+            <View style={styles.fixToText}>
+                <TouchableOpacity style={styles.CalBtn} onPress={insertData}>
+                    <Text style={styles.CalBtnText}> Add </Text>
                 </TouchableOpacity>
-                <TouchableOpacity style={styles.CalBtn} onPress={() => individualCost()}>
-                    <Text style={styles.CalBtnText}>Individual cost</Text>
-                </TouchableOpacity>
-            </View> */}
-
-            
+            </View>
 
         </View>
-
     );
 }
 
-const styles = StyleSheet.create({
-    MainContainer: {
-        justifyContent: 'center',
-        alignItems: 'center',
-        marginTop: 30
+const styles = {
+    itemTextStyle: {
+        paddingLeft: 10
+    },
+    dropdown: {
+        textAlign: 'center',
+        height: 40,
+        width: '85%',
+        borderBottomEndRadius: 5,
+        // marginLeft: 35,
+        borderRadius: 10,
+        margin: 5,
+        backgroundColor: "#E4E4E4",
+        color: "black"
+    },
+    placeholderStyle: {
+        paddingLeft: 10
     },
     CalBtn: {
-        width: '35%',
-        paddingTop: 2,
-        paddingBottom: 2,
-        backgroundColor: '#26B787',
+        backgroundColor: '#52B1E2',
         borderRadius: 10,
-        marginTop: 70,
-        marginLeft: 10,
-        height: 45
+        marginTop: 30,
+        // marginLeft: 10,
+        height: 45,
+        width: 300,
     },
     CalBtnText: {
         color: '#000',
-        fontSize: 14,
+        fontSize: 16,
         textAlign: 'center',
         padding: 10,
         fontWeight: "500"
     },
     fixToText: {
-        marginTop: 20,
-        flexDirection: 'row',
-        justifyContent: 'space-between',
+        // flexDirection: 'row',
+        // justifyContent: 'space-between',
     },
-    text: {
-        color: '#000',
-        fontSize: 20,
-        textAlign: 'center',
-        padding: 30,
-        fontWeight: "500"
-    },
-    StstText: {
-        color: '#000',
-        fontSize: 14,
-        textAlign: 'center',
-        padding: 30,
-        // width: 380
+    app: {
+        flex: 4, // the number of columns you want to devide the screen into
+        marginHorizontal: "auto",
+        width: 350,
+        alignItems: 'center',
+        marginHorizontal: 20,
+        marginTop: 30
     },
     row: {
-        flexDirection: 'row',
-        marginTop: 15,
+        flexDirection: "row"
     },
-    lableClass: {
-        textAlign: 'center',
-        height: 40,
-        fontSize: 14,
-        marginTop: 38,
-        margin: 5,
-        color: "#26B787",
-        fontWeight: "600"
+    "2col": {
+        borderColor: "#fff",
+        // borderWidth: 1,
+        flex: 2
     },
     SmallTextInputStyleClass: {
         textAlign: 'center',
         height: 40,
-        width: '25%',
+        width: '85%',
         borderBottomEndRadius: 5,
-        marginTop: 30,
-        marginLeft: 35,
+        // marginLeft: 35,
         borderRadius: 10,
         margin: 5,
         backgroundColor: "#E4E4E4",
         color: "black"
     },
-    lableClass2: {
+    texts: {
         textAlign: 'center',
-        height: 40,
-        fontSize: 14,
-        marginTop: 108,
-        borderRadius: 20,
-        margin: 5,
-        color: "#26B787",
+        fontSize: 16,
+        marginTop: 13,
+        color: "Black",
         fontWeight: "600"
-    },
-    SmallTextInputStyleClass2: {
-        textAlign: 'center',
-        height: 40,
-        width: '25%',
-        borderBottomEndRadius: 5,
-        marginTop: 100,
-        borderRadius: 10,
-        margin: 5,
-        backgroundColor: "#E4E4E4",
-        color: "black"
-    },
-    lableClass3: {
-        textAlign: 'center',
-        height: 40,
-        fontSize: 14,
-        marginTop: 178,
-        borderRadius: 20,
-        margin: 5,
-        color: "#26B787",
-        fontWeight: "600"
-    },
-    SmallTextInputStyleClass3: {
-        textAlign: 'center',
-        height: 40,
-        width: '25%',
-        borderBottomEndRadius: 5,
-        marginTop: 170,
-        borderRadius: 10,
-        margin: 5,
-        marginLeft: 60,
-        backgroundColor: "#E4E4E4",
-        color: "black"
-    },
-    lableClass4: {
-        textAlign: 'center',
-        height: 40,
-        fontSize: 14,
-        borderRadius: 20,
-        marginTop: 250,
-        margin: 5,
-        color: "#26B787",
-        fontWeight: "600"
-    },
-    SmallTextInputStyleClass4: {
-        textAlign: 'center',
-        height: 40,
-        width: '25%',
-        borderBottomEndRadius: 5,
-        marginTop: 240,
-        borderRadius: 10,
-        margin: 5,
-        marginLeft: 60,
-        backgroundColor: "#E4E4E4",
-        color: "black"
-    },
-    container: {
-        flex: 1,
-        flexDirection: "row",
-        justifyContent: 'center'
-    },
-});
-
+    }
+};
 
 export default AddNewTip
