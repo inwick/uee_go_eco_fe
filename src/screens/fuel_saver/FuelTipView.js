@@ -7,8 +7,10 @@ function FuelTipView({ route }) {
 
     const [tip, setTip] = useState([]);
     const [comment, setComment] = useState([]);
+    const [input, setInput] = useState("");
     const navigation = useNavigation();
     const { id } = route.params;
+    // const [did, setDid] = useState("");
 
     const getFuelTip = async () => {
         try {
@@ -42,6 +44,13 @@ function FuelTipView({ route }) {
         getComments();
     }, [])
 
+    // const onDeleteCmnt = async (id) => {
+    //     axios({
+    //         method: 'DELETE',
+    //         url: `http://localhost:5050/cart/${id}`
+    //     })
+    // }
+
     return (
 
         <View style={styles.MainContainer}>
@@ -53,18 +62,43 @@ function FuelTipView({ route }) {
             <Text style={{ fontSize: 14, fontWeight: "700", color: "#26B787", marginLeft: -235, marginTop: 10 }}>Comments</Text>
 
             <TextInput
-                onChangeText={comment => setComment(comment)}
+                onChangeText={input => setInput(input)}
+                onEndEditing={async () => {
+                    try {
+                        const data = {
+                            tipId: id,
+                            userId: 1234,
+                            comments: input,
+                        }
+
+                        await axios.post(`http://10.0.2.2:5050/FuelComment/add`, data)
+                        getComments();
+
+                    } catch (error) {
+                        alert(error);
+                    }
+                    return false
+                }}
                 underlineColorAndroid='transparent'
                 style={styles.SmallTextInputStyleClass3}
             />
 
-            <ScrollView>
+            <ScrollView style={{ height: 150 }}>
 
                 {comment.map((comments, index) => (
-                    <View key={index} >
-                        <Text style={styles.cardButton}>
+                    <View key={index} style={styles.cardButton}>
+                        <Text style={{ width: "80%" }}>
                             {comments}
                         </Text>
+                        <View style={styles.fixToText}>
+                            <TouchableOpacity onPress={() => totalCost()}>
+                                <Image source={require('../../assets/fuel_saver/pensil.png')} style={{ marginTop: -17, marginLeft: 250 }} />
+                            </TouchableOpacity>
+
+                            <TouchableOpacity onPress={() => individualCost()}>
+                                <Image source={require('../../assets/fuel_saver/cross.png')} style={{ marginTop: -17, marginLeft: 7 }} />
+                            </TouchableOpacity>
+                        </View>
                     </View>
                 ))}
 
@@ -95,9 +129,12 @@ const styles = StyleSheet.create({
     },
     img: {
         width: 300,
-        height: 200,
+        height: 175,
         marginBottom: 5,
         marginTop: 10
+    },
+    icon: {
+        color: "red"
     },
     SmallTextInputStyleClass3: {
         textAlign: 'center',
@@ -113,7 +150,6 @@ const styles = StyleSheet.create({
         padding: 15,
         paddingLeft: 0,
         width: 300,
-        alignItems: 'center',
         marginTop: 10,
         borderBottomColor: 'black',
         borderBottomWidth: StyleSheet.hairlineWidth,
@@ -123,5 +159,11 @@ const styles = StyleSheet.create({
         position: 'absolute',
         right: 0,
         bottom: 0
-    }
+    },
+    fixToText: {
+        // marginTop: 20,
+        // alignSelf: "flex-end",
+        flexDirection: 'row',
+        // justifyContent: 'space-between',
+    },
 });
