@@ -3,8 +3,15 @@ import { StyleSheet, View, TouchableOpacity, Text, Image, SafeAreaView, Modal, A
 import axios from 'react-native-axios';
 import { useNavigation } from '@react-navigation/native';
 import { ScrollView, TextInput } from 'react-native-gesture-handler';
+import { Dropdown } from 'react-native-element-dropdown';
 
 function FoodSavingTipsView() {
+
+    const data = [
+        { label: 'Ways to Reduce Food Waste', value: '1' },
+        { label: 'Food Preservation Methods', value: '2' },
+        { label: 'Replanting Using Food Waste Plant', value: '3' },
+    ];
 
     const [tips, setTips] = useState([]);
     const [visible, setVisible] = useState(false);
@@ -17,7 +24,7 @@ function FoodSavingTipsView() {
     const [video, setVideo] = useState('');
     const [image, setImage] = useState('');
     const [category, setCategory] = useState('');
-    // const [userId, setUserId] = useState('003');
+    const [userId, setUserId] = useState('003');
 
     const onChangeTextTitle = (value) => {
         setTitle(value)
@@ -71,7 +78,7 @@ function FoodSavingTipsView() {
     const viewUpdateDataBtn = () => {
         setVisible(true)
         setVisibleView(false)
-        //  setId(_id)
+        setId(id)
         setTitle(title)
         setDescription(description)
         setCategory(category)
@@ -139,11 +146,23 @@ function FoodSavingTipsView() {
                     <View>
                         <TouchableOpacity
                             onPress={handleVisibleModel}
-                        // style={styles.CalBtn}
                         >
                             <Text>Close</Text>
                         </TouchableOpacity>
 
+                        <Text style={{
+                            fontSize: 22,
+                            fontWeight: 'bold',
+                            color: 'black',
+                            textAlign: 'center'
+                        }}>
+                            Update Details
+                        </Text>
+
+                        <Image
+                            source={require('../../assets/food_waste_saver/food3.png')}
+                            style={styles.img}
+                        />
                         <View style={styles.container}>
 
                             <Text style={styles.lableClass}>Title : </Text>
@@ -160,13 +179,31 @@ function FoodSavingTipsView() {
                         <View style={styles.container}>
 
                             <Text style={styles.lableClass2}>category :</Text>
-                            <TextInput
+                            <Dropdown
+                                style={styles.dropdown}
+                                placeholderStyle={styles.placeholderStyle}
+                                selectedTextStyle={styles.selectedTextStyle}
+                                inputSearchStyle={styles.inputSearchStyle}
+                                iconStyle={styles.iconStyle}
+                                data={data}
+                                search
+                                maxHeight={300}
+                                labelField="label"
+                                valueField="value"
+                                searchPlaceholder="Search..."
+                                value={category}
+                                onChange={item => {
+                                    setCategory(item.value);
+                                }}
+
+                            />
+                            {/* <TextInput
                                 onChangeText={onChangeTextCategory}
                                 value={category}
                                 name='category'
                                 underlineColorAndroid='transparent'
                                 style={styles.SmallTextInputStyleClass2}
-                            />
+                            /> */}
                         </View>
 
                         <View style={styles.container}>
@@ -178,6 +215,8 @@ function FoodSavingTipsView() {
                                 style={styles.SmallTextInputStyleClass3}
                                 name='description'
                                 value={description}
+                                numberOfLines={6}
+                                multiline={true}
                             />
                         </View>
 
@@ -204,31 +243,6 @@ function FoodSavingTipsView() {
                                 value={image}
                             />
                         </View>
-
-                        {/* <TextInput
-                            placeholder="Title Name"
-                            onChangeText={onChangeTextTitle}
-                            defaultValue={title} /> */}
-                        {/* <TextInput
-                            placeholder="Category"
-                            onChangeText={onChangeTextCategory}
-                            value={category} /> */}
-                        {/* <TextInput
-                            placeholder="Description"
-                            onChangeText={onChangeTextDescription}
-                            value={description} /> */}
-                        {/* <TextInput
-                            placeholder="Video"
-                            onChangeText={onChangeTextVideo}
-                            value={video} /> */}
-                        {/* <TextInput
-                            placeholder="Image"
-                            onChangeText={onChangeTextImage}
-                            value={image} /> */}
-
-
-
-
 
                     </View>
                     <View style={styles.fixToText}>
@@ -262,8 +276,9 @@ function FoodSavingTipsView() {
                             </TouchableOpacity>
                             <Text value={title} style={styles.title}> {title}</Text>
                             <Image style={styles.tinyLogo} source={{ uri: image }} />
-                            <Text style={styles.text}>{description}</Text>
-                            <Text style={styles.text}>Video Link: {video}</Text>
+
+                            <Text style={styles.StstText}>{description}</Text>
+                            <Text style={styles.StstText}>Video Link: {video}</Text>
 
 
                         </View>
@@ -339,17 +354,18 @@ export default FoodSavingTipsView
 
 const styles = StyleSheet.create({
     fixToText: {
-        marginTop: 400,
+        marginTop: 285,
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'center',
         justifyContent: 'center',
     },
     fixToText1: {
-        marginTop: 10,
+        marginTop: -100,
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'center',
+        marginBottom: 50
     },
     tinyLogo: {
         width: '100%',
@@ -429,26 +445,22 @@ const styles = StyleSheet.create({
         padding: 30,
         fontWeight: "bold"
     },
-    container: {
-        flex: 1,
-        flexDirection: "row",
-    },
     lableClass: {
         textAlign: 'center',
         height: 40,
         fontSize: 14,
-        marginTop: 38,
-        margin: 5,
+        marginTop: 0,
+        marginLeft: 70,
         color: "#ffc107",
-        fontWeight: "600"
+        fontWeight: "600",
     },
     SmallTextInputStyleClass: {
         textAlign: 'center',
         height: 40,
         width: '50%',
         borderBottomEndRadius: 5,
-        marginTop: 30,
-        marginLeft: 35,
+        marginTop: -5,
+        marginLeft: 37,
         borderRadius: 10,
         margin: 5,
         backgroundColor: "#E4E4E4",
@@ -458,9 +470,9 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         height: 40,
         fontSize: 14,
-        marginTop: 108,
+        marginTop: 60,
         borderRadius: 20,
-        margin: 5,
+        marginLeft: 45,
         color: "#ffc107",
         fontWeight: "600"
     },
@@ -469,41 +481,43 @@ const styles = StyleSheet.create({
         height: 40,
         width: '50%',
         borderBottomEndRadius: 5,
-        marginTop: 100,
+        marginTop: 50,
         borderRadius: 10,
         margin: 5,
         backgroundColor: "#E4E4E4",
-        color: "black"
+        color: "black",
+        marginLeft: 40,
     },
     lableClass3: {
         textAlign: 'center',
         height: 40,
         fontSize: 14,
-        marginTop: 178,
+        marginTop: 116,
         borderRadius: 20,
-        margin: 5,
+        marginLeft: 30,
         color: "#ffc107",
         fontWeight: "600"
     },
     SmallTextInputStyleClass3: {
-        textAlign: 'center',
         height: 40,
         width: '50%',
         borderBottomEndRadius: 5,
-        marginTop: 170,
+        marginTop: 115,
         borderRadius: 10,
         margin: 5,
-        marginLeft: 60,
+        marginLeft: 37,
         backgroundColor: "#E4E4E4",
-        color: "black"
+        color: "black",
+        height: 150,
+        justifyContent: "flex-start"
     },
     lableClass4: {
         textAlign: 'center',
         height: 40,
         fontSize: 14,
-        marginTop: 250,
+        marginTop: 285,
         borderRadius: 20,
-        margin: 5,
+        marginLeft: 35,
         color: "#ffc107",
         fontWeight: "600"
     },
@@ -512,19 +526,20 @@ const styles = StyleSheet.create({
         height: 40,
         width: '50%',
         borderBottomEndRadius: 5,
-        marginTop: 240,
+        marginTop: 280,
         borderRadius: 10,
         margin: 5,
         backgroundColor: "#E4E4E4",
-        color: "black"
+        color: "black",
+        marginLeft: 37,
     },
     lableClass5: {
         textAlign: 'center',
         height: 40,
         fontSize: 14,
-        marginTop: 320,
+        marginTop: 345,
         borderRadius: 20,
-        margin: 5,
+        marginLeft: 31,
         color: "#ffc107",
         fontWeight: "600"
     },
@@ -533,10 +548,69 @@ const styles = StyleSheet.create({
         height: 40,
         width: '50%',
         borderBottomEndRadius: 5,
-        marginTop: 310,
+        marginTop: 340,
         borderRadius: 10,
         margin: 5,
         backgroundColor: "#E4E4E4",
-        color: "black"
+        color: "black",
+        marginLeft: 38,
+    },
+    container: {
+        flex: 1,
+        flexDirection: "row",
+    },
+    img: {
+        width: 220,
+        height: 220,
+        marginBottom: 0,
+        marginTop: -10,
+        marginLeft: 90
+    },
+    // drop down
+    // drop dow styles
+    dropdown: {
+        height: 50,
+        width: '50%',
+        // borderColor: 'gray',
+        backgroundColor: "#E4E4E4",
+        color: "black",
+        marginTop: 51,
+        // borderWidth: 0.5,
+        borderRadius: 8,
+        paddingHorizontal: 8,
+        marginLeft: 38,
+    },
+    icon: {
+        marginRight: 5,
+    },
+    label: {
+        position: 'absolute',
+        backgroundColor: 'white',
+        left: 22,
+        top: 6,
+        zIndex: 999,
+        paddingHorizontal: 8,
+        fontSize: 14,
+    },
+    placeholderStyle: {
+        fontSize: 16,
+    },
+    selectedTextStyle: {
+        fontSize: 16,
+    },
+    iconStyle: {
+        width: 20,
+        height: 20,
+    },
+    inputSearchStyle: {
+        height: 40,
+        fontSize: 16,
+    },
+    // common description
+    StstText: {
+        color: '#000',
+        fontSize: 18,
+        padding: 10,
+        // width: 380
     },
 });
