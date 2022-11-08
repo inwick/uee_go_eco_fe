@@ -1,18 +1,26 @@
 import React, { useState } from "react";
-import { StyleSheet, View, TouchableOpacity, Text, TextInput, Button, Alert, Picker } from "react-native";
+import { StyleSheet, View, TouchableOpacity, Text, TextInput, Button, Alert, Picker, Image } from "react-native";
 import { useNavigation } from '@react-navigation/native';
 import axios from 'react-native-axios';
+import { ScrollView } from 'react-native-gesture-handler';
+import { Dropdown } from 'react-native-element-dropdown';
 
 function AddFoodWasteReducingTips() {
 
     // const [wallets, setWallets] = useState([]);
     const navigation = useNavigation();
 
+    const data = [
+        { label: 'Ways to Reduce Food Waste', value: '1' },
+        { label: 'Food Preservation Methods', value: '2' },
+        { label: 'Replanting Using Food Waste Plant', value: '3' },
+    ];
+
     const [title, setTitle] = useState('');
     const [description, setDescription] = useState('');
     const [video, setVideo] = useState('');
     const [image, setImage] = useState('');
-    const [category, setCategory] = useState('');
+    const [category, setCategory] = useState(null);
     const [userId, setUserId] = useState('003');
 
 
@@ -48,17 +56,17 @@ function AddFoodWasteReducingTips() {
             method: "POST",
             data: data
         }).then((response) => {
-            setList(response.data)
+            // setList(response.data)
+            Alert.alert(
+                "Done",
+                "Successfully Inserted!",
+                [
+                    { text: "OK", onPress: () => navigation.navigate("FoodSavingTips") }
+                ]
+            );
         })
 
 
-        Alert.alert(
-            "Done",
-            "Successfully Inserted!",
-            [
-                { text: "OK", onPress: () => navigation.navigate("FoodSavingTips") }
-            ]
-        );
 
     }
 
@@ -69,10 +77,22 @@ function AddFoodWasteReducingTips() {
             <Text style={{
                 fontSize: 22,
                 fontWeight: 'bold',
-                color: 'black'
+                color: 'black',
+                marginTop: -20
             }}>
                 Add Food Waste Reducing Tips
             </Text>
+
+            {/* <ScrollView
+                contentContainerStyle={{
+                    justifyContent: 'center',
+                    marginLeft: 20,
+                    marginRight: 20,
+                }}> */}
+            <Image
+                source={require('../../assets/food_waste_saver/food2.png')}
+                style={styles.img}
+            />
 
             <View style={styles.container}>
 
@@ -83,6 +103,7 @@ function AddFoodWasteReducingTips() {
                     name="title"
                     underlineColorAndroid='transparent'
                     style={styles.SmallTextInputStyleClass}
+                
                 />
 
             </View>
@@ -90,13 +111,34 @@ function AddFoodWasteReducingTips() {
             <View style={styles.container}>
 
                 <Text style={styles.lableClass2}>category :</Text>
-                <TextInput
+                <Dropdown
+                    style={styles.dropdown}
+                    placeholderStyle={styles.placeholderStyle}
+                    selectedTextStyle={styles.selectedTextStyle}
+                    inputSearchStyle={styles.inputSearchStyle}
+                    iconStyle={styles.iconStyle}
+                    data={data}
+                    search
+                    maxHeight={300}
+                    labelField="label"
+                    valueField="value"
+                    // placeholder={!isFocus ? 'Select item' : '...'}
+                    searchPlaceholder="Search..."
+                    value={category}
+                    // onFocus={() => setIsFocus(true)}
+                    // onBlur={() => setIsFocus(false)}
+                    onChange={item => {
+                        setCategory(item.value);
+                    }}
+
+                />
+                {/* <TextInput
                     onChangeText={onChangeTextCategory}
                     value={category}
                     name='category'
                     underlineColorAndroid='transparent'
                     style={styles.SmallTextInputStyleClass2}
-                />
+                /> */}
             </View>
 
             <View style={styles.container}>
@@ -108,6 +150,8 @@ function AddFoodWasteReducingTips() {
                     style={styles.SmallTextInputStyleClass3}
                     name='description'
                     value={description}
+                    numberOfLines={6}
+                    multiline={true}
                 />
             </View>
 
@@ -138,30 +182,12 @@ function AddFoodWasteReducingTips() {
             <View style={{
                 width: 450,
                 alignItems: 'center',
-                borderBottomColor: '#ffc107',
-                borderBottomWidth: StyleSheet.hairlineWidth,
-                marginTop: 250,
+                // borderBottomColor: '#ffc107',
+                // borderBottomWidth: StyleSheet.hairlineWidth,
+                marginTop: 260,
             }}>
             </View>
-            {/* 
-            <View style={styles.container}>
-
-                <Text style={styles.lableClass4}>
-                    Seat Count :
-                </Text>
-
-                <TextInput
-                                        onChangeText={preDistance => setPreDistance(preDistance)}
-                    underlineColorAndroid='transparent'
-                    style={styles.SmallTextInputStyleClass4}
-                    keyboardType="numeric"
-                />
-            </View> */}
-            {/* 
-            <Text style={styles.StstText} >
-                If you want to calculate your vehicle's individual fuel cost,
-                please enter the number of seats.
-            </Text> */}
+            {/* </ScrollView> */}
 
             <View style={styles.fixToText}>
                 <TouchableOpacity style={styles.CalBtn} onPress={insertData}>
@@ -232,18 +258,18 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         height: 40,
         fontSize: 14,
-        marginTop: 38,
-        margin: 5,
+        marginTop: 0,
+        marginLeft: 40,
         color: "#ffc107",
-        fontWeight: "600"
+        fontWeight: "600",
     },
     SmallTextInputStyleClass: {
         textAlign: 'center',
         height: 40,
         width: '50%',
         borderBottomEndRadius: 5,
-        marginTop: 30,
-        marginLeft: 35,
+        marginTop: -5,
+        marginLeft: 37,
         borderRadius: 10,
         margin: 5,
         backgroundColor: "#E4E4E4",
@@ -253,9 +279,9 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         height: 40,
         fontSize: 14,
-        marginTop: 108,
+        marginTop: 60,
         borderRadius: 20,
-        margin: 5,
+        marginLeft: 10,
         color: "#ffc107",
         fontWeight: "600"
     },
@@ -264,41 +290,44 @@ const styles = StyleSheet.create({
         height: 40,
         width: '50%',
         borderBottomEndRadius: 5,
-        marginTop: 100,
+        marginTop: 50,
         borderRadius: 10,
         margin: 5,
         backgroundColor: "#E4E4E4",
-        color: "black"
+        color: "black",
+        marginLeft: 40,
     },
     lableClass3: {
         textAlign: 'center',
         height: 40,
         fontSize: 14,
-        marginTop: 178,
+        marginTop: 118,
         borderRadius: 20,
-        margin: 5,
+        marginLeft: 1,
         color: "#ffc107",
         fontWeight: "600"
     },
     SmallTextInputStyleClass3: {
-        textAlign: 'center',
         height: 40,
         width: '50%',
         borderBottomEndRadius: 5,
-        marginTop: 170,
+        marginTop: 116,
         borderRadius: 10,
         margin: 5,
-        marginLeft: 60,
+        marginLeft: 37,
         backgroundColor: "#E4E4E4",
-        color: "black"
+        color: "black",
+        height: 150,
+        justifyContent: "flex-start",
+        paddingHorizontal: 8,
     },
     lableClass4: {
         textAlign: 'center',
         height: 40,
         fontSize: 14,
-        marginTop: 250,
+        marginTop: 285,
         borderRadius: 20,
-        margin: 5,
+        marginLeft: 6,
         color: "#ffc107",
         fontWeight: "600"
     },
@@ -307,19 +336,20 @@ const styles = StyleSheet.create({
         height: 40,
         width: '50%',
         borderBottomEndRadius: 5,
-        marginTop: 240,
+        marginTop: 280,
         borderRadius: 10,
         margin: 5,
         backgroundColor: "#E4E4E4",
-        color: "black"
+        color: "black",
+        marginLeft: 37,
     },
     lableClass5: {
         textAlign: 'center',
         height: 40,
         fontSize: 14,
-        marginTop: 320,
+        marginTop: 345,
         borderRadius: 20,
-        margin: 5,
+        marginLeft: 4,
         color: "#ffc107",
         fontWeight: "600"
     },
@@ -328,14 +358,60 @@ const styles = StyleSheet.create({
         height: 40,
         width: '50%',
         borderBottomEndRadius: 5,
-        marginTop: 310,
+        marginTop: 340,
         borderRadius: 10,
         margin: 5,
         backgroundColor: "#E4E4E4",
-        color: "black"
+        color: "black",
+        marginLeft: 38,
     },
     container: {
         flex: 1,
         flexDirection: "row",
+    },
+    img: {
+        width: 220,
+        height: 220,
+        marginBottom: -20,
+        marginTop: -30,
+    },
+    // drop dow styles
+    dropdown: {
+        height: 50,
+        width: '50%',
+        // borderColor: 'gray',
+        backgroundColor: "#E4E4E4",
+        color: "black",
+        marginTop: 51,
+        // borderWidth: 0.5,
+        borderRadius: 8,
+        paddingHorizontal: 8,
+        marginLeft: 38,
+    },
+    icon: {
+        marginRight: 5,
+    },
+    label: {
+        position: 'absolute',
+        backgroundColor: 'white',
+        left: 22,
+        top: 8,
+        zIndex: 999,
+        paddingHorizontal: 8,
+        fontSize: 14,
+    },
+    placeholderStyle: {
+        fontSize: 16,
+    },
+    selectedTextStyle: {
+        fontSize: 16,
+    },
+    iconStyle: {
+        width: 20,
+        height: 20,
+    },
+    inputSearchStyle: {
+        height: 40,
+        fontSize: 16,
     },
 });
