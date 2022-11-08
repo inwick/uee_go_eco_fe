@@ -50,11 +50,11 @@ const App = () => {
         <Stack.Screen name="AddCommentForFoodSavingTips" component={AddCommentForFoodTips} options={{ title: 'Add Review' }} />
 
 
-        <Stack.Screen name="WaterSaverDashBoard" component={WaterSaverDashBoard} options={{ title: 'Water Saver DashBoard' }} />
-        <Stack.Screen name="WaterSavingTips" component={WaterSavingTips} options={{ title: 'Water Saving Tips' }} />
-        <Stack.Screen name="WaterTipView" component={WaterTipView} options={{ title: 'Water Tip View' }} />
-        <Stack.Screen name="AddNewTip" component={AddNewTip} options={{ title: 'Add New Idea' }} />
-        <Stack.Screen name="WaterSaverCategories" component={WaterSaverCategories} options={{ title: 'Water Saver Categories' }} />
+        <Stack.Screen name="WaterSaverDashBoard" component={WaterSaverDashBoard} options={{ title: '' }} />
+        <Stack.Screen name="WaterSavingTips" component={WaterSavingTips} options={{ title: '' }} />
+        <Stack.Screen name="WaterTipView" component={WaterTipView} options={{ title: '' }} />
+        <Stack.Screen name="AddNewTip" component={AddNewTip} options={{ title: '' }} />
+        <Stack.Screen name="WaterSaverCategories" component={WaterSaverCategories} options={{ title: '' }} />
 
         <Stack.Screen
           name="ElectricitySaverDashBoard"
