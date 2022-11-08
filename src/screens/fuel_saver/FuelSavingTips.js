@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
-import { StyleSheet, View, TouchableOpacity, Text } from "react-native";
+import { StyleSheet, View, TouchableOpacity, Text, ScrollView } from "react-native";
 import axios from 'react-native-axios';
 import { useNavigation } from '@react-navigation/native';
+import { color } from "react-native-reanimated";
 
 function FuelSavingTips() {
 
@@ -24,7 +25,6 @@ function FuelSavingTips() {
     return (
 
         <View style={styles.MainContainer}>
-
             <Text style={{
                 fontSize: 25,
                 fontWeight: 'bold',
@@ -33,21 +33,27 @@ function FuelSavingTips() {
                 Fuel Saving Tips
             </Text>
 
-            {tips.map(tip => (
-                <View key={tip._id}>
+            <ScrollView>
+                {tips.map(tip => (
+                    <View key={tip._id}>
 
-                    <TouchableOpacity style={styles.cardButton} onPress={() => navigation.navigate("FuelTipView", { id: tip._id })}>
+                        <TouchableOpacity style={styles.cardButton} onPress={() => navigation.navigate("FuelTipView", { id: tip._id })}>
 
-                        <Text style={{ fontSize: 16, fontWeight: "700", color: "#26B787", alignSelf: "flex-start" }}>
-                            {tip.tipTitle}
-                        </Text>
-                        <Text style={{ fontSize: 14, alignSelf: "flex-start" }}>
-                            {tip.tipDescription.slice(0, 120)} ...
-                        </Text>
+                            <Text style={{ fontSize: 16, fontWeight: "700", color: "#26B787", alignSelf: "flex-start" }}>
+                                {tip.tipTitle}
+                            </Text>
+                            <Text style={{ fontSize: 14, alignSelf: "flex-start" }}>
+                                {tip.tipDescription.slice(0, 120)} ...
+                            </Text>
 
-                    </TouchableOpacity>
-                </View>
-            ))}
+                        </TouchableOpacity>
+                    </View>
+                ))}
+                <Text style={styles.csText} >
+                    Comming Soon ...
+                </Text>
+            </ScrollView>
+
         </View>
 
     );
@@ -59,6 +65,12 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         marginTop: 20
+    },
+    csText: {
+        marginBottom: 50,
+        marginTop: 10,
+        textAlign: "center",
+        color: "#26B787"
     },
     button: {
         width: '80%',

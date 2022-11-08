@@ -1,25 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { StyleSheet, View, TouchableOpacity, Text, Image } from "react-native";
-import axios from 'react-native-axios';
 import { useNavigation } from '@react-navigation/native';
 
 function FuelSaverDashBoard() {
 
-    const [wallets, setWallets] = useState([]);
     const navigation = useNavigation();
-
-    const getWalletItems = async () => {
-        try {
-            const response = await axios.get(`http://192.168.1.100:5050/wallet`);
-            setWallets(response.data);
-        } catch (error) {
-            console.log(error);
-        }
-    };
-
-    useEffect(() => {
-        getWalletItems();
-    }, [])
 
     return (
 
