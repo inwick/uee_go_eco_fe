@@ -108,7 +108,7 @@ function FoodSavingTipsView() {
             "Done",
             "Successfully Updated!",
             [
-                { text: "OK", onPress: () => navigation.navigate("FoodSavingTips") }
+                { text: "OK", onPress: () => navigation.navigate("FoodSaverDashboard") }
             ]
         );
 
@@ -127,7 +127,7 @@ function FoodSavingTipsView() {
                 "Done",
                 "Successfully Deleted!",
                 [
-                    { text: "OK", onPress: () => navigation.navigate("FoodSavingTips") }
+                    { text: "OK", onPress: () => navigation.navigate("FoodSaverDashboard") }
                 ]
             );
         })
@@ -197,13 +197,6 @@ function FoodSavingTipsView() {
                                 }}
 
                             />
-                            {/* <TextInput
-                                onChangeText={onChangeTextCategory}
-                                value={category}
-                                name='category'
-                                underlineColorAndroid='transparent'
-                                style={styles.SmallTextInputStyleClass2}
-                            /> */}
                         </View>
 
                         <View style={styles.container}>
@@ -269,7 +262,6 @@ function FoodSavingTipsView() {
                     <SafeAreaView>
                         <View>
                             <TouchableOpacity
-                                //  onPress={() => navigation.navigate("FoodSavingTips")}
                                 onPress={handleVisibleModelViewMode}
                             >
                                 <Text>Close</Text>
@@ -290,12 +282,14 @@ function FoodSavingTipsView() {
                                 <Text style={styles.CalBtnText}>Delete</Text>
                             </TouchableOpacity>
                         </View>
-                        {/* <TouchableOpacity style={styles.CalBtn} onPress={viewUpdateDataBtn}>
-                            <Text style={styles.CalBtnText}>Update</Text>
-                        </TouchableOpacity>
-                        <TouchableOpacity style={styles.CalBtn} onPress={deleteData}>
-                            <Text style={styles.CalBtnText}>Delete</Text>
-                        </TouchableOpacity> */}
+                        <View style={styles.fixToText1}>
+                            <TouchableOpacity style={styles.CalBtn} onPress={() => navigation.navigate("AddCommentForFoodSavingTips",{id: id})}>
+                                <Text style={styles.CalBtnText}>Add Review</Text>
+                            </TouchableOpacity>
+                            <TouchableOpacity style={styles.CalBtn} onPress={() => navigation.navigate("ViewReviewsInFoodSavingTips",{id: id})}>
+                                <Text style={styles.CalBtnText}>View Review</Text>
+                            </TouchableOpacity>
+                        </View>
                     </SafeAreaView>
                 </ScrollView>
             </Modal>
