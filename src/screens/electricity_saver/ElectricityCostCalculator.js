@@ -1,3 +1,4 @@
+/* eslint-disable no-alert */
 /* eslint-disable react/jsx-no-undef */
 /* eslint-disable react-native/no-inline-styles */
 import React, {useState} from 'react';
@@ -13,55 +14,68 @@ import {
 } from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import SelectList from 'react-native-dropdown-select-list';
+import {Dropdown} from 'react-native-element-dropdown';
 
 function ElectricityCostCalculator() {
   // const [wallets, setWallets] = useState([]);
   const navigation = useNavigation();
 
   const [distance, setDistance] = useState('');
+  const [provider, setProvider] = useState('');
+  const [customerType, setCustomerType] = useState('');
+  const [units, setUnits] = useState(0);
   const [consumption, setConsumption] = useState('');
   const [price, setPrice] = useState('');
   const [seats, setSeats] = useState('');
   const [selected, setSelected] = React.useState('');
-  const data = [{key: '1', value: 'Jammu & Kashmir'}];
-  const [estimatedBill, setEstimatedBill] = useState(5420);
+  const serviceData = [
+    {label: 'LECO', value: 'LECO'},
+    {label: 'CEB', value: 'CEB'},
+  ];
+  const customerData = [
+    {label: 'Domestic', value: 'domestic'},
+    {label: 'Industrial', value: 'industrial'},
+  ];
+  const [estimatedBill, setEstimatedBill] = useState(0);
 
   const totalCost = async () => {
-    if (distance == '') {
-      alert('Please Enter Travel Distance');
+    if (provider === '') {
+      alert('Please Select a Provider');
       return false;
-    } else if (consumption == '') {
-      alert('Please Enter Fuel Consumption');
+    } else if (customerType === '') {
+      alert('Please Select a Customer Type');
       return false;
-    } else if (price == '') {
-      alert('Please Enter Latest Fuel Price');
+    } else if (units === 0) {
+      alert('Number of Units cannot be empty');
       return false;
     } else {
-      const cost = (distance / consumption) * price;
-      Alert.alert('Total Cost', 'LKR.' + cost.toString(), [
-        {text: 'OK', onPress: () => navigation.navigate('FuelCostCalculator')},
-      ]);
+      if (customerType === 'domestic') {
+        setEstimatedBill(calculateDomesticBill());
+      } else if (customerType === 'industrial') {
+        setEstimatedBill(calculateIndustrialBill());
+      }
     }
   };
 
-  const individualCost = async () => {
-    if (distance == '') {
-      alert('Please Enter Travel Distance');
-      return false;
-    } else if (consumption == '') {
-      alert('Please Enter Fuel Consumption');
-      return false;
-    } else if (price == '') {
-      alert('Please Enter Latest Fuel Price');
-      return false;
-    } else if (seats == '') {
-      alert('Please Enter Seat Count');
-      return false;
+  const calculateDomesticBill = () => {
+    if (units <= 30 && units > 0) {
+      return units * 8 + 120;
+    } else if (units > 30 && units <= 60) {
+      return units * 10 + 240;
+    } else if (units > 60 && units <= 90) {
+      return 60 * 16 + (units - 60) * 16 + 360;
+    } else if (units > 60 && units <= 180) {
+      return 60 * 16 + 30 * 16 + (units - 90) * 50 + 960;
+    } else if (units > 60 && units > 180) {
+      return 60 * 16 + 30 * 16 + 90 * 50 + (units - 180) * 75 + 1500;
+    }
+  };
+
+  const calculateIndustrialBill = () => {
+    if (units <= 300 && units > 0) {
+      return units * 20 + 960;
     } else {
-      const inCost = ((distance / consumption) * price) / seats;
-      Alert.alert('Individual Cost', 'LKR.' + inCost.toString(), [
-        {text: 'OK', onPress: () => navigation.navigate('FuelCostCalculator')},
-      ]);
+      return units * 20 + 1500;
     }
   };
 
@@ -84,35 +98,48 @@ function ElectricityCostCalculator() {
       <View style={styles.container}>
         <Text style={styles.labelClass}>Select Provider</Text>
 
-        <SelectList
-          setSelected={setSelected}
-          data={data}
-          style={styles.SmallTextInputStyleClass}
-          onSelect={() => alert(selected)}
-        />
-
-        <TextInput
-          onChangeText={distance => setDistance(distance)}
-          defaultValue={distance}
-          underlineColorAndroid="transparent"
-          style={styles.SmallTextInputStyleClass}
-          keyboardType="numeric"
+        <Dropdown
+          style={styles.dropdown}
+          placeholderStyle={styles.placeholderStyle}
+          selectedTextStyle={styles.selectedTextStyle}
+          inputSearchStyle={styles.inputSearchStyle}
+          iconStyle={styles.iconStyle}
+          data={serviceData}
+          maxHeight={300}
+          labelField="label"
+          valueField="value"
+          searchPlaceholder="Search..."
+          placeholder="Select Provider"
+          value={provider}
+          onChange={item => {
+            setProvider(item.value);
+          }}
         />
 
         <Text style={styles.labelClassTwo}>Select Customer Type</Text>
 
-        <TextInput
-          onChangeText={distance => setDistance(distance)}
-          defaultValue={distance}
-          underlineColorAndroid="transparent"
-          style={styles.SmallTextInputStyleClass}
-          keyboardType="numeric"
+        <Dropdown
+          style={styles.dropdown}
+          placeholderStyle={styles.placeholderStyle}
+          selectedTextStyle={styles.selectedTextStyle}
+          inputSearchStyle={styles.inputSearchStyle}
+          iconStyle={styles.iconStyle}
+          data={customerData}
+          maxHeight={300}
+          labelField="label"
+          valueField="value"
+          searchPlaceholder="Search..."
+          placeholder="Select Type"
+          value={customerType}
+          onChange={item => {
+            setCustomerType(item.value);
+          }}
         />
 
         <Text style={styles.labelClassTwo}>Number of Units (kWh)</Text>
 
         <TextInput
-          onChangeText={distance => setDistance(distance)}
+          onChangeText={value => setUnits(value)}
           defaultValue={distance}
           underlineColorAndroid="transparent"
           style={styles.SmallTextInputStyleClass}
@@ -223,15 +250,16 @@ const styles = StyleSheet.create({
     backgroundColor: '#E4E4E4',
     color: 'black',
   },
-  lableClass2: {
-    textAlign: 'center',
+  dropdown: {
     height: 40,
-    fontSize: 14,
-    marginTop: 108,
-    borderRadius: 20,
-    margin: 5,
-    color: '#26B787',
-    fontWeight: '600',
+    // borderColor: 'gray',
+    backgroundColor: '#E4E4E4',
+    color: 'black',
+    marginTop: 0,
+    // borderWidth: 0.5,
+    borderRadius: 8,
+    paddingHorizontal: 8,
+    textAlign: 'center',
   },
   SmallTextInputStyleClass2: {
     textAlign: 'center',
