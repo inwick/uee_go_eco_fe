@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { StyleSheet, View, TouchableOpacity, Text, Image } from "react-native";
+import { StyleSheet, View, TouchableOpacity, Text, Image, ScrollView } from "react-native";
 import axios from 'react-native-axios';
 import { useNavigation } from '@react-navigation/native';
 
@@ -10,7 +10,7 @@ function FuelSavingTips() {
 
     const getFuelTips = async () => {
         try {
-            const response = await axios.get(`http://192.168.1.100:5050/WaterTips/`);
+            const response = await axios.get(`http://10.0.2.2:5050/WaterTips/`);
             setTips(response.data);
         } catch (error) {
             console.log(error);
@@ -28,26 +28,41 @@ function FuelSavingTips() {
             <Text style={{
                 fontSize: 25,
                 fontWeight: 'bold',
-                color: 'black'
+                color: 'black',
+                textAlign: 'center',
+                marginBottom: 25
             }}>
                 Water Saving Tips
             </Text>
+            <ScrollView
+                contentContainerStyle={{
+                    // justifyContent: 'center',
+                    // marginLeft: 20,
+                    // marginRight: 20,
+                }}>
 
-            {tips.map(tip => (
-                <View key={tip._id}>
-
-                    <TouchableOpacity style={styles.cardButton} onPress={() => navigation.navigate("WaterTipView" , { id : tip._id})}>
-
-                        <Text style={{ fontSize: 16, fontWeight: "700", color: "#52B1E2", alignSelf: "flex-start" }}>
-                            {tip.tipTitle}
-                        </Text>
-                        <Text style={{ fontSize: 14, alignSelf: "flex-start" }}>
-                            {tip.tipDescription.slice(0, 120)} ...
-                        </Text>
-
-                    </TouchableOpacity>
-                </View>
-            ))}
+                {tips.map(tip => (
+                    <View key={tip._id}>
+                        <TouchableOpacity onPress={() => navigation.navigate("WaterTipView", { id: tip._id })}>
+                            <View style={styles.row}>
+                                <View style={styles[`1col`]}>
+                                    <Image source={{ uri: tip.image }} style={styles.img} />
+                                </View>
+                                <View style={styles[`2col`]}>
+                                    <Text style={{ fontSize: 15, fontWeight: "600", color: "#52B1E2", alignSelf: "flex-start" }}>
+                                        {tip.tipTitle}
+                                    </Text>
+                                </View>
+                                <View style={styles[`0.5col`]} onPress={() => navigation.navigate("WaterTipView", { id: tip._id })}>
+                                    <Image source={require('../../assets/water_saver/arrow.png')} style={styles.arrowimg} />
+                                </View>
+                            </View>
+                        </TouchableOpacity>
+                        <View style={styles.tch}/>
+                    </View>
+                ))}
+                <Text style={styles.btmtxt}> More ideas coming soon...</Text>
+            </ScrollView>
         </View>
 
     );
@@ -55,10 +70,57 @@ function FuelSavingTips() {
 export default FuelSavingTips
 
 const styles = StyleSheet.create({
+    tch: {
+        marginTop: 20,
+        borderBottomColor: 'black',
+        // borderBottomWidth: StyleSheet.hairlineWidth,
+        borderBottomWidth: 0.7
+    },
+    arrowimg: {
+        width: 13,
+        height: 13
+    },
+    row: {
+        flexDirection: "row",
+    },
+    "0.5col": {
+        borderColor: "black",
+        // borderWidth: 1,
+        flex: 0.2,
+        // alignItems:'center',
+        justifyContent: 'center',
+        // alignContent:'center',
+        // textAlign:'center'
+    },
+    "1col": {
+        borderColor: "black",
+        // borderWidth: 1,
+        flex: 1,
+        alignItems: 'center',
+
+    },
+    "2col": {
+        borderColor: "black",
+        // borderWidth: 1,
+        flex: 2,
+        justifyContent: 'center',
+        paddingRight: 15
+    },
+    btmtxt: {
+        marginTop: 10,
+        marginBottom: 50,
+        textAlign: 'center',
+        fontSize: 16,
+        fontWeight: '600',
+        color: "#52B1E2"
+
+    },
     MainContainer: {
         justifyContent: 'center',
-        alignItems: 'center',
-        marginTop: 20
+        // alignItems: 'center',
+        marginTop: 20,
+        marginLeft: 10,
+        marginRight: 10,
     },
     button: {
         width: '80%',
@@ -85,10 +147,9 @@ const styles = StyleSheet.create({
         fontWeight: "500"
     },
     img: {
-        width: 150,
-        height: 150,
-        marginBottom: 5,
-        marginTop: 10
+        width: 65,
+        height: 65,
+        borderRadius: 10
     },
     row: {
         flexDirection: 'row',

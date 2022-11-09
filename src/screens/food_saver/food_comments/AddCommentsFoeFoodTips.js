@@ -2,57 +2,33 @@ import React, { useState } from "react";
 import { StyleSheet, View, TouchableOpacity, Text, TextInput, Button, Alert, Picker, Image } from "react-native";
 import { useNavigation } from '@react-navigation/native';
 import axios from 'react-native-axios';
-import { ScrollView } from 'react-native-gesture-handler';
-import { Dropdown } from 'react-native-element-dropdown';
 
-function AddFoodWasteReducingTips() {
+function AddCommentForFoodTips({ route }) {
 
     // const [wallets, setWallets] = useState([]);
     const navigation = useNavigation();
 
-    const data = [
-        { label: 'Ways to Reduce Food Waste', value: '1' },
-        { label: 'Food Preservation Methods', value: '2' },
-        { label: 'Replanting Using Food Waste Plant', value: '3' },
-    ];
+    const { id } = route.params;
 
-    const [title, setTitle] = useState('');
-    const [description, setDescription] = useState('');
-    const [video, setVideo] = useState('');
-    const [image, setImage] = useState('');
-    const [category, setCategory] = useState(null);
+    const [tipId, setTipId] = useState(id);
+    const [comment, setComment] = useState('');
     const [userId, setUserId] = useState('003');
 
 
-    const onChangeTextTitle = (value) => {
-        setTitle(value)
-    }
-    const onChangeTextDescription = (value) => {
-        setDescription(value)
-    }
-    const onChangeTextVideo = (value) => {
-        setVideo(value)
-    }
-    const onChangeTextImage = (value) => {
-        setImage(value)
-    }
-    const onChangeTextCategory = (value) => {
-        setCategory(value)
+    const onChangeTextComment = (value) => {
+        setComment(value)
     }
 
 
     const insertData = () => {
 
         var data = {
-            title: title,
-            category: category,
-            description: description,
-            image: image,
-            video: video,
-            userId: userId
+            tipId: tipId,
+            userId: userId,
+            comment: comment,
         }
         axios({
-            url: "http://192.168.1.100:5050/FoodSaver/add",
+            url: "http://192.168.1.100:5050/FoodSaver-comment/add",
             method: "POST",
             data: data
         }).then((response) => {
@@ -61,12 +37,10 @@ function AddFoodWasteReducingTips() {
                 "Done",
                 "Successfully Inserted!",
                 [
-                    { text: "OK", onPress: () => navigation.navigate("FoodSavingTips") }
+                    { text: "OK", onPress: () => navigation.navigate("FoodSaverDashboard") }
                 ]
             );
         })
-
-
 
     }
 
@@ -80,116 +54,40 @@ function AddFoodWasteReducingTips() {
                 color: 'black',
                 marginTop: -20
             }}>
-                Add Food Waste Reducing Tips
+                Add Review
             </Text>
 
-            {/* <ScrollView
-                contentContainerStyle={{
-                    justifyContent: 'center',
-                    marginLeft: 20,
-                    marginRight: 20,
-                }}> */}
             <Image
-                source={require('../../assets/food_waste_saver/food2.png')}
+                source={require('../../../assets/food_waste_saver/feedback.png')}
                 style={styles.img}
             />
 
+            {/* <Text>tip id is: {tipId}</Text> */}
+
             <View style={styles.container}>
 
-                <Text style={styles.lableClass}>Title : </Text>
+                <Text style={styles.lableClass}>Comment : </Text>
                 <TextInput
-                    onChangeText={onChangeTextTitle}
-                    value={title}
-                    name="title"
-                    underlineColorAndroid='transparent'
-                    style={styles.SmallTextInputStyleClass}
-                
-                />
-
-            </View>
-
-            <View style={styles.container}>
-
-                <Text style={styles.lableClass2}>category :</Text>
-                <Dropdown
-                    style={styles.dropdown}
-                    placeholderStyle={styles.placeholderStyle}
-                    selectedTextStyle={styles.selectedTextStyle}
-                    inputSearchStyle={styles.inputSearchStyle}
-                    iconStyle={styles.iconStyle}
-                    data={data}
-                    search
-                    maxHeight={300}
-                    labelField="label"
-                    valueField="value"
-                    // placeholder={!isFocus ? 'Select item' : '...'}
-                    searchPlaceholder="Search..."
-                    value={category}
-                    // onFocus={() => setIsFocus(true)}
-                    // onBlur={() => setIsFocus(false)}
-                    onChange={item => {
-                        setCategory(item.value);
-                    }}
-
-                />
-                {/* <TextInput
-                    onChangeText={onChangeTextCategory}
-                    value={category}
-                    name='category'
-                    underlineColorAndroid='transparent'
-                    style={styles.SmallTextInputStyleClass2}
-                /> */}
-            </View>
-
-            <View style={styles.container}>
-
-                <Text style={styles.lableClass3}>description : </Text>
-                <TextInput
-                    onChangeText={onChangeTextDescription}
+                    onChangeText={onChangeTextComment}
                     underlineColorAndroid='transparent'
                     style={styles.SmallTextInputStyleClass3}
-                    name='description'
-                    value={description}
-                    numberOfLines={6}
+                    name='comment'
+                    value={comment}
+                    numberOfLines={10}
                     multiline={true}
+
                 />
-            </View>
 
-            <View style={styles.container}>
-
-                <Text style={styles.lableClass4}> Video URL :</Text>
-                <TextInput
-                    onChangeText={onChangeTextVideo}
-                    underlineColorAndroid='transparent'
-                    style={styles.SmallTextInputStyleClass4}
-                    name='video'
-                    value={video}
-                />
-            </View>
-
-            <View style={styles.container}>
-
-                <Text style={styles.lableClass5}> Image URL :</Text>
-                <TextInput
-                    onChangeText={onChangeTextImage}
-                    underlineColorAndroid='transparent'
-                    style={styles.SmallTextInputStyleClass5}
-                    name='image'
-                    value={image}
-                />
             </View>
 
             <View style={{
                 width: 450,
                 alignItems: 'center',
-                // borderBottomColor: '#ffc107',
-                // borderBottomWidth: StyleSheet.hairlineWidth,
                 marginTop: 260,
             }}>
             </View>
-            {/* </ScrollView> */}
 
-            <View style={styles.fixToText}>
+            <View style={styles.fixToText2}>
                 <TouchableOpacity style={styles.CalBtn} onPress={insertData}>
                     <Text style={styles.CalBtnText}>Save</Text>
                 </TouchableOpacity>
@@ -201,7 +99,7 @@ function AddFoodWasteReducingTips() {
 
     );
 }
-export default AddFoodWasteReducingTips
+export default AddCommentForFoodTips
 
 const styles = StyleSheet.create({
     dropdownList: {
@@ -212,7 +110,8 @@ const styles = StyleSheet.create({
     MainContainer: {
         justifyContent: 'center',
         alignItems: 'center',
-        marginTop: 30
+        marginTop: 30,
+        flex: 1
     },
     CalBtn: {
         width: '35%',
@@ -220,7 +119,7 @@ const styles = StyleSheet.create({
         paddingBottom: 2,
         backgroundColor: '#ffc107',
         borderRadius: 10,
-        marginTop: 120,
+        marginTop: 10,
         marginLeft: 10,
         height: 45
     },
@@ -231,8 +130,8 @@ const styles = StyleSheet.create({
         padding: 10,
         fontWeight: "500"
     },
-    fixToText: {
-        marginTop: 20,
+    fixToText2: {
+        marginTop: -20,
         flexDirection: 'row',
         justifyContent: 'space-between',
     },
@@ -258,8 +157,8 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         height: 40,
         fontSize: 14,
-        marginTop: 0,
-        marginLeft: 40,
+        marginTop: 40,
+        marginLeft: 20,
         color: "#ffc107",
         fontWeight: "600",
     },
@@ -301,7 +200,7 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         height: 40,
         fontSize: 14,
-        marginTop: 118,
+        marginTop: 200,
         borderRadius: 20,
         marginLeft: 1,
         color: "#ffc107",
@@ -311,10 +210,10 @@ const styles = StyleSheet.create({
         height: 40,
         width: '50%',
         borderBottomEndRadius: 5,
-        marginTop: 116,
+        marginTop: 80,
         borderRadius: 10,
         margin: 5,
-        marginLeft: 37,
+        marginLeft: -90,
         backgroundColor: "#E4E4E4",
         color: "black",
         height: 150,

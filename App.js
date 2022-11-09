@@ -16,11 +16,14 @@ import UpdateFuelComent from './src/screens/fuel_saver/updateComment';
 import FoodSaverDashboard from './src/screens/food_saver/FoodSaverDashboard';
 import AddFoodWasteReducingTips from './src/screens/food_saver/AddFoodWasteReducingTips';
 import FoodSavingTipsView from './src/screens/food_saver/FoodTipsView';
-import FoodWasteTipsViewOneByOne from './src/screens/food_saver/FoodViewOneByOne';
+import AddCommentForFoodTips from './src/screens/food_saver/food_comments/AddCommentsFoeFoodTips';
+import ViewReviewForFoodTips from './src/screens/food_saver/food_comments/ViewCommentsForFoodTips';
+
 import WaterSaverDashBoard from './src/screens/water_saver/WaterSaverDashboard';
 import WaterSavingTips from './src/screens/water_saver/WaterSavingTips';
 import WaterTipView from './src/screens/water_saver/WaterTipView';
 import AddNewTip from './src/screens/water_saver/AddNewTip';
+import WaterSaverCategories from './src/screens/water_saver/WaterSaverCategories';
 
 import ElectricitySaverDashBoard from './src/screens/electricity_saver/ElectricitySaverDashBoard';
 import ElectricityCostCalculator from './src/screens/electricity_saver/ElectricityCostCalculator';
@@ -28,6 +31,7 @@ import AddBillInformation from './src/screens/electricity_saver/AddBillInformati
 import ElectricitySaverTips from './src/screens/electricity_saver/ElectricitySaverTips';
 import ElectricitySaverBillHistory from './src/screens/electricity_saver/ElectricitySaverBillHistory';
 import ElectricitySaverReport from './src/screens/electricity_saver/ElectricitySaverReport';
+import UpdateBillInformation from './src/screens/electricity_saver/UpdateBillInformation';
 
 const Stack = createNativeStackNavigator();
 const Bottom = createBottomTabNavigator();
@@ -83,6 +87,16 @@ const Water = () => {
       <Stack.Screen name="WaterSavingTips" component={WaterSavingTips} options={{ title: 'Water Saving Tips' }} />
       <Stack.Screen name="WaterTipView" component={WaterTipView} options={{ title: 'Water Tip View' }} />
       <Stack.Screen name="AddNewTip" component={AddNewTip} options={{ title: 'Add New Idea' }} />
+      <Stack.Screen
+        name="WaterSaverCategories"
+        component={WaterSaverCategories}
+        options={{ title: 'Water Saver Categories' }}
+      />
+      <Stack.Screen
+        name="UpdateBillInformation"
+        component={UpdateBillInformation}
+        options={{ title: '' }}
+      />
     </Stack.Navigator>
 
   );
@@ -109,7 +123,17 @@ const Food = () => {
       <Stack.Screen name="FoodSaverDashboard" component={FoodSaverDashboard} options={{ title: 'Food  Waste Reduce DashBoard' }} />
       <Stack.Screen name="AddFoodSavingTips" component={AddFoodWasteReducingTips} options={{ title: 'Add Food Waste Tips' }} />
       <Stack.Screen name="FoodSavingTips" component={FoodSavingTipsView} options={{ title: 'Food Waste Reducing Tips' }} />
-      <Stack.Screen name="FoodSavingTipsGetOneByOne" component={FoodWasteTipsViewOneByOne} options={{ title: 'Food Waste Reducing Tips Get One By One' }} />
+      {/* <Stack.Screen name="FoodSavingTipsGetOneByOne" component={FoodWasteTipsViewOneByOne} options={{ title: 'Food Waste Reducing Tips Get One By One' }} /> */}
+      <Stack.Screen
+        name="AddCommentForFoodSavingTips"
+        component={AddCommentForFoodTips}
+        options={{ title: 'Add Review' }}
+      />
+      <Stack.Screen
+        name="ViewReviewsInFoodSavingTips"
+        component={ViewReviewForFoodTips}
+        options={{ title: 'Reviews' }}
+      />
     </Stack.Navigator>
   );
 }

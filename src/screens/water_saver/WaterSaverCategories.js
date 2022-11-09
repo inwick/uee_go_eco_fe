@@ -3,23 +3,23 @@ import { StyleSheet, View, TouchableOpacity, Text, Image } from "react-native";
 import axios from 'react-native-axios';
 import { useNavigation } from '@react-navigation/native';
 
-function WaterSaverDashBoard() {
+function WaterSaverCategories() {
 
     const [wallets, setWallets] = useState([]);
     const navigation = useNavigation();
 
-    const getWalletItems = async () => {
-        try {
-            const response = await axios.get(`http://192.168.1.111:5050/wallet`);
-            setWallets(response.data);
-        } catch (error) {
-            console.log(error);
-        }
-    };
+    // const getWalletItems = async () => {
+    //     try {
+    //         const response = await axios.get(`http://192.168.1.111:5050/wallet`);
+    //         setWallets(response.data);
+    //     } catch (error) {
+    //         console.log(error);
+    //     }
+    // };
 
-    useEffect(() => {
-        getWalletItems();
-    }, [])
+    // useEffect(() => {
+    //     getWalletItems();
+    // }, [])
 
     return (
 
@@ -30,27 +30,27 @@ function WaterSaverDashBoard() {
                 fontWeight: 'bold',
                 color: 'black'
             }}>
-                Water Saver
+                Categories
             </Text>
-            <Image source={require('../../assets/water_saver/water_icon.png')} style={styles.img} />
+            {/* <Image source={require('../../assets/water_saver/water_icon.png')} style={styles.img} /> */}
 
             <TouchableOpacity style={styles.button} onPress={() => navigation.navigate("WaterSavingTips")}>
-                <Text style={styles.text}>Latest Ideas</Text>
+                <Text style={styles.text}>DOMESTIC IDEAS</Text>
             </TouchableOpacity>
 
             <TouchableOpacity style={styles.button} onPress={() => navigation.navigate("WaterSaverCategories")}>
-                <Text style={styles.text}>Categories</Text>
+                <Text style={styles.text}> MEDUIM SCALE IDEAS</Text>
             </TouchableOpacity>
 
             <TouchableOpacity style={styles.button} onPress={() => navigation.navigate("AddNewTip")}>
-                <Text style={styles.text}>Add New Idea</Text>
+                <Text style={styles.text}> INDUSTRIAL IDEAS</Text>
             </TouchableOpacity>
 
         </View>
 
     );
 }
-export default WaterSaverDashBoard
+export default WaterSaverCategories
 
 const styles = StyleSheet.create({
     MainContainer: {
@@ -61,18 +61,18 @@ const styles = StyleSheet.create({
     button: {
         width: '80%',
         paddingTop: 2,
-        paddingBottom: 2,
+        paddingBottom: 0,
         backgroundColor: '#52B1E2',
         borderRadius: 20,
         marginTop: 20,
-        height: 100
+        height: 80
     },
     text: {
         color: '#000',
-        fontSize: 20,
+        fontSize: 18,
         textAlign: 'center',
-        padding: 30,
-        fontWeight: "500"
+        paddingTop: 25,
+        fontWeight: "600"
     },
     img: {
         width: 140,

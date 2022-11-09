@@ -1,20 +1,24 @@
 import React, { useState, useEffect } from "react";
-import { Button, StyleSheet, View, TouchableOpacity, Text, Image, ScrollView, SafeAreaView } from "react-native";
+import { Button, StyleSheet, View, TouchableOpacity, Text, Image, ScrollView, SafeAreaView, TextInput,Alert} from "react-native";
 import axios from 'react-native-axios';
 import { useNavigation } from '@react-navigation/native';
+import Modal from "react-native-modal";
 
 function WaterTipView({ route }) {
 
     const [title, setTitle] = useState('');
     const [description, setDescription] = useState('');
     const [image, setImage] = useState('');
-    // const [title, setTitle] = useState('');
+    const [comment, setComment] = useState('');
     const navigation = useNavigation();
     const { id } = route.params;
 
+    const [isModalVisible, setIsModalVisible] = useState(false);
+    const handleModal = () => setIsModalVisible(() => !isModalVisible);
+
     const getWalletItems = async () => {
         try {
-            const response = await axios.get(`http://192.168.1.100:5050/WaterTips/` + id);
+            const response = await axios.get(`http://10.0.2.2:5050/WaterTips/` + id);
             setTitle(response.data.tipTitle);
             setDescription(response.data.tipDescription);
             setImage(response.data.image);
@@ -27,9 +31,36 @@ function WaterTipView({ route }) {
         getWalletItems();
     }, [])
 
+    const onChangeTextComment = (value) => {
+        setComment(value)
+    }
+
+    const insertData = () => {
+
+        var data = {
+            userId: '1234',
+            ideaId: id,
+            comment: comment
+        }
+        console.log('a', data)
+        axios({
+            url: "http://10.0.2.2:5050/WaterComments/add",
+            method: "POST",
+            data: data
+        }).then((response) => {
+            Alert.alert(
+                "Done",
+                "Successfully Inserted!",
+                [
+                    { text: "OK", onPress: () => navigation.navigate("WaterSavingTips") }
+                ]
+            );
+        })
+    }
+
     return (
 
-        <SafeAreaView>
+        <SafeAreaView style={styles.view}>
             <ScrollView >
                 <View style={styles.infoContainer}>
                     <Text style={styles.name}> {title}</Text>
@@ -43,13 +74,38 @@ function WaterTipView({ route }) {
                     <Text style={styles.description}> {description}</Text>
 
                     <View style={styles.fixToText}>
-                        <TouchableOpacity style={styles.CalBtn} onPress={() => totalCost()}>
-                            <Text style={styles.CalBtnText}>Total Cost</Text>
+                        <TouchableOpacity style={styles.CalBtn} onPress={handleModal}>
+                            <Text style={styles.CalBtnText}>ADD COMMENT</Text>
                         </TouchableOpacity>
-                        <TouchableOpacity style={styles.CalBtn} onPress={() => individualCost()}>
-                            <Text style={styles.CalBtnText}>Individual cost</Text>
+                        <TouchableOpacity style={styles.CalBtn} >
+                            <Text style={styles.CalBtnText}>VIEW COMMENTS</Text>
                         </TouchableOpacity>
                     </View>
+                </View>
+
+                <View style={styles.container}>
+                    <View style={styles.separator} />
+                    {/* <Button title="button" onPress={handleModal} /> */}
+                    <Modal style={styles.modal} isVisible={isModalVisible}>
+                        <View style={styles.vw}>
+                            <Text style={styles.cmnttxt}> ADD COMMENT </Text>
+                            <View>
+                                <TextInput
+                                    style={styles.input}
+                                    onChangeText={onChangeTextComment}
+                                    defaultValue={comment}
+                                    underlineColorAndroid='transparent'/>
+                            </View>
+                            <View style={{ flexDirection: 'row', marginRight: 10 }}>
+                                <TouchableOpacity style={styles.btn} onPress={handleModal}>
+                                    <Text style={styles.CalBtnText}> CANCEL</Text>
+                                </TouchableOpacity>
+                                <TouchableOpacity style={styles.btn} onPress={insertData}>
+                                    <Text style={styles.CalBtnText}> ADD</Text>
+                                </TouchableOpacity>
+                            </View>
+                        </View>
+                    </Modal>
                 </View>
             </ScrollView>
         </SafeAreaView>
@@ -59,15 +115,76 @@ function WaterTipView({ route }) {
 export default WaterTipView
 
 const styles = StyleSheet.create({
+
+    btn: {
+        // width: '35%',
+        paddingBottom: 5,
+        paddingBottom: 5,
+        backgroundColor: '#52B1E2',
+        borderRadius: 10,
+        marginLeft: 10,
+        height: 40,
+        flex: 2
+    },
+    input: {
+        textAlign: 'center',
+        height: 120,
+        width: '75%',
+        borderBottomEndRadius: 5,
+        borderRadius: 10,
+        backgroundColor: "#E4E4E4",
+        marginHorizontal: 26,
+        marginVertical: 20
+    },
+    cmnttxt: {
+        textAlign: 'center',
+        fontSize: 16,
+        marginTop: 10,
+        borderBottomWidth: 1,
+    },
+    vw: {
+        flex: 1,
+        backgroundColor: 'white',
+        borderRadius: 20,
+        borderColor: 'black',
+        borderBottomWidth: 1,
+    },
+    modal: {
+        marginVertical: 150,
+        marginHorizontal: 75,
+        width: 250,
+        maxHeight: 250,
+        borderRadius: 10,
+        borderColor: 'red'
+    },
+    container: {
+        // flex: 1,
+        alignItems: "center",
+        justifyContent: "center",
+        textAlign: 'center'
+    },
+    title: {
+        fontSize: 20,
+        fontWeight: "bold",
+    },
+    text: {
+        fontSize: 16,
+        fontWeight: "400",
+        textAlign: "center",
+    },
+    view: {
+        marginHorizontal: 25
+    },
     fixToText: {
         marginTop: 20,
         flexDirection: 'row',
         justifyContent: 'space-between',
     },
     CalBtn: {
-        width: '40%',
-        paddingBottom: 2,
-        backgroundColor: '#26B787',
+        width: '50%',
+        paddingBottom: 5,
+        paddingBottom: 5,
+        backgroundColor: '#52B1E2',
         borderRadius: 10,
         marginLeft: 10,
         height: 45
@@ -76,8 +193,8 @@ const styles = StyleSheet.create({
         color: '#000',
         fontSize: 14,
         textAlign: 'center',
-        padding: 10,
-        fontWeight: "500"
+        fontWeight: "500",
+        marginTop: 10
     },
     card: {
         backgroundColor: 'white',
@@ -94,16 +211,20 @@ const styles = StyleSheet.create({
     },
     image: {
         height: 300,
-        width: '100%'
+        width: '100%',
+        borderRadius: 20,
+        marginTop: 10,
+        marginBottom: 10
     },
     infoContainer: {
         padding: 16,
         //   justifyContent:'center',
-        alignItems: 'center'
+        alignItems: 'center',
     },
     name: {
         fontSize: 22,
         fontWeight: 'bold',
+        textAlign: 'center'
     },
     price: {
         fontSize: 16,
