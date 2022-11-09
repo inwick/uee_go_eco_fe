@@ -54,7 +54,7 @@ function AddBillInformation() {
       Alert.alert('Done', 'Bill information Successfully Inserted!', [
         {
           text: 'OK',
-          onPress: () => navigation.navigate('ElectricitySaverDashBoard'),
+          onPress: () => navigation.navigate('ElectricitySaverBillHistory'),
         },
         ,
       ]);
