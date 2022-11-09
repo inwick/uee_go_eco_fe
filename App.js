@@ -172,6 +172,8 @@ const App = () => {
               // headerTitle: "",
               headerTintColor: "black",
               headerShown: false,
+              tabBarStyle: { height: 60 },
+              tabBarHideOnKeyboard: true
             }}
           />
 
@@ -192,6 +194,8 @@ const App = () => {
               // headerTitle: "",
               headerTintColor: "black",
               headerShown: false,
+              tabBarStyle: { height: 60 },
+              tabBarHideOnKeyboard: true
             }}
           />
           <Bottom.Screen
@@ -212,6 +216,8 @@ const App = () => {
               // headerTitle: "",
               headerTintColor: "black",
               headerShown: false,
+              tabBarStyle: { height: 60 },
+              tabBarHideOnKeyboard: true
             }}
 
           />
@@ -232,6 +238,8 @@ const App = () => {
               // headerTitle: "",
               headerTintColor: "black",
               headerShown: false,
+              tabBarStyle: { height: 60 },
+              tabBarHideOnKeyboard: true
             }}
           />
 
@@ -253,6 +261,8 @@ const App = () => {
               // headerTitle: "",
               headerTintColor: "black",
               headerShown: false,
+              tabBarStyle: { height: 60 },
+              tabBarHideOnKeyboard: true
             }}
           />
 

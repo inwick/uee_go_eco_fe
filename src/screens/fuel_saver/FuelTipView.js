@@ -96,7 +96,7 @@ function FuelTipView({ route }) {
                 style={styles.SmallTextInputStyleClass3}
             />
 
-            <ScrollView style={{ height: 150 }}>
+            <ScrollView style={{ height: 180 }}>
 
                 {comment.length === 0 ?
                     <Text style={{ width: "100%", marginTop: 15 }}>

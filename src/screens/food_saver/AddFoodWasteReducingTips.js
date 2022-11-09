@@ -103,7 +103,7 @@ function AddFoodWasteReducingTips() {
                     name="title"
                     underlineColorAndroid='transparent'
                     style={styles.SmallTextInputStyleClass}
-                
+
                 />
 
             </View>
@@ -220,7 +220,7 @@ const styles = StyleSheet.create({
         paddingBottom: 2,
         backgroundColor: '#ffc107',
         borderRadius: 10,
-        marginTop: 120,
+        marginTop: 65,
         marginLeft: 10,
         height: 45
     },
@@ -308,7 +308,6 @@ const styles = StyleSheet.create({
         fontWeight: "600"
     },
     SmallTextInputStyleClass3: {
-        height: 40,
         width: '50%',
         borderBottomEndRadius: 5,
         marginTop: 116,
@@ -317,7 +316,7 @@ const styles = StyleSheet.create({
         marginLeft: 37,
         backgroundColor: "#E4E4E4",
         color: "black",
-        height: 150,
+        height: 90,
         justifyContent: "flex-start",
         paddingHorizontal: 8,
     },
@@ -325,7 +324,7 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         height: 40,
         fontSize: 14,
-        marginTop: 285,
+        marginTop: 225,
         borderRadius: 20,
         marginLeft: 6,
         color: "#ffc107",
@@ -336,7 +335,7 @@ const styles = StyleSheet.create({
         height: 40,
         width: '50%',
         borderBottomEndRadius: 5,
-        marginTop: 280,
+        marginTop: 220,
         borderRadius: 10,
         margin: 5,
         backgroundColor: "#E4E4E4",
@@ -347,7 +346,7 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         height: 40,
         fontSize: 14,
-        marginTop: 345,
+        marginTop: 285,
         borderRadius: 20,
         marginLeft: 4,
         color: "#ffc107",
@@ -358,7 +357,7 @@ const styles = StyleSheet.create({
         height: 40,
         width: '50%',
         borderBottomEndRadius: 5,
-        marginTop: 340,
+        marginTop: 280,
         borderRadius: 10,
         margin: 5,
         backgroundColor: "#E4E4E4",
