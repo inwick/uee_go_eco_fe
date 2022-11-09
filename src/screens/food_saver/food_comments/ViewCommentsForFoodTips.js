@@ -26,25 +26,22 @@ function ViewReviewForFoodTips({ route }) {
     }, [])
 
 
-    // const deleteData = () => {
+    const deleteData = (cid) => {
 
-    //     axios({
-    //         url: "http://192.168.1.100:5050/FoodSaver/" + id,
-    //         method: "DELETE"
-    //     }).then((res) => {
-    //         // setList(response.data)
-    //         setVisible(false)
-    //         setVisibleView(false)
-    //         Alert.alert(
-    //             "Done",
-    //             "Successfully Deleted!",
-    //             [
-    //                 { text: "OK", onPress: () => navigation.navigate("FoodSavingTips") }
-    //             ]
-    //         );
-    //     })
+        axios({
+            url: "http://192.168.1.100:5050/FoodSaver-comment/" + cid,
+            method: "DELETE"
+        }).then((res) => {
+            Alert.alert(
+                "Done",
+                "Successfully Deleted!",
+                [
+                    { text: "OK", onPress: () => navigation.navigate("FoodSaverDashboard") }
+                ]
+            );
+        })
 
-    // }
+    }
 
     return (
         <SafeAreaView>
@@ -76,10 +73,20 @@ function ViewReviewForFoodTips({ route }) {
 
                             <TouchableOpacity style={styles.cardButton}>
 
-                                <Text style={{ fontSize: 14, alignSelf: "flex-start" }}>
+                                <Text style={{ fontSize: 14, alignSelf: "flex-start", textAlign: 'center', height: 30, }}>
                                     {tip.comment.slice(0, 120)} ...
                                 </Text>
+                                <View style={styles.fixToText}>
+                                    {/* <TouchableOpacity onPress={() => totalCost()}>
+                                        <Image source={require('../../../assets/food_waste_saver/edit.png')} style={{ marginTop: -17, marginLeft: 250 }} />
+                                    </TouchableOpacity> */}
 
+                                    <TouchableOpacity
+                                        onPress={() => deleteData(tip._id)}
+                                    >
+                                        <Image source={require('../../../assets/food_waste_saver/delete.png')} style={{ marginTop: -17, marginLeft: 250 }} />
+                                    </TouchableOpacity>
+                                </View>
                             </TouchableOpacity>
                         </View>
                     ))}
@@ -103,11 +110,12 @@ export default ViewReviewForFoodTips
 
 const styles = StyleSheet.create({
     fixToText: {
-        marginTop: -5,
+        marginTop: -13,
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'center',
         justifyContent: 'center',
+
     },
     fixToText1: {
         marginTop: -100,
@@ -145,9 +153,10 @@ const styles = StyleSheet.create({
     },
     cardButton: {
         padding: 15,
-        width: 350,
+        width: 300,
         alignItems: 'center',
         marginTop: 10,
+        marginLeft: 5,
         borderBottomColor: 'black',
         borderBottomWidth: StyleSheet.hairlineWidth,
     },

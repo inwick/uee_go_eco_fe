@@ -272,24 +272,33 @@ function FoodSavingTipsView() {
                             <Text style={styles.StstText}>{description}</Text>
                             <Text style={styles.StstText}>Video Link: {video}</Text>
 
+                            <View style={styles.fixToText1}>
+                                <TouchableOpacity style={styles.CalBtn} onPress={() => navigation.navigate("AddCommentForFoodSavingTips", { id: id })}>
+                                    <Text style={styles.CalBtnText}>Add Review</Text>
+                                </TouchableOpacity>
+                                <TouchableOpacity style={styles.CalBtn} onPress={() => navigation.navigate("ViewReviewsInFoodSavingTips", { id: id })}>
+                                    <Text style={styles.CalBtnText}>View Review</Text>
+                                </TouchableOpacity>
+                            </View>
+                            <View style={styles.fixToText2}>
+                                <TouchableOpacity onPress={viewUpdateDataBtn}>
+                                    <Image source={require('../../assets/food_waste_saver/edit.png')} style={{ marginTop: 100, marginLeft: 250 }} />
+                                </TouchableOpacity>
 
+                                <TouchableOpacity onPress={deleteData}>
+                                    <Image source={require('../../assets/food_waste_saver/delete.png')} style={{ marginTop: 100, marginLeft: -10 }} />
+                                </TouchableOpacity>
+                            </View>
+                            <Text style={styles.StstText2}>If you want to modify this?</Text>
                         </View>
-                        <View style={styles.fixToText1}>
+                        {/* <View style={styles.fixToText1}>
                             <TouchableOpacity style={styles.CalBtn} onPress={viewUpdateDataBtn}>
                                 <Text style={styles.CalBtnText}>Update</Text>
                             </TouchableOpacity>
                             <TouchableOpacity style={styles.CalBtn} onPress={deleteData}>
                                 <Text style={styles.CalBtnText}>Delete</Text>
                             </TouchableOpacity>
-                        </View>
-                        <View style={styles.fixToText1}>
-                            <TouchableOpacity style={styles.CalBtn} onPress={() => navigation.navigate("AddCommentForFoodSavingTips",{id: id})}>
-                                <Text style={styles.CalBtnText}>Add Review</Text>
-                            </TouchableOpacity>
-                            <TouchableOpacity style={styles.CalBtn} onPress={() => navigation.navigate("ViewReviewsInFoodSavingTips",{id: id})}>
-                                <Text style={styles.CalBtnText}>View Review</Text>
-                            </TouchableOpacity>
-                        </View>
+                        </View> */}
                     </SafeAreaView>
                 </ScrollView>
             </Modal>
@@ -358,6 +367,12 @@ const styles = StyleSheet.create({
         marginTop: -100,
         flexDirection: 'row',
         justifyContent: 'space-between',
+        alignItems: 'center',
+        marginBottom: 50
+    },
+    fixToText2: {
+        marginTop: -100,
+        flexDirection: 'row',
         alignItems: 'center',
         marginBottom: 50
     },
@@ -605,6 +620,13 @@ const styles = StyleSheet.create({
         color: '#000',
         fontSize: 18,
         padding: 10,
+        // width: 380
+    },
+    StstText2: {
+        color: '#000',
+        fontSize: 14,
+        marginTop: -70,
+        marginBottom:30
         // width: 380
     },
 });

@@ -83,120 +83,110 @@ function AddFoodWasteReducingTips() {
                 Add Food Waste Reducing Tips
             </Text>
 
-            {/* <ScrollView
+            <ScrollView
                 contentContainerStyle={{
                     justifyContent: 'center',
                     marginLeft: 20,
                     marginRight: 20,
-                }}> */}
-            <Image
-                source={require('../../assets/food_waste_saver/food2.png')}
-                style={styles.img}
-            />
-
-            <View style={styles.container}>
-
-                <Text style={styles.lableClass}>Title : </Text>
-                <TextInput
-                    onChangeText={onChangeTextTitle}
-                    value={title}
-                    name="title"
-                    underlineColorAndroid='transparent'
-                    style={styles.SmallTextInputStyleClass}
-                
+                }}>
+                <Image
+                    source={require('../../assets/food_waste_saver/food2.png')}
+                    style={styles.img}
                 />
 
-            </View>
+                <View style={styles.container}>
 
-            <View style={styles.container}>
+                    <Text style={styles.lableClass}>Title : </Text>
+                    <TextInput
+                        onChangeText={onChangeTextTitle}
+                        value={title}
+                        name="title"
+                        underlineColorAndroid='transparent'
+                        style={styles.SmallTextInputStyleClass}
 
-                <Text style={styles.lableClass2}>category :</Text>
-                <Dropdown
-                    style={styles.dropdown}
-                    placeholderStyle={styles.placeholderStyle}
-                    selectedTextStyle={styles.selectedTextStyle}
-                    inputSearchStyle={styles.inputSearchStyle}
-                    iconStyle={styles.iconStyle}
-                    data={data}
-                    search
-                    maxHeight={300}
-                    labelField="label"
-                    valueField="value"
-                    // placeholder={!isFocus ? 'Select item' : '...'}
-                    searchPlaceholder="Search..."
-                    value={category}
-                    // onFocus={() => setIsFocus(true)}
-                    // onBlur={() => setIsFocus(false)}
-                    onChange={item => {
-                        setCategory(item.value);
-                    }}
+                    />
 
-                />
-                {/* <TextInput
-                    onChangeText={onChangeTextCategory}
-                    value={category}
-                    name='category'
-                    underlineColorAndroid='transparent'
-                    style={styles.SmallTextInputStyleClass2}
-                /> */}
-            </View>
+                </View>
 
-            <View style={styles.container}>
+                <View style={styles.container}>
 
-                <Text style={styles.lableClass3}>description : </Text>
-                <TextInput
-                    onChangeText={onChangeTextDescription}
-                    underlineColorAndroid='transparent'
-                    style={styles.SmallTextInputStyleClass3}
-                    name='description'
-                    value={description}
-                    numberOfLines={6}
-                    multiline={true}
-                />
-            </View>
+                    <Text style={styles.lableClass2}>category :</Text>
+                    <Dropdown
+                        style={styles.dropdown}
+                        placeholderStyle={styles.placeholderStyle}
+                        selectedTextStyle={styles.selectedTextStyle}
+                        inputSearchStyle={styles.inputSearchStyle}
+                        iconStyle={styles.iconStyle}
+                        data={data}
+                        search
+                        maxHeight={300}
+                        labelField="label"
+                        valueField="value"
+                        searchPlaceholder="Search..."
+                        value={category}
+                        onChange={item => {
+                            setCategory(item.value);
+                        }}
 
-            <View style={styles.container}>
+                    />
+                </View>
 
-                <Text style={styles.lableClass4}> Video URL :</Text>
-                <TextInput
-                    onChangeText={onChangeTextVideo}
-                    underlineColorAndroid='transparent'
-                    style={styles.SmallTextInputStyleClass4}
-                    name='video'
-                    value={video}
-                />
-            </View>
+                <View style={styles.container}>
 
-            <View style={styles.container}>
+                    <Text style={styles.lableClass3}>description : </Text>
+                    <TextInput
+                        onChangeText={onChangeTextDescription}
+                        underlineColorAndroid='transparent'
+                        style={styles.SmallTextInputStyleClass3}
+                        name='description'
+                        value={description}
+                        numberOfLines={6}
+                        multiline={true}
+                    />
+                </View>
 
-                <Text style={styles.lableClass5}> Image URL :</Text>
-                <TextInput
-                    onChangeText={onChangeTextImage}
-                    underlineColorAndroid='transparent'
-                    style={styles.SmallTextInputStyleClass5}
-                    name='image'
-                    value={image}
-                />
-            </View>
+                <View style={styles.container}>
 
-            <View style={{
-                width: 450,
-                alignItems: 'center',
-                // borderBottomColor: '#ffc107',
-                // borderBottomWidth: StyleSheet.hairlineWidth,
-                marginTop: 260,
-            }}>
-            </View>
-            {/* </ScrollView> */}
+                    <Text style={styles.lableClass4}> Video URL :</Text>
+                    <TextInput
+                        onChangeText={onChangeTextVideo}
+                        underlineColorAndroid='transparent'
+                        style={styles.SmallTextInputStyleClass4}
+                        name='video'
+                        value={video}
+                    />
+                </View>
 
-            <View style={styles.fixToText}>
-                <TouchableOpacity style={styles.CalBtn} onPress={insertData}>
-                    <Text style={styles.CalBtnText}>Save</Text>
-                </TouchableOpacity>
-                <TouchableOpacity style={styles.CalBtn} onPress={() => navigation.navigate("FoodSaverDashboard")}>
-                    <Text style={styles.CalBtnText}>Cancel</Text>
-                </TouchableOpacity>
-            </View>
+                <View style={styles.container}>
+
+                    <Text style={styles.lableClass5}> Image URL :</Text>
+                    <TextInput
+                        onChangeText={onChangeTextImage}
+                        underlineColorAndroid='transparent'
+                        style={styles.SmallTextInputStyleClass5}
+                        name='image'
+                        value={image}
+                    />
+                </View>
+
+                <View style={{
+                    width: 450,
+                    alignItems: 'center',
+                    // borderBottomColor: '#ffc107',
+                    // borderBottomWidth: StyleSheet.hairlineWidth,
+                    marginTop: 260,
+                }}>
+                </View>
+
+                <View style={styles.fixToText}>
+                    <TouchableOpacity style={styles.CalBtn} onPress={insertData}>
+                        <Text style={styles.CalBtnText}>Save</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity style={styles.CalBtn} onPress={() => navigation.navigate("FoodSaverDashboard")}>
+                        <Text style={styles.CalBtnText}>Cancel</Text>
+                    </TouchableOpacity>
+                </View>
+            </ScrollView>
         </View>
 
     );
@@ -215,7 +205,7 @@ const styles = StyleSheet.create({
         marginTop: 30
     },
     CalBtn: {
-        width: '35%',
+        width: '25%',
         paddingTop: 2,
         paddingBottom: 2,
         backgroundColor: '#ffc107',
@@ -232,9 +222,10 @@ const styles = StyleSheet.create({
         fontWeight: "500"
     },
     fixToText: {
-        marginTop: 20,
+        marginTop: -370,
         flexDirection: 'row',
-        justifyContent: 'space-between',
+        marginLeft: 76,
+        marginBottom: 20,
     },
     text: {
         color: '#000',
@@ -269,7 +260,7 @@ const styles = StyleSheet.create({
         width: '50%',
         borderBottomEndRadius: 5,
         marginTop: -5,
-        marginLeft: 37,
+        marginLeft: 30,
         borderRadius: 10,
         margin: 5,
         backgroundColor: "#E4E4E4",
@@ -279,7 +270,7 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         height: 40,
         fontSize: 14,
-        marginTop: 60,
+        marginTop: 20,
         borderRadius: 20,
         marginLeft: 10,
         color: "#ffc107",
@@ -290,7 +281,7 @@ const styles = StyleSheet.create({
         height: 40,
         width: '50%',
         borderBottomEndRadius: 5,
-        marginTop: 50,
+        marginTop: 10,
         borderRadius: 10,
         margin: 5,
         backgroundColor: "#E4E4E4",
@@ -301,7 +292,7 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         height: 40,
         fontSize: 14,
-        marginTop: 118,
+        marginTop: 30,
         borderRadius: 20,
         marginLeft: 1,
         color: "#ffc107",
@@ -311,10 +302,10 @@ const styles = StyleSheet.create({
         height: 40,
         width: '50%',
         borderBottomEndRadius: 5,
-        marginTop: 116,
+        marginTop: 26,
         borderRadius: 10,
         margin: 5,
-        marginLeft: 37,
+        marginLeft: 30,
         backgroundColor: "#E4E4E4",
         color: "black",
         height: 150,
@@ -325,7 +316,7 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         height: 40,
         fontSize: 14,
-        marginTop: 285,
+        marginTop: 25,
         borderRadius: 20,
         marginLeft: 6,
         color: "#ffc107",
@@ -336,18 +327,18 @@ const styles = StyleSheet.create({
         height: 40,
         width: '50%',
         borderBottomEndRadius: 5,
-        marginTop: 280,
+        marginTop: 17,
         borderRadius: 10,
         margin: 5,
         backgroundColor: "#E4E4E4",
         color: "black",
-        marginLeft: 37,
+        marginLeft: 30,
     },
     lableClass5: {
         textAlign: 'center',
         height: 40,
         fontSize: 14,
-        marginTop: 345,
+        marginTop: 28,
         borderRadius: 20,
         marginLeft: 4,
         color: "#ffc107",
@@ -358,22 +349,23 @@ const styles = StyleSheet.create({
         height: 40,
         width: '50%',
         borderBottomEndRadius: 5,
-        marginTop: 340,
+        marginTop: 20,
         borderRadius: 10,
         margin: 5,
         backgroundColor: "#E4E4E4",
         color: "black",
-        marginLeft: 38,
+        marginLeft: 28,
     },
     container: {
         flex: 1,
         flexDirection: "row",
     },
     img: {
-        width: 220,
-        height: 220,
+        width: 200,
+        height: 200,
         marginBottom: -20,
         marginTop: -30,
+        marginLeft:76
     },
     // drop dow styles
     dropdown: {
@@ -382,7 +374,7 @@ const styles = StyleSheet.create({
         // borderColor: 'gray',
         backgroundColor: "#E4E4E4",
         color: "black",
-        marginTop: 51,
+        marginTop: 11,
         // borderWidth: 0.5,
         borderRadius: 8,
         paddingHorizontal: 8,
