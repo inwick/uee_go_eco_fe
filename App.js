@@ -28,38 +28,106 @@ import ElectricitySaverTips from './src/screens/electricity_saver/ElectricitySav
 import ElectricitySaverBillHistory from './src/screens/electricity_saver/ElectricitySaverBillHistory';
 import ElectricitySaverReport from './src/screens/electricity_saver/ElectricitySaverReport';
 import WaterSaverCategories from './src/screens/water_saver/WaterSaverCategories';
-
+import UpdateBillInformation from './src/screens/electricity_saver/UpdateBillInformation';
 
 const Stack = createNativeStackNavigator();
 const App = () => {
   return (
     <NavigationContainer>
       <Stack.Navigator initialRouteName="StartScreen">
-
         {/* fuel saver */}
-        <Stack.Screen name="Home" component={Home} options={{ title: 'Go Eco' }} />
-        <Stack.Screen name="FuelSaverDashBoard" component={FuelSaverDashBoard} options={{ title: 'Fuel Saver DashBoard' }} />
-        <Stack.Screen name="FuelSavingTips" component={FuelSavingTips} options={{ title: 'Fuel Saving Tips' }} />
-        <Stack.Screen name="FuelCostCalculator" component={FuelCostCalculator} options={{ title: 'Fuel Cost Calculator' }} />
-        <Stack.Screen name="FuelEfficiencyCalculator" component={FuelEfficiencyCalculator} options={{ title: 'Fuel Efficiency Calculator' }} />
-        <Stack.Screen name="FuelTipView" component={FuelTipView} options={{ title: 'Tip View' }} />
-        <Stack.Screen name="UpdateFuelComent" component={UpdateFuelComent} options={{ title: 'Update Comment' }} />
-
+        <Stack.Screen
+          name="Home"
+          component={Home}
+          options={{ title: 'Go Eco' }}
+        />
+        <Stack.Screen
+          name="FuelCostCalculator"
+          component={FuelCostCalculator}
+          options={{ title: 'Fuel Cost Calculator' }}
+        />
+        {/* <Stack.Screen
+          name="FoodSavingTipsGetOneByOne"
+          component={FoodWasteTipsViewOneByOne}
+          options={{title: 'Food Waste Reducing Tips Get One By One'}}
+        /> */}
+        <Stack.Screen
+          name="FuelSaverDashBoard"
+          component={FuelSaverDashBoard}
+          options={{ title: 'Fuel Saver DashBoard' }}
+        />
+        <Stack.Screen
+          name="FuelSavingTips"
+          component={FuelSavingTips}
+          options={{ title: 'Fuel Saving Tips' }}
+        />
+        <Stack.Screen
+          name="FuelEfficiencyCalculator"
+          component={FuelEfficiencyCalculator}
+          options={{ title: 'Fuel Efficiency Calculator' }}
+        />
+        <Stack.Screen
+          name="FuelTipView"
+          component={FuelTipView}
+          options={{ title: 'Tip View' }}
+        />
+        <Stack.Screen
+          name="UpdateFuelComent"
+          component={UpdateFuelComent}
+          options={{ title: 'Update Comment' }}
+        />
 
         {/* food waste saver */}
-        <Stack.Screen name="FoodSaverDashboard" component={FoodSaverDashboard} options={{ title: 'Food  Waste Reduce DashBoard' }} />
-        <Stack.Screen name="AddFoodSavingTips" component={AddFoodWasteReducingTips} options={{ title: 'Add Food Waste Tips' }} />
-        <Stack.Screen name="FoodSavingTips" component={FoodSavingTipsView} options={{ title: 'Food Waste Reducing Tips' }} />
-        <Stack.Screen name="ViewReviewsInFoodSavingTips" component={ViewReviewForFoodTips} options={{ title: 'Reviews' }} />
-        <Stack.Screen name="AddCommentForFoodSavingTips" component={AddCommentForFoodTips} options={{ title: 'Add Review' }} />
-
-
-        <Stack.Screen name="WaterSaverDashBoard" component={WaterSaverDashBoard} options={{ title: '' }} />
-        <Stack.Screen name="WaterSavingTips" component={WaterSavingTips} options={{ title: '' }} />
-        <Stack.Screen name="WaterTipView" component={WaterTipView} options={{ title: '' }} />
-        <Stack.Screen name="AddNewTip" component={AddNewTip} options={{ title: '' }} />
-        <Stack.Screen name="WaterSaverCategories" component={WaterSaverCategories} options={{ title: '' }} />
-
+        <Stack.Screen
+          name="FoodSaverDashboard"
+          component={FoodSaverDashboard}
+          options={{ title: 'Food  Waste Reduce DashBoard' }}
+        />
+        <Stack.Screen
+          name="AddFoodSavingTips"
+          component={AddFoodWasteReducingTips}
+          options={{ title: 'Add Food Waste Tips' }}
+        />
+        <Stack.Screen
+          name="FoodSavingTips"
+          component={FoodSavingTipsView}
+          options={{ title: 'Food Waste Reducing Tips' }}
+        />
+        <Stack.Screen
+          name="ViewReviewsInFoodSavingTips"
+          component={ViewReviewForFoodTips}
+          options={{ title: 'Reviews' }}
+        />
+        <Stack.Screen
+          name="WaterSaverDashBoard"
+          component={WaterSaverDashBoard}
+          options={{ title: 'Water Saver DashBoard' }}
+        />
+        <Stack.Screen
+          name="WaterSavingTips"
+          component={WaterSavingTips}
+          options={{ title: 'Water Saving Tips' }}
+        />
+        <Stack.Screen
+          name="WaterTipView"
+          component={WaterTipView}
+          options={{ title: 'Water Tip View' }}
+        />
+        <Stack.Screen
+          name="AddNewTip"
+          component={AddNewTip}
+          options={{ title: 'Add New Idea' }}
+        />
+        <Stack.Screen
+          name="WaterSaverCategories"
+          component={WaterSaverCategories}
+          options={{ title: 'Water Saver Categories' }}
+        />
+        <Stack.Screen
+          name="AddCommentForFoodSavingTips"
+          component={AddCommentForFoodTips}
+          options={{ title: 'Add Review' }}
+        />
         <Stack.Screen
           name="ElectricitySaverDashBoard"
           component={ElectricitySaverDashBoard}
@@ -78,7 +146,6 @@ const App = () => {
           options={{ title: '' }}
         />
 
-
         <Stack.Screen
           name="ElectricitySaverTips"
           component={ElectricitySaverTips}
@@ -94,6 +161,12 @@ const App = () => {
         <Stack.Screen
           name="ElectricitySaverReport"
           component={ElectricitySaverReport}
+          options={{ title: '' }}
+        />
+
+        <Stack.Screen
+          name="UpdateBillInformation"
+          component={UpdateBillInformation}
           options={{ title: '' }}
         />
       </Stack.Navigator>

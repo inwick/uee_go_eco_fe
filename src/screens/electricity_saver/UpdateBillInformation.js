@@ -1,9 +1,10 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable no-sparse-arrays */
 /* eslint-disable no-alert */
 /* eslint-disable react/jsx-no-undef */
 /* eslint-disable react-native/no-inline-styles */
 import {useNavigation} from '@react-navigation/native';
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {
   StyleSheet,
   View,
@@ -17,13 +18,19 @@ import axios from 'react-native-axios';
 // import {useNavigation} from '@react-navigation/native';
 import {Dropdown} from 'react-native-element-dropdown';
 
-function AddBillInformation() {
+function UpdateBillInformation({route}) {
   const navigation = useNavigation();
   // const [wallets, setWallets] = useState([]);
   // const navigation = useNavigation();
 
   const [month, setMonth] = useState('');
   const [units, setUnits] = useState('');
+  const [entry, setEntry] = useState([]);
+  const {id} = route.params;
+
+  useEffect(() => {
+    getEntry();
+  }, []);
 
   const data = [
     {label: 'January', value: 'January'},
@@ -40,25 +47,48 @@ function AddBillInformation() {
     {label: 'December', value: 'December'},
   ];
 
-  const addBillInfo = () => {
-    const monthlyBill = {
-      month: month,
-      units: units,
-    };
-    axios({
-      url: 'http://10.0.2.2:5050/electricity/add',
-      method: 'POST',
-      data: monthlyBill,
-    }).then(() => {
-      // setList(response.data)
-      Alert.alert('Done', 'Bill information Successfully Inserted!', [
-        {
-          text: 'OK',
-          onPress: () => navigation.navigate('ElectricitySaverBillHistory'),
+  const updateBillInfo = () => {
+    Alert.alert('Confirm Update', 'Do you really want to update this entry?', [
+      {
+        text: 'Cancel',
+        onPress: () =>
+          navigation.navigate('UpdateBillInformation', {
+            id: id,
+          }),
+        style: 'cancel',
+      },
+      {
+        text: 'OK',
+        onPress: () => {
+          const monthlyBill = {
+            month: month,
+            units: units,
+          };
+          axios({
+            url: `http://10.0.2.2:5050/electricity/update/${id}`,
+            method: 'POST',
+            data: monthlyBill,
+          }).then(() => {
+            navigation.navigate('ElectricitySaverBillHistory');
+          });
+          navigation.navigate('ElectricitySaverBillHistory');
         },
-        ,
-      ]);
-    });
+      },
+    ]);
+  };
+
+  const getEntry = () => {
+    try {
+      axios.get(`http://10.0.2.2:5050/electricity/${id}`).then(res => {
+        setEntry(res.data);
+        setMonth(res.data.month);
+        setUnits(res.data.units);
+      });
+
+      console.log(entry);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
@@ -69,7 +99,7 @@ function AddBillInformation() {
           fontWeight: 'bold',
           color: 'black',
         }}>
-        Add Bill information
+        Update Bill Information
       </Text>
 
       <Image
@@ -104,6 +134,7 @@ function AddBillInformation() {
           onChangeText={unit => setUnits(unit)}
           defaultValue={10}
           underlineColorAndroid="transparent"
+          value={units}
           style={styles.SmallTextInputStyleClass}
           keyboardType="numeric"
         />
@@ -119,14 +150,16 @@ function AddBillInformation() {
       />
 
       <View style={styles.fixToText}>
-        <TouchableOpacity style={styles.CalBtn} onPress={() => addBillInfo()}>
-          <Text style={styles.CalBtnText}>ADD</Text>
+        <TouchableOpacity
+          style={styles.CalBtn}
+          onPress={() => updateBillInfo()}>
+          <Text style={styles.CalBtnText}>UPDATE</Text>
         </TouchableOpacity>
       </View>
     </View>
   );
 }
-export default AddBillInformation;
+export default UpdateBillInformation;
 
 const styles = StyleSheet.create({
   MainContainer: {
