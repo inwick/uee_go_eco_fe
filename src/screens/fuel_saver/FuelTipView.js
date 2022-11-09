@@ -85,6 +85,7 @@ function FuelTipView({ route }) {
                         }
 
                         await axios.post(`http://10.0.2.2:5050/FuelComment/add`, data)
+                        alert("Comment is added successfully.")
                         getComments();
 
                     } catch (error) {
