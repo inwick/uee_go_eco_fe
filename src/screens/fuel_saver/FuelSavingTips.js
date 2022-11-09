@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import { StyleSheet, View, TouchableOpacity, Text, ScrollView } from "react-native";
 import axios from 'react-native-axios';
 import { useNavigation } from '@react-navigation/native';
-import { color } from "react-native-reanimated";
 
 function FuelSavingTips() {
 
