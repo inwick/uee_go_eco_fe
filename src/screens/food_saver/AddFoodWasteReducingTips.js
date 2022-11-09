@@ -52,7 +52,7 @@ function AddFoodWasteReducingTips() {
             userId: userId
         }
         axios({
-            url: "http://192.168.1.100:5050/FoodSaver/add",
+            url: "http://10.0.2.2:5050/FoodSaver/add",
             method: "POST",
             data: data
         }).then((response) => {
@@ -374,7 +374,7 @@ const styles = StyleSheet.create({
         height: 200,
         marginBottom: -20,
         marginTop: -30,
-        marginLeft:76
+        marginLeft: 76
     },
     // drop dow styles
     dropdown: {

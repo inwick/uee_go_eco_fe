@@ -118,7 +118,6 @@ const Food = () => {
       <Stack.Screen name="FoodSaverDashboard" component={FoodSaverDashboard} options={{ title: '' }} />
       <Stack.Screen name="AddFoodSavingTips" component={AddFoodWasteReducingTips} options={{ title: '' }} />
       <Stack.Screen name="FoodSavingTips" component={FoodSavingTipsView} options={{ title: '' }} />
-      {/* <Stack.Screen name="FoodSavingTipsGetOneByOne" component={FoodWasteTipsViewOneByOne} options={{ title: 'Food Waste Reducing Tips Get One By One' }} /> */}
       <Stack.Screen
         name="AddCommentForFoodSavingTips"
         component={AddCommentForFoodTips}
