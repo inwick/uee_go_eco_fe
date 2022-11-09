@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from "react";
-import { StyleSheet, View, TouchableOpacity, Text, ScrollView } from "react-native";
+import { StyleSheet, View, TouchableOpacity, Text, ScrollView, Image } from "react-native";
 import axios from 'react-native-axios';
 import { useNavigation } from '@react-navigation/native';
-import { color } from "react-native-reanimated";
 
 function FuelSavingTips() {
 
@@ -42,11 +41,12 @@ function FuelSavingTips() {
                             <Text style={{ fontSize: 16, fontWeight: "700", color: "#26B787", alignSelf: "flex-start" }}>
                                 {tip.tipTitle}
                             </Text>
-                            <Text style={{ fontSize: 14, alignSelf: "flex-start" }}>
+                            <Text style={{ fontSize: 14, alignSelf: "flex-start", width: '95%', }}>
                                 {tip.tipDescription.slice(0, 120)} ...
                             </Text>
 
                         </TouchableOpacity>
+                        <Image source={require('../../assets/fuel_saver/arrow.png')} style={{ marginTop: -50, marginBottom: 12, marginLeft: 330 }} />
                     </View>
                 ))}
                 <Text style={styles.csText} >
@@ -68,7 +68,7 @@ const styles = StyleSheet.create({
     },
     csText: {
         marginBottom: 50,
-        marginTop: 10,
+        marginTop: 40,
         textAlign: "center",
         color: "#26B787"
     },
@@ -85,7 +85,8 @@ const styles = StyleSheet.create({
         padding: 15,
         width: 350,
         alignItems: 'center',
-        marginTop: 10,
+        marginTop: 25,
+        paddingBottom: 18,
         borderBottomColor: 'black',
         borderBottomWidth: StyleSheet.hairlineWidth,
     },

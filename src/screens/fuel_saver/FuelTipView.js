@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { StyleSheet, View, TouchableOpacity, Text, Image, TextInput, Button, ScrollView } from "react-native";
+import { StyleSheet, View, TouchableOpacity, Text, Image, TextInput, Alert, ScrollView } from "react-native";
 import axios from 'react-native-axios';
 import { useNavigation } from '@react-navigation/native';
 
@@ -10,7 +10,7 @@ function FuelTipView({ route }) {
     const [input, setInput] = useState("");
     const navigation = useNavigation();
     const { id } = route.params;
-    // const [did, setDid] = useState("");
+    const UId = "1234";
 
     const getFuelTip = async () => {
         try {
@@ -21,19 +21,15 @@ function FuelTipView({ route }) {
         }
     };
 
+
     const getComments = async () => {
         let temp = [];
         try {
             const response = await axios.get("http://10.0.2.2:5050/FuelComment/tipcomment/" + id);
             for (let i = 0; i < response.data.length; i++) {
-                temp.push(response.data[i].comments);
+                temp.push(response.data[i]);
             }
-            if (temp[0] == null) {
-                setComment(["Currently no Comments"]);
-            } else {
-                setComment(temp);
-            }
-            console.log('a', temp);
+            setComment(temp);
         } catch (err) {
             console.log(err);
         }
@@ -44,12 +40,29 @@ function FuelTipView({ route }) {
         getComments();
     }, [])
 
-    // const onDeleteCmnt = async (id) => {
-    //     axios({
-    //         method: 'DELETE',
-    //         url: `http://localhost:5050/cart/${id}`
-    //     })
-    // }
+    const onDeleteCmnt = async (did) => {
+        await axios({
+            method: 'DELETE',
+            url: `http://10.0.2.2:5050/FuelComment/${did}`
+        })
+        getComments();
+    }
+
+    const deleteCmnt = async (did) => {
+
+        Alert.alert(
+            "Are you sure?",
+            "Are you sure you want to remove this comment?",
+            [
+                {
+                    text: "Cancel",
+                    style: "cancel"
+                },
+                { text: "OK", onPress: () => onDeleteCmnt(did) }
+            ]
+        );
+
+    }
 
     return (
 
@@ -67,7 +80,7 @@ function FuelTipView({ route }) {
                     try {
                         const data = {
                             tipId: id,
-                            userId: 1234,
+                            userId: UId,
                             comments: input,
                         }
 
@@ -85,22 +98,33 @@ function FuelTipView({ route }) {
 
             <ScrollView style={{ height: 150 }}>
 
-                {comment.map((comments, index) => (
-                    <View key={index} style={styles.cardButton}>
-                        <Text style={{ width: "80%" }}>
-                            {comments}
-                        </Text>
-                        <View style={styles.fixToText}>
-                            <TouchableOpacity onPress={() => totalCost()}>
-                                <Image source={require('../../assets/fuel_saver/pensil.png')} style={{ marginTop: -17, marginLeft: 250 }} />
-                            </TouchableOpacity>
+                {comment.length === 0 ?
+                    <Text style={{ width: "100%", marginTop: 15 }}>
+                        Currently don't have any comments.
+                    </Text>
+                    :
+                    comment.map(cmt => (
+                        <View key={cmt._id} style={styles.cardButton}>
 
-                            <TouchableOpacity onPress={() => individualCost()}>
-                                <Image source={require('../../assets/fuel_saver/cross.png')} style={{ marginTop: -17, marginLeft: 7 }} />
-                            </TouchableOpacity>
+                            <Text style={{ width: "80%" }}>
+                                {cmt.comments}
+                            </Text>
+
+                            {cmt.userId === UId ?
+                                <View style={styles.fixToText}>
+
+                                    <TouchableOpacity onPress={() => navigation.navigate("UpdateFuelComent", { cid: cmt._id, id: tip._id, textEdit: cmt.comments })}>
+                                        <Image source={require('../../assets/fuel_saver/pensil.png')} style={{ marginTop: -17, marginLeft: 250 }} />
+                                    </TouchableOpacity>
+
+                                    <TouchableOpacity onPress={() => deleteCmnt(cmt._id)}>
+                                        <Image source={require('../../assets/fuel_saver/cross.png')} style={{ marginTop: -17, marginLeft: 7 }} />
+                                    </TouchableOpacity>
+                                </View>
+                                : null}
                         </View>
-                    </View>
-                ))}
+                    ))
+                }
 
             </ScrollView>
 

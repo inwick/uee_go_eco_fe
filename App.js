@@ -1,12 +1,15 @@
 import * as React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
+
 import Home from './src/screens/Home';
+
 import FuelSaverDashBoard from './src/screens/fuel_saver/FuelSaverDashBoard';
 import FuelSavingTips from './src/screens/fuel_saver/FuelSavingTips';
 import FuelCostCalculator from './src/screens/fuel_saver/FuelCostCalculator';
 import FuelEfficiencyCalculator from './src/screens/fuel_saver/FuelEfficiencyCalculator';
 import FuelTipView from './src/screens/fuel_saver/FuelTipView';
+import UpdateFuelComent from './src/screens/fuel_saver/updateComment';
 
 import FoodSaverDashboard from './src/screens/food_saver/FoodSaverDashboard';
 import AddFoodWasteReducingTips from './src/screens/food_saver/AddFoodWasteReducingTips';
@@ -39,6 +42,16 @@ const App = () => {
           options={{title: 'Go Eco'}}
         />
         <Stack.Screen
+          name="FuelCostCalculator"
+          component={FuelCostCalculator}
+          options={{title: 'Fuel Cost Calculator'}}
+        />
+        {/* <Stack.Screen
+          name="FoodSavingTipsGetOneByOne"
+          component={FoodWasteTipsViewOneByOne}
+          options={{title: 'Food Waste Reducing Tips Get One By One'}}
+        /> */}
+        <Stack.Screen
           name="FuelSaverDashBoard"
           component={FuelSaverDashBoard}
           options={{title: 'Fuel Saver DashBoard'}}
@@ -49,11 +62,6 @@ const App = () => {
           options={{title: 'Fuel Saving Tips'}}
         />
         <Stack.Screen
-          name="FuelCostCalculator"
-          component={FuelCostCalculator}
-          options={{title: 'Fuel Cost Calculator'}}
-        />
-        <Stack.Screen
           name="FuelEfficiencyCalculator"
           component={FuelEfficiencyCalculator}
           options={{title: 'Fuel Efficiency Calculator'}}
@@ -62,6 +70,11 @@ const App = () => {
           name="FuelTipView"
           component={FuelTipView}
           options={{title: 'Tip View'}}
+        />
+        <Stack.Screen
+          name="UpdateFuelComent"
+          component={UpdateFuelComent}
+          options={{title: 'Update Comment'}}
         />
 
         {/* food waste saver */}
@@ -80,12 +93,11 @@ const App = () => {
           component={FoodSavingTipsView}
           options={{title: 'Food Waste Reducing Tips'}}
         />
-        {/* <Stack.Screen
-          name="FoodSavingTipsGetOneByOne"
-          component={FoodWasteTipsViewOneByOne}
-          options={{title: 'Food Waste Reducing Tips Get One By One'}}
-        /> */}
-
+        <Stack.Screen
+          name="ViewReviewsInFoodSavingTips"
+          component={ViewReviewForFoodTips}
+          options={{title: 'Reviews'}}
+        />
         <Stack.Screen
           name="WaterSaverDashBoard"
           component={WaterSaverDashBoard}
@@ -110,11 +122,6 @@ const App = () => {
           name="WaterSaverCategories"
           component={WaterSaverCategories}
           options={{title: 'Water Saver Categories'}}
-        />
-        <Stack.Screen
-          name="ViewReviewsInFoodSavingTips"
-          component={ViewReviewForFoodTips}
-          options={{title: 'Reviews'}}
         />
         <Stack.Screen
           name="AddCommentForFoodSavingTips"
