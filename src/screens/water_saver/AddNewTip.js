@@ -71,7 +71,7 @@ function AddNewTip() {
             </Text>
             <View style={styles.row}>
                 <View style={styles[`2col`]}>
-                    <Text style={styles.texts}>Title :</Text>
+                    <Text style={styles.texts}> Title :</Text>
                 </View>
                 <View style={styles[`2col`]}>
                     <TextInput
@@ -99,7 +99,7 @@ function AddNewTip() {
             </View>
             <View style={styles.row}>
                 <View style={styles[`2col`]}>
-                    <Text style={styles.texts}> Category</Text>
+                    <Text style={styles.texts}> Category :</Text>
                 </View>
                 <View style={styles[`2col`]}>
                     <Dropdown
@@ -123,7 +123,7 @@ function AddNewTip() {
             </View>
             <View style={styles.row}>
                 <View style={styles[`2col`]}>
-                    <Text style={styles.texts}> Image Link</Text>
+                    <Text style={styles.texts}> Image Link :</Text>
                 </View>
                 <View style={styles[`2col`]}>
                     <TextInput
@@ -196,7 +196,7 @@ const styles = {
     },
     "2col": {
         borderColor: "#fff",
-        // borderWidth: 1,
+        borderWidth: 1,
         flex: 2
     },
     SmallTextInputStyleClass: {
@@ -211,11 +211,12 @@ const styles = {
         color: "black"
     },
     texts: {
-        textAlign: 'center',
+        // textAlign: 'center',
         fontSize: 16,
         marginTop: 13,
+        paddingLeft: 30,
         color: "Black",
-        fontWeight: "600"
+        fontWeight: "600",
     }
 };
 
