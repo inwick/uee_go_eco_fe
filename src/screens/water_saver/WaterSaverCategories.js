@@ -32,7 +32,7 @@ function WaterSaverCategories() {
             }}>
                 Categories
             </Text>
-            {/* <Image source={require('../../assets/water_saver/water_icon.png')} style={styles.img} /> */}
+            <Image source={require('../../assets/water_saver/categories.png')} style={styles.img} />
 
             <TouchableOpacity style={styles.button} onPress={() => navigation.navigate("WaterSavingTips")}>
                 <Text style={styles.text}>DOMESTIC IDEAS</Text>
@@ -75,9 +75,9 @@ const styles = StyleSheet.create({
         fontWeight: "600"
     },
     img: {
-        width: 140,
-        height: 140,
-        marginBottom: 20,
-        marginTop: 20
+        width: 150,
+        height: 150,
+        marginBottom: 30,
+        marginTop: 30
     },
 });
