@@ -24,6 +24,7 @@ import WaterSavingTips from './src/screens/water_saver/WaterSavingTips';
 import WaterTipView from './src/screens/water_saver/WaterTipView';
 import AddNewTip from './src/screens/water_saver/AddNewTip';
 import WaterSaverCategories from './src/screens/water_saver/WaterSaverCategories';
+import WaterComments from './src/screens/water_saver/waterComments';
 
 import ElectricitySaverDashBoard from './src/screens/electricity_saver/ElectricitySaverDashBoard';
 import ElectricityCostCalculator from './src/screens/electricity_saver/ElectricityCostCalculator';
@@ -87,16 +88,9 @@ const Water = () => {
       <Stack.Screen name="WaterSavingTips" component={WaterSavingTips} options={{ title: 'Water Saving Tips' }} />
       <Stack.Screen name="WaterTipView" component={WaterTipView} options={{ title: 'Water Tip View' }} />
       <Stack.Screen name="AddNewTip" component={AddNewTip} options={{ title: 'Add New Idea' }} />
-      <Stack.Screen
-        name="WaterSaverCategories"
-        component={WaterSaverCategories}
-        options={{ title: 'Water Saver Categories' }}
-      />
-      <Stack.Screen
-        name="UpdateBillInformation"
-        component={UpdateBillInformation}
-        options={{ title: '' }}
-      />
+      <Stack.Screen name="WaterSaverCategories" component={WaterSaverCategories} options={{ title: 'Water Saver Categories' }} />
+      <Stack.Screen name="UpdateBillInformation" component={UpdateBillInformation} options={{ title: '' }} />
+      <Stack.Screen name="WaterSaverComments" component={WaterComments} />
     </Stack.Navigator>
 
   );
@@ -201,6 +195,7 @@ const App = () => {
           <Bottom.Screen
 
             name="MainHome"
+            initialRouteName="MainHome"
             component={MainHome}
             options={{
               tabBarShowLabel: false,

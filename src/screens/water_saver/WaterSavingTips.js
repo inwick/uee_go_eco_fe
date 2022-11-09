@@ -74,7 +74,7 @@ const styles = StyleSheet.create({
         marginTop: 20,
         borderBottomColor: 'black',
         // borderBottomWidth: StyleSheet.hairlineWidth,
-        borderBottomWidth: 0.7
+        borderBottomWidth: 0.5
     },
     arrowimg: {
         width: 13,
