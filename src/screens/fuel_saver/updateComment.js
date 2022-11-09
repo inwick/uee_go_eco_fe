@@ -1,16 +1,19 @@
 import React, { useState, useEffect } from "react";
-import { StyleSheet, View, TouchableOpacity, Text, Image, TextInput, Button, ScrollView } from "react-native";
+import { StyleSheet, View, TouchableOpacity, Text, Image, TextInput, Button, ScrollView, ImageBackground } from "react-native";
 import axios from 'react-native-axios';
 import { useNavigation } from '@react-navigation/native';
 
-function FuelTipView({ route }) {
+function UpdateFuelComent({ route }) {
 
     const [tip, setTip] = useState([]);
     const [comment, setComment] = useState([]);
     const [input, setInput] = useState("");
     const navigation = useNavigation();
+    const { cid } = route.params;
     const { id } = route.params;
+    const { textEdit } = route.params;
     const UId = "1234";
+
 
     const getFuelTip = async () => {
         try {
@@ -44,47 +47,28 @@ function FuelTipView({ route }) {
         getComments();
     }, [])
 
-    const onDeleteCmnt = async (did) => {
-        await axios({
-            method: 'DELETE',
-            url: `http://10.0.2.2:5050/FuelComment/${did}`
-        })
-        getComments();
-    }
-
-    // const onUpdateCmnt = async (cid) => {
-
-    //     const updateData = {
-    //         comments: input,
-    //     }
-
-    //     console.log("dadada", updateData);
-    //     await axios.post(`http://10.0.2.2:5050/FuelComment/updateFuelTip/${cid}`, updateData)
-
-    // }
-
     return (
 
         <View style={styles.MainContainer}>
 
-            <Text style={styles.textTitle}> {tip.tipTitle} </Text>
+            <Text style={styles.textTitle} > {tip.tipTitle} </Text>
             <Image source={{ uri: tip.image }} style={styles.img} />
+
             <Text style={styles.textDescription}> {tip.tipDescription} </Text>
 
             <Text style={{ fontSize: 14, fontWeight: "700", color: "#26B787", marginLeft: -235, marginTop: 10 }}>Comments</Text>
 
             <TextInput
+                defaultValue={textEdit}
                 onChangeText={input => setInput(input)}
                 onEndEditing={async () => {
                     try {
                         const data = {
-                            tipId: id,
-                            userId: UId,
                             comments: input,
                         }
 
-                        await axios.post(`http://10.0.2.2:5050/FuelComment/add`, data)
-                        getComments();
+                        await axios.post(`http://10.0.2.2:5050/FuelComment/updateFuelTip/${cid}`, data)
+                        navigation.navigate("FuelTipView", { id: tip._id })
 
                     } catch (error) {
                         alert(error);
@@ -106,11 +90,11 @@ function FuelTipView({ route }) {
                         {cmt.userId === UId ?
                             <View style={styles.fixToText}>
 
-                                <TouchableOpacity onPress={() => navigation.navigate("UpdateFuelComent", { cid: cmt._id, id: tip._id, textEdit: cmt.comments })}>
+                                <TouchableOpacity >
                                     <Image source={require('../../assets/fuel_saver/pensil.png')} style={{ marginTop: -17, marginLeft: 250 }} />
                                 </TouchableOpacity>
 
-                                <TouchableOpacity onPress={() => onDeleteCmnt(cmt._id)}>
+                                <TouchableOpacity >
                                     <Image source={require('../../assets/fuel_saver/cross.png')} style={{ marginTop: -17, marginLeft: 7 }} />
                                 </TouchableOpacity>
                             </View>
@@ -124,13 +108,13 @@ function FuelTipView({ route }) {
 
     );
 }
-export default FuelTipView
+export default UpdateFuelComent
 
 const styles = StyleSheet.create({
     MainContainer: {
         justifyContent: 'center',
         alignItems: 'center',
-        marginTop: 20
+        marginTop: 20,
     },
     textTitle: {
         fontSize: 25,
@@ -147,7 +131,7 @@ const styles = StyleSheet.create({
         width: 300,
         height: 175,
         marginBottom: 5,
-        marginTop: 10
+        marginTop: 10,
     },
     icon: {
         color: "red"
@@ -157,7 +141,7 @@ const styles = StyleSheet.create({
         height: 40,
         width: '78%',
         borderBottomEndRadius: 5,
-        marginTop: 10,
+        marginTop: 20,
         borderRadius: 10,
         backgroundColor: "#E4E4E4",
         color: "black"
@@ -177,9 +161,6 @@ const styles = StyleSheet.create({
         bottom: 0
     },
     fixToText: {
-        // marginTop: 20,
-        // alignSelf: "flex-end",
         flexDirection: 'row',
-        // justifyContent: 'space-between',
     },
 });
