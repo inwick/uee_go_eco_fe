@@ -24,6 +24,7 @@ import WaterSavingTips from './src/screens/water_saver/WaterSavingTips';
 import WaterTipView from './src/screens/water_saver/WaterTipView';
 import AddNewTip from './src/screens/water_saver/AddNewTip';
 import WaterSaverCategories from './src/screens/water_saver/WaterSaverCategories';
+import WaterComments from './src/screens/water_saver/waterComments';
 
 import ElectricitySaverDashBoard from './src/screens/electricity_saver/ElectricitySaverDashBoard';
 import ElectricityCostCalculator from './src/screens/electricity_saver/ElectricityCostCalculator';
@@ -32,6 +33,7 @@ import ElectricitySaverTips from './src/screens/electricity_saver/ElectricitySav
 import ElectricitySaverBillHistory from './src/screens/electricity_saver/ElectricitySaverBillHistory';
 import ElectricitySaverReport from './src/screens/electricity_saver/ElectricitySaverReport';
 import UpdateBillInformation from './src/screens/electricity_saver/UpdateBillInformation';
+
 
 const Stack = createNativeStackNavigator();
 const Bottom = createBottomTabNavigator();
@@ -149,127 +151,73 @@ const MainHome = () => {
 
 const App = () => {
   return (
-    <>
-      <NavigationContainer>
+    <NavigationContainer>
+      <Stack.Navigator initialRouteName="StartScreen">
 
-        <Bottom.Navigator>
+        {/* fuel saver */}
+        <Stack.Screen name="Home" component={Home} options={{ title: 'Go Eco' }} />
+        <Stack.Screen name="FuelSaverDashBoard" component={FuelSaverDashBoard} options={{ title: 'Fuel Saver DashBoard' }} />
+        <Stack.Screen name="FuelSavingTips" component={FuelSavingTips} options={{ title: 'Fuel Saving Tips' }} />
+        <Stack.Screen name="FuelCostCalculator" component={FuelCostCalculator} options={{ title: 'Fuel Cost Calculator' }} />
+        <Stack.Screen name="FuelEfficiencyCalculator" component={FuelEfficiencyCalculator} options={{ title: 'Fuel Efficiency Calculator' }} />
+        <Stack.Screen name="FuelTipView" component={FuelTipView} options={{ title: 'Tip View' }} />
+        <Stack.Screen name="UpdateFuelComent" component={UpdateFuelComent} options={{ title: 'Update Comment' }} />
 
-          <Bottom.Screen
-            name="Electricity"
-            component={Electricity}
-            options={{
-              tabBarShowLabel: false,
-              tabBarIcon: ({ focused }) => (
-                <View>
-                  <Image source={require('./src/navigation/electricIcon.png')}
-                    style={{ tintColor: focused ? '#FA8072' : 'black' }}
-                  />
-                </View>
-              ),
-              headerTitleAlign: "center",
 
-              //headr title
-              // headerTitle: "",
-              headerTintColor: "black",
-              headerShown: false,
-              tabBarStyle: { height: 60 },
-              tabBarHideOnKeyboard: true
-            }}
-          />
+        {/* food waste saver */}
+        <Stack.Screen name="FoodSaverDashboard" component={FoodSaverDashboard} options={{ title: 'Food  Waste Reduce DashBoard' }} />
+        <Stack.Screen name="AddFoodSavingTips" component={AddFoodWasteReducingTips} options={{ title: 'Add Food Waste Tips' }} />
+        <Stack.Screen name="FoodSavingTips" component={FoodSavingTipsView} options={{ title: 'Food Waste Reducing Tips' }} />
+        <Stack.Screen name="ViewReviewsInFoodSavingTips" component={ViewReviewForFoodTips} options={{ title: 'Reviews' }} />
+        <Stack.Screen name="AddCommentForFoodSavingTips" component={AddCommentForFoodTips} options={{ title: 'Add Review' }} />
 
-          <Bottom.Screen
-            name="Water"
-            component={Water}
-            options={{
-              tabBarShowLabel: false,
-              tabBarIcon: ({ focused }) => (
-                <View>
-                  <Image source={require('./src/navigation/waterIcon.png')}
-                    style={{ tintColor: focused ? '#52B1E2' : 'black' }}
-                  />
-                </View>
-              ),
-              headerTitleAlign: "center",
-              //headr title
-              // headerTitle: "",
-              headerTintColor: "black",
-              headerShown: false,
-              tabBarStyle: { height: 60 },
-              tabBarHideOnKeyboard: true
-            }}
-          />
-          <Bottom.Screen
 
-            name="MainHome"
-            component={MainHome}
-            options={{
-              tabBarShowLabel: false,
-              tabBarIcon: ({ focused }) => (
-                <View>
-                  <Image source={require('./src/navigation/homeIcon.png')}
-                    style={{ tintColor: focused ? '#CF8D2A' : 'black' }}
-                  />
-                </View>
-              ),
-              headerTitleAlign: "center",
-              //headr title
-              // headerTitle: "",
-              headerTintColor: "black",
-              headerShown: false,
-              tabBarStyle: { height: 60 },
-              tabBarHideOnKeyboard: true
-            }}
+        <Stack.Screen name="WaterSaverDashBoard" component={WaterSaverDashBoard} options={{ title: '' }} />
+        <Stack.Screen name="WaterSavingTips" component={WaterSavingTips} options={{ title: '' }} />
+        <Stack.Screen name="WaterTipView" component={WaterTipView} options={{ title: '' }} />
+        <Stack.Screen name="AddNewTip" component={AddNewTip} options={{ title: '' }} />
+        <Stack.Screen name="WaterSaverCategories" component={WaterSaverCategories} options={{ title: '' }} />
+        <Stack.Screen name="WaterSaverComments" component={WaterComments} />
 
-          />
-          <Bottom.Screen
-            name="Fuel"
-            component={Fuel}
-            options={{
-              tabBarShowLabel: false,
-              tabBarIcon: ({ focused }) => (
-                <View>
-                  <Image source={require('./src/navigation/fuelIcon.png')}
-                    style={{ tintColor: focused ? '#26B787' : 'black' }}
-                  />
-                </View>
-              ),
-              headerTitleAlign: "center",
-              //headr title
-              // headerTitle: "",
-              headerTintColor: "black",
-              headerShown: false,
-              tabBarStyle: { height: 60 },
-              tabBarHideOnKeyboard: true
-            }}
-          />
+        <Stack.Screen
+          name="ElectricitySaverDashBoard"
+          component={ElectricitySaverDashBoard}
+          options={{ title: '' }}
+        />
 
-          <Bottom.Screen
+        <Stack.Screen
+          name="ElectricityCostCalculator"
+          component={ElectricityCostCalculator}
+          options={{ title: '' }}
+        />
 
-            name="food"
-            component={Food}
-            options={{
-              tabBarShowLabel: false,
-              tabBarIcon: ({ focused }) => (
-                <View>
-                  <Image source={require('./src/navigation/foodIcon.png')}
-                    style={{ tintColor: focused ? '#FFC107' : 'black' }}
-                  />
-                </View>
-              ),
-              headerTitleAlign: "center",
-              //headr title
-              // headerTitle: "",
-              headerTintColor: "black",
-              headerShown: false,
-              tabBarStyle: { height: 60 },
-              tabBarHideOnKeyboard: true
-            }}
-          />
+        <Stack.Screen
+          name="AddBillInformation"
+          component={AddBillInformation}
+          options={{ title: '' }}
+        />
 
-        </Bottom.Navigator>
 
-      </NavigationContainer>
-    </>
+        <Stack.Screen
+          name="ElectricitySaverTips"
+          component={ElectricitySaverTips}
+          options={{ title: '' }}
+        />
+
+        <Stack.Screen
+          name="ElectricitySaverBillHistory"
+          component={ElectricitySaverBillHistory}
+          options={{ title: '' }}
+        />
+
+        <Stack.Screen
+          name="ElectricitySaverReport"
+          component={ElectricitySaverReport}
+          options={{ title: '' }}
+        />
+      </Stack.Navigator>
+    </NavigationContainer>
+
   );
 };
 
