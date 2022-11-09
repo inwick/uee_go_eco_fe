@@ -94,8 +94,8 @@ const styles = StyleSheet.create({
     fontWeight: '500',
   },
   img: {
-    width: 90,
-    height: 135,
+    width: 75,
+    height: 110,
     marginBottom: 10,
     marginTop: 20,
   },

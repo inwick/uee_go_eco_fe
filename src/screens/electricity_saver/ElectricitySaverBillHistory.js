@@ -1,5 +1,5 @@
 /* eslint-disable react-native/no-inline-styles */
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   StyleSheet,
   View,
@@ -10,7 +10,7 @@ import {
   Alert,
 } from 'react-native';
 import axios from 'react-native-axios';
-import {useNavigation} from '@react-navigation/native';
+import { useNavigation } from '@react-navigation/native';
 
 function ElectricitySaverBillHistory() {
   const [update, setUpdate] = useState('');
@@ -63,7 +63,14 @@ function ElectricitySaverBillHistory() {
         Bill History
       </Text>
 
-      <ScrollView>
+      <ScrollView
+        contentContainerStyle={{
+          justifyContent: 'center',
+          marginLeft: 20,
+          marginRight: 20,
+          marginTop: 10,
+          marginBottom: 10,
+        }}>
         {data.map(entry => (
           <TouchableOpacity style={styles.cardButton}>
             <View key={entry._id} style={styles.container}>
@@ -76,7 +83,7 @@ function ElectricitySaverBillHistory() {
                 }}>
                 {entry.month} - 2022
               </Text>
-              <View style={{flexDirection: 'row', marginLeft: 'auto'}}>
+              <View style={{ flexDirection: 'row', marginLeft: 'auto' }}>
                 <Text
                   style={{
                     fontSize: 16,
@@ -108,6 +115,7 @@ function ElectricitySaverBillHistory() {
             </View>
           </TouchableOpacity>
         ))}
+        <Text style={styles.endText}>End of the entries</Text>
       </ScrollView>
     </View>
   );
@@ -125,6 +133,14 @@ const styles = StyleSheet.create({
     marginTop: 10,
     textAlign: 'center',
     color: '#26B787',
+  },
+  endText: {
+    color: '#FA8072',
+    fontSize: 16,
+    fontWeight: '400',
+    marginBottom: 50,
+    marginTop: 20,
+    textAlign: 'center',
   },
   button: {
     width: '80%',
