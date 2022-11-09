@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { StyleSheet, View, TouchableOpacity, Text, Image, TextInput, Button, ScrollView } from "react-native";
+import { StyleSheet, View, TouchableOpacity, Text, Image, TextInput, Alert, ScrollView } from "react-native";
 import axios from 'react-native-axios';
 import { useNavigation } from '@react-navigation/native';
 
@@ -29,11 +29,7 @@ function FuelTipView({ route }) {
             for (let i = 0; i < response.data.length; i++) {
                 temp.push(response.data[i]);
             }
-            if (temp[0] == null) {
-                setComment(["Currently no Comments"]);
-            } else {
-                setComment(temp);
-            }
+            setComment(temp);
         } catch (err) {
             console.log(err);
         }
@@ -52,16 +48,21 @@ function FuelTipView({ route }) {
         getComments();
     }
 
-    // const onUpdateCmnt = async (cid) => {
+    const deleteCmnt = async (did) => {
 
-    //     const updateData = {
-    //         comments: input,
-    //     }
+        Alert.alert(
+            "Are you sure?",
+            "Are you sure you want to remove this comment?",
+            [
+                {
+                    text: "Cancel",
+                    style: "cancel"
+                },
+                { text: "OK", onPress: () => onDeleteCmnt(did) }
+            ]
+        );
 
-    //     console.log("dadada", updateData);
-    //     await axios.post(`http://10.0.2.2:5050/FuelComment/updateFuelTip/${cid}`, updateData)
-
-    // }
+    }
 
     return (
 
@@ -97,26 +98,33 @@ function FuelTipView({ route }) {
 
             <ScrollView style={{ height: 150 }}>
 
-                {comment.map(cmt => (
-                    <View key={cmt._id} style={styles.cardButton}>
-                        <Text style={{ width: "80%" }}>
-                            {cmt.comments}
-                        </Text>
+                {comment.length === 0 ?
+                    <Text style={{ width: "100%", marginTop: 15 }}>
+                        Currently don't have any comments.
+                    </Text>
+                    :
+                    comment.map(cmt => (
+                        <View key={cmt._id} style={styles.cardButton}>
 
-                        {cmt.userId === UId ?
-                            <View style={styles.fixToText}>
+                            <Text style={{ width: "80%" }}>
+                                {cmt.comments}
+                            </Text>
 
-                                <TouchableOpacity onPress={() => navigation.navigate("UpdateFuelComent", { cid: cmt._id, id: tip._id, textEdit: cmt.comments })}>
-                                    <Image source={require('../../assets/fuel_saver/pensil.png')} style={{ marginTop: -17, marginLeft: 250 }} />
-                                </TouchableOpacity>
+                            {cmt.userId === UId ?
+                                <View style={styles.fixToText}>
 
-                                <TouchableOpacity onPress={() => onDeleteCmnt(cmt._id)}>
-                                    <Image source={require('../../assets/fuel_saver/cross.png')} style={{ marginTop: -17, marginLeft: 7 }} />
-                                </TouchableOpacity>
-                            </View>
-                            : null}
-                    </View>
-                ))}
+                                    <TouchableOpacity onPress={() => navigation.navigate("UpdateFuelComent", { cid: cmt._id, id: tip._id, textEdit: cmt.comments })}>
+                                        <Image source={require('../../assets/fuel_saver/pensil.png')} style={{ marginTop: -17, marginLeft: 250 }} />
+                                    </TouchableOpacity>
+
+                                    <TouchableOpacity onPress={() => deleteCmnt(cmt._id)}>
+                                        <Image source={require('../../assets/fuel_saver/cross.png')} style={{ marginTop: -17, marginLeft: 7 }} />
+                                    </TouchableOpacity>
+                                </View>
+                                : null}
+                        </View>
+                    ))
+                }
 
             </ScrollView>
 
