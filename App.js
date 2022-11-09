@@ -43,7 +43,7 @@ const App = () => {
         <Stack.Screen name="FuelCostCalculator" component={FuelCostCalculator} options={{ title: 'Fuel Cost Calculator' }} />
         <Stack.Screen name="FuelEfficiencyCalculator" component={FuelEfficiencyCalculator} options={{ title: 'Fuel Efficiency Calculator' }} />
         <Stack.Screen name="FuelTipView" component={FuelTipView} options={{ title: 'Tip View' }} />
-        <Stack.Screen name="UpdateFuelComent" component={UpdateFuelComent} options={{ title: 'gg' }} />
+        <Stack.Screen name="UpdateFuelComent" component={UpdateFuelComent} options={{ title: 'Update Comment' }} />
 
 
         {/* food waste saver */}

@@ -52,11 +52,14 @@ function UpdateFuelComent({ route }) {
         <View style={styles.MainContainer}>
 
             <Text style={styles.textTitle} > {tip.tipTitle} </Text>
-            <Image source={{ uri: tip.image }} style={styles.img} />
-
+            <Image source={{ uri: tip.image }} style={styles.img} blurRadius={5} />
             <Text style={styles.textDescription}> {tip.tipDescription} </Text>
 
-            <Text style={{ fontSize: 14, fontWeight: "700", color: "#26B787", marginLeft: -235, marginTop: 10 }}>Comments</Text>
+            <View style={styles.background}>
+                <Image source={require('../../assets/fuel_saver/bgBlur.png')} style={styles.bgimg} blurRadius={10} />
+            </View>
+
+            <Text style={{ fontSize: 14, fontWeight: "700", color: "#26B787", marginLeft: -235, marginTop: 0 }}>Comments</Text>
 
             <TextInput
                 defaultValue={textEdit}
@@ -79,31 +82,6 @@ function UpdateFuelComent({ route }) {
                 style={styles.SmallTextInputStyleClass3}
             />
 
-            <ScrollView style={{ height: 150 }}>
-
-                {comment.map(cmt => (
-                    <View key={cmt._id} style={styles.cardButton}>
-                        <Text style={{ width: "80%" }}>
-                            {cmt.comments}
-                        </Text>
-
-                        {cmt.userId === UId ?
-                            <View style={styles.fixToText}>
-
-                                <TouchableOpacity >
-                                    <Image source={require('../../assets/fuel_saver/pensil.png')} style={{ marginTop: -17, marginLeft: 250 }} />
-                                </TouchableOpacity>
-
-                                <TouchableOpacity >
-                                    <Image source={require('../../assets/fuel_saver/cross.png')} style={{ marginTop: -17, marginLeft: 7 }} />
-                                </TouchableOpacity>
-                            </View>
-                            : null}
-                    </View>
-                ))}
-
-            </ScrollView>
-
         </View>
 
     );
@@ -115,6 +93,15 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         marginTop: 20,
+    },
+    background: {
+        height: 350,
+        width: 395,
+        marginTop: -360
+    },
+    bgimg: {
+        height: 350,
+        backgroundColor: 'transparent'
     },
     textTitle: {
         fontSize: 25,
