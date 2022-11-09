@@ -41,7 +41,7 @@ function FoodSaverDashboard() {
             <TouchableOpacity style={styles.button} onPress={() => navigation.navigate("FoodSavingTips")}>
                 <Text style={styles.text}>Food Waste Reducing Tips</Text>
             </TouchableOpacity>
-{/* 
+            {/* 
             <TouchableOpacity style={styles.button} onPress={() => navigation.navigate("FuelEfficiencyCalculator")}>
                 <Text style={styles.text}>Fuel Efficiency Calculator</Text>
             </TouchableOpacity> */}
@@ -65,8 +65,7 @@ const styles = StyleSheet.create({
         paddingBottom: 2,
         backgroundColor: '#ffc107',
         borderRadius: 20,
-        marginTop: 20,
-        marginBottom: 60,
+        marginBottom: 35,
         height: 100
     },
     text: {
@@ -78,8 +77,8 @@ const styles = StyleSheet.create({
     },
 
     img: {
-        width: 150,
-        height: 150,
+        width: 250,
+        height: 250,
         marginBottom: 5,
         marginTop: 10
     },

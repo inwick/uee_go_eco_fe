@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Button, StyleSheet, View, TouchableOpacity, Text, Image, ScrollView, SafeAreaView, TextInput,Alert} from "react-native";
+import { Button, StyleSheet, View, TouchableOpacity, Text, Image, ScrollView, SafeAreaView, TextInput, Alert } from "react-native";
 import axios from 'react-native-axios';
 import { useNavigation } from '@react-navigation/native';
 import  Modal  from "react-native-modal";
@@ -92,7 +92,7 @@ function WaterTipView({ route }) {
                                     style={styles.input}
                                     onChangeText={onChangeTextComment}
                                     defaultValue={comment}
-                                    underlineColorAndroid='transparent'/>
+                                    underlineColorAndroid='transparent' />
                             </View>
                             <View style={{ flexDirection: 'row', marginRight: 10 }}>
                                 <TouchableOpacity style={styles.btn} onPress={handleModal}>
@@ -234,5 +234,6 @@ const styles = StyleSheet.create({
         fontWeight: '400',
         color: '#787878',
         marginBottom: 16,
+        textAlign: 'justify',
     },
 });
