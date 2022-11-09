@@ -52,7 +52,7 @@ function AddCommentForFoodTips({ route }) {
                 fontSize: 22,
                 fontWeight: 'bold',
                 color: 'black',
-                marginTop: -20
+                marginTop: 30
             }}>
                 Add Review
             </Text>
@@ -80,12 +80,12 @@ function AddCommentForFoodTips({ route }) {
 
             </View>
 
-            <View style={{
+            {/* <View style={{
                 width: 450,
                 alignItems: 'center',
                 marginTop: 260,
             }}>
-            </View>
+            </View> */}
 
             <View style={styles.fixToText2}>
                 <TouchableOpacity style={styles.CalBtn} onPress={insertData}>
@@ -131,9 +131,11 @@ const styles = StyleSheet.create({
         fontWeight: "500"
     },
     fixToText2: {
-        marginTop: -20,
         flexDirection: 'row',
         justifyContent: 'space-between',
+        marginBottom: 100,
+        marginTop:300,
+        marginLeft: -10
     },
     text: {
         color: '#000',

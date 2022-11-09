@@ -24,7 +24,8 @@ function FoodSavingTipsView() {
     const [video, setVideo] = useState('');
     const [image, setImage] = useState('');
     const [category, setCategory] = useState('');
-    const [userId, setUserId] = useState('003');
+    const [userId, setUserId] = useState('');
+    const [userNo, setUserNo] = useState('003');
 
     const onChangeTextTitle = (value) => {
         setTitle(value)
@@ -67,6 +68,7 @@ function FoodSavingTipsView() {
     const handleEdit = (tip) => {
         // setVisible(true)
         setVisibleView(true)
+        setUserId(tip.userId)
         setId(tip._id)
         setTitle(tip.title)
         setDescription(tip.description)
@@ -78,6 +80,7 @@ function FoodSavingTipsView() {
     const viewUpdateDataBtn = () => {
         setVisible(true)
         setVisibleView(false)
+        setUserId(userId)
         setId(id)
         setTitle(title)
         setDescription(description)
@@ -102,35 +105,49 @@ function FoodSavingTipsView() {
         }).then((res) => {
             // setList(response.data)
             setVisible(false)
+
+            Alert.alert(
+                "Done",
+                "Successfully Updated!",
+                [
+                    { text: "OK", onPress: () => getFoodTips() }
+                ]
+            );
+
         })
 
-        Alert.alert(
-            "Done",
-            "Successfully Updated!",
-            [
-                { text: "OK", onPress: () => navigation.navigate("FoodSaverDashboard") }
-            ]
-        );
 
     }
 
     const deleteData = () => {
 
-        axios({
-            url: "http://192.168.1.100:5050/FoodSaver/" + id,
-            method: "DELETE"
-        }).then((res) => {
-            // setList(response.data)
-            setVisible(false)
-            setVisibleView(false)
-            Alert.alert(
-                "Done",
-                "Successfully Deleted!",
-                [
-                    { text: "OK", onPress: () => navigation.navigate("FoodSaverDashboard") }
-                ]
-            );
-        })
+        Alert.alert(
+            "Delete Technique",
+            "Are you sure you want to permanently delete this technique? ",
+            [
+                {
+                    text: "Cancel",
+                    style: "cancel"
+                },
+                {
+                    text: "OK", onPress: () => axios({
+                        url: "http://192.168.1.100:5050/FoodSaver/" + id,
+                        method: "DELETE"
+                    }).then((res) => {
+                        // setList(response.data)
+                        setVisible(false)
+                        setVisibleView(false)
+                        Alert.alert(
+                            "Done",
+                            "Successfully Deleted!",
+                            [
+                                { text: "OK", onPress: () => getFoodTips() }
+                            ]
+                        );
+                    })
+                }
+            ]
+        );
 
     }
 
@@ -143,106 +160,113 @@ function FoodSavingTipsView() {
                 visible={visible}
             >
                 <SafeAreaView>
-                    <View>
-                        <TouchableOpacity
-                            onPress={handleVisibleModel}
-                        >
-                            <Text>Close</Text>
-                        </TouchableOpacity>
-
-                        <Text style={{
-                            fontSize: 22,
-                            fontWeight: 'bold',
-                            color: 'black',
-                            textAlign: 'center'
+                    <ScrollView
+                        contentContainerStyle={{
+                            justifyContent: 'center',
+                            marginLeft: 20,
+                            marginRight: 20,
                         }}>
-                            Update Details
-                        </Text>
+                        <View>
+                            <TouchableOpacity
+                                onPress={handleVisibleModel}
+                            >
+                                <Text>Close</Text>
+                            </TouchableOpacity>
 
-                        <Image
-                            source={require('../../assets/food_waste_saver/food3.png')}
-                            style={styles.img}
-                        />
-                        <View style={styles.container}>
+                            <Text style={{
+                                fontSize: 22,
+                                fontWeight: 'bold',
+                                color: 'black',
+                                textAlign: 'center'
+                            }}>
+                                Update Details
+                            </Text>
 
-                            <Text style={styles.lableClass}>Title : </Text>
-                            <TextInput
-                                onChangeText={onChangeTextTitle}
-                                value={title}
-                                name="title"
-                                underlineColorAndroid='transparent'
-                                style={styles.SmallTextInputStyleClass}
+                            <Image
+                                source={require('../../assets/food_waste_saver/food3.png')}
+                                style={styles.img}
                             />
+                            <View style={styles.container}>
+
+                                <Text style={styles.lableClass}>Title : </Text>
+                                <TextInput
+                                    onChangeText={onChangeTextTitle}
+                                    value={title}
+                                    name="title"
+                                    underlineColorAndroid='transparent'
+                                    style={styles.SmallTextInputStyleClass}
+                                />
+
+                            </View>
+
+                            <View style={styles.container}>
+
+                                <Text style={styles.lableClass2}>category :</Text>
+                                <Dropdown
+                                    style={styles.dropdown}
+                                    placeholderStyle={styles.placeholderStyle}
+                                    selectedTextStyle={styles.selectedTextStyle}
+                                    inputSearchStyle={styles.inputSearchStyle}
+                                    iconStyle={styles.iconStyle}
+                                    data={data}
+                                    search
+                                    maxHeight={300}
+                                    labelField="label"
+                                    valueField="value"
+                                    searchPlaceholder="Search..."
+                                    value={category}
+                                    onChange={item => {
+                                        setCategory(item.value);
+                                    }}
+
+                                />
+                            </View>
+
+                            <View style={styles.container}>
+
+                                <Text style={styles.lableClass3}>description : </Text>
+                                <TextInput
+                                    onChangeText={onChangeTextDescription}
+                                    underlineColorAndroid='transparent'
+                                    style={styles.SmallTextInputStyleClass3}
+                                    name='description'
+                                    value={description}
+                                    numberOfLines={6}
+                                    multiline={true}
+                                />
+                            </View>
+
+                            <View style={styles.container}>
+
+                                <Text style={styles.lableClass4}> Video URL :</Text>
+                                <TextInput
+                                    onChangeText={onChangeTextVideo}
+                                    underlineColorAndroid='transparent'
+                                    style={styles.SmallTextInputStyleClass4}
+                                    name='video'
+                                    value={video}
+                                />
+                            </View>
+
+                            <View style={styles.container}>
+
+                                <Text style={styles.lableClass5}> Image URL :</Text>
+                                <TextInput
+                                    onChangeText={onChangeTextImage}
+                                    underlineColorAndroid='transparent'
+                                    style={styles.SmallTextInputStyleClass5}
+                                    name='image'
+                                    value={image}
+                                />
+                            </View>
 
                         </View>
-
-                        <View style={styles.container}>
-
-                            <Text style={styles.lableClass2}>category :</Text>
-                            <Dropdown
-                                style={styles.dropdown}
-                                placeholderStyle={styles.placeholderStyle}
-                                selectedTextStyle={styles.selectedTextStyle}
-                                inputSearchStyle={styles.inputSearchStyle}
-                                iconStyle={styles.iconStyle}
-                                data={data}
-                                search
-                                maxHeight={300}
-                                labelField="label"
-                                valueField="value"
-                                searchPlaceholder="Search..."
-                                value={category}
-                                onChange={item => {
-                                    setCategory(item.value);
-                                }}
-
-                            />
+                        <View style={styles.fixToText}>
+                            <TouchableOpacity style={styles.CalBtn} onPress={updateData}>
+                                <Text style={styles.CalBtnText}>Update</Text>
+                            </TouchableOpacity>
                         </View>
-
-                        <View style={styles.container}>
-
-                            <Text style={styles.lableClass3}>description : </Text>
-                            <TextInput
-                                onChangeText={onChangeTextDescription}
-                                underlineColorAndroid='transparent'
-                                style={styles.SmallTextInputStyleClass3}
-                                name='description'
-                                value={description}
-                                numberOfLines={6}
-                                multiline={true}
-                            />
-                        </View>
-
-                        <View style={styles.container}>
-
-                            <Text style={styles.lableClass4}> Video URL :</Text>
-                            <TextInput
-                                onChangeText={onChangeTextVideo}
-                                underlineColorAndroid='transparent'
-                                style={styles.SmallTextInputStyleClass4}
-                                name='video'
-                                value={video}
-                            />
-                        </View>
-
-                        <View style={styles.container}>
-
-                            <Text style={styles.lableClass5}> Image URL :</Text>
-                            <TextInput
-                                onChangeText={onChangeTextImage}
-                                underlineColorAndroid='transparent'
-                                style={styles.SmallTextInputStyleClass5}
-                                name='image'
-                                value={image}
-                            />
-                        </View>
-
-                    </View>
-                    <View style={styles.fixToText}>
-                        <TouchableOpacity style={styles.CalBtn} onPress={updateData}>
-                            <Text style={styles.CalBtnText}>Update</Text>
-                        </TouchableOpacity>
-                    </View>
+                    </ScrollView>
                 </SafeAreaView>
             </Modal>
 
@@ -272,24 +296,57 @@ function FoodSavingTipsView() {
                             <Text style={styles.StstText}>{description}</Text>
                             <Text style={styles.StstText}>Video Link: {video}</Text>
 
+                            {userId === userNo ?
+                                <View style={styles.fixToText1}>
+                                    <TouchableOpacity style={styles.CalBtn} onPress={() => navigation.navigate("ViewReviewsInFoodSavingTips", { id: id })}>
+                                        <Text style={styles.CalBtnText}>View Review</Text>
+                                    </TouchableOpacity>
+                                </View> :
+                                <View style={styles.fixToText4}>
+                                    <TouchableOpacity style={styles.CalBtn} onPress={() => navigation.navigate("AddCommentForFoodSavingTips", { id: id })}>
+                                        <Text style={styles.CalBtnText}>Add Review</Text>
+                                    </TouchableOpacity>
+                                    <TouchableOpacity style={styles.CalBtn} onPress={() => navigation.navigate("ViewReviewsInFoodSavingTips", { id: id })}>
+                                        <Text style={styles.CalBtnText}>View Review</Text>
+                                    </TouchableOpacity>
+                                </View>
+                            }
+
+                            {userId === userNo ?
+                                <View>
+
+                                    <View style={{
+                                        width: 350,
+                                        height: 30,
+                                        alignItems: 'center',
+                                        borderBottomColor: '#ffc107',
+                                        borderBottomWidth: StyleSheet.hairlineWidth,
+                                        marginTop: -10,
+                                        marginBottom: 70
+                                    }}>
+                                    </View>
+                                    <View style={styles.fixToText2}>
+                                        <TouchableOpacity onPress={viewUpdateDataBtn}>
+                                            <Image source={require('../../assets/food_waste_saver/edit1.jpeg')} style={{ marginTop: 100, marginLeft: 100, height: 34, width: 37 }} />
+                                        </TouchableOpacity>
+
+                                        <TouchableOpacity onPress={deleteData}>
+                                            <Image source={require('../../assets/food_waste_saver/delete1.png')} style={{ marginTop: 100, marginLeft: 10 }} />
+                                        </TouchableOpacity>
+                                    </View>
+                                    <Text style={styles.StstText2}>If you want to modify this?</Text>
+                                </View>
+                                : null}
 
                         </View>
-                        <View style={styles.fixToText1}>
+                        {/* <View style={styles.fixToText1}>
                             <TouchableOpacity style={styles.CalBtn} onPress={viewUpdateDataBtn}>
                                 <Text style={styles.CalBtnText}>Update</Text>
                             </TouchableOpacity>
                             <TouchableOpacity style={styles.CalBtn} onPress={deleteData}>
                                 <Text style={styles.CalBtnText}>Delete</Text>
                             </TouchableOpacity>
-                        </View>
-                        <View style={styles.fixToText1}>
-                            <TouchableOpacity style={styles.CalBtn} onPress={() => navigation.navigate("AddCommentForFoodSavingTips",{id: id})}>
-                                <Text style={styles.CalBtnText}>Add Review</Text>
-                            </TouchableOpacity>
-                            <TouchableOpacity style={styles.CalBtn} onPress={() => navigation.navigate("ViewReviewsInFoodSavingTips",{id: id})}>
-                                <Text style={styles.CalBtnText}>View Review</Text>
-                            </TouchableOpacity>
-                        </View>
+                        </View> */}
                     </SafeAreaView>
                 </ScrollView>
             </Modal>
@@ -328,17 +385,20 @@ function FoodSavingTipsView() {
                                 <Text style={{ fontSize: 16, fontWeight: "700", color: "#ffc107", alignSelf: "flex-start" }}>
                                     {tip.title}
                                 </Text>
-                                <Text style={{ fontSize: 14, alignSelf: "flex-start" }}>
+                                <Text style={{ fontSize: 14, alignSelf: "flex-start", width: '95%', }}>
                                     {tip.description.slice(0, 120)} ...
                                 </Text>
 
-
                             </TouchableOpacity>
+                            <Image source={require('../../assets/food_waste_saver/arrow.png')} style={{ marginTop: -50, marginBottom: 12, marginLeft: 330 }} />
                         </View>
                     ))}
+                    <Text style={styles.csText} >
+                        Coming Soon ...
+                    </Text>
                 </ScrollView>
             </View>
-        </SafeAreaView>
+        </SafeAreaView >
 
     );
 }
@@ -347,19 +407,40 @@ export default FoodSavingTipsView
 
 
 const styles = StyleSheet.create({
+    csText: {
+        marginBottom: 50,
+        marginTop: 40,
+        textAlign: "center",
+        color: "#ffc107"
+    },
     fixToText: {
-        marginTop: 285,
+        marginTop: -70,
+        marginBottom: 40,
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'center',
         justifyContent: 'center',
     },
     fixToText1: {
-        marginTop: -100,
-        flexDirection: 'row',
-        justifyContent: 'space-between',
+        marginTop: -70,
         alignItems: 'center',
-        marginBottom: 50
+        marginBottom: 50,
+        marginLeft: -20,
+        width: 400
+    },
+    fixToText4: {
+        marginTop: -70,
+        flexDirection: 'row',
+        alignItems: 'center',
+        marginBottom: 50,
+        marginLeft: 60
+    },
+    fixToText2: {
+        marginTop: -140,
+        flexDirection: 'row',
+        alignItems: 'center',
+        marginBottom: 50,
+        marginLeft: 100
     },
     tinyLogo: {
         width: '100%',
@@ -464,7 +545,7 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         height: 40,
         fontSize: 14,
-        marginTop: 60,
+        marginTop: 20,
         borderRadius: 20,
         marginLeft: 45,
         color: "#ffc107",
@@ -475,7 +556,7 @@ const styles = StyleSheet.create({
         height: 40,
         width: '50%',
         borderBottomEndRadius: 5,
-        marginTop: 50,
+        marginTop: 20,
         borderRadius: 10,
         margin: 5,
         backgroundColor: "#E4E4E4",
@@ -486,7 +567,7 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         height: 40,
         fontSize: 14,
-        marginTop: 116,
+        marginTop: 26,
         borderRadius: 20,
         marginLeft: 30,
         color: "#ffc107",
@@ -496,10 +577,10 @@ const styles = StyleSheet.create({
         height: 40,
         width: '50%',
         borderBottomEndRadius: 5,
-        marginTop: 115,
+        marginTop: 25,
         borderRadius: 10,
         margin: 5,
-        marginLeft: 37,
+        marginLeft: 33,
         backgroundColor: "#E4E4E4",
         color: "black",
         height: 150,
@@ -509,7 +590,7 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         height: 40,
         fontSize: 14,
-        marginTop: 285,
+        marginTop: 20,
         borderRadius: 20,
         marginLeft: 35,
         color: "#ffc107",
@@ -520,18 +601,18 @@ const styles = StyleSheet.create({
         height: 40,
         width: '50%',
         borderBottomEndRadius: 5,
-        marginTop: 280,
+        marginTop: 16,
         borderRadius: 10,
         margin: 5,
         backgroundColor: "#E4E4E4",
         color: "black",
-        marginLeft: 37,
+        marginLeft: 33,
     },
     lableClass5: {
         textAlign: 'center',
         height: 40,
         fontSize: 14,
-        marginTop: 345,
+        marginTop: 30,
         borderRadius: 20,
         marginLeft: 31,
         color: "#ffc107",
@@ -542,12 +623,12 @@ const styles = StyleSheet.create({
         height: 40,
         width: '50%',
         borderBottomEndRadius: 5,
-        marginTop: 340,
+        marginTop: 24,
         borderRadius: 10,
         margin: 5,
         backgroundColor: "#E4E4E4",
         color: "black",
-        marginLeft: 38,
+        marginLeft: 33,
     },
     container: {
         flex: 1,
@@ -568,7 +649,7 @@ const styles = StyleSheet.create({
         // borderColor: 'gray',
         backgroundColor: "#E4E4E4",
         color: "black",
-        marginTop: 51,
+        marginTop: 17,
         // borderWidth: 0.5,
         borderRadius: 8,
         paddingHorizontal: 8,
@@ -606,5 +687,12 @@ const styles = StyleSheet.create({
         fontSize: 18,
         padding: 10,
         // width: 380
+    },
+    StstText2: {
+        color: '#000',
+        fontSize: 14,
+        marginTop: -77,
+        marginBottom: 30,
+        marginLeft: 10
     },
 });
