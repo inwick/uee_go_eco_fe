@@ -309,7 +309,6 @@ const styles = StyleSheet.create({
         fontWeight: "600"
     },
     SmallTextInputStyleClass3: {
-        height: 40,
         width: '50%',
         borderBottomEndRadius: 5,
         marginTop: 26,
@@ -318,7 +317,7 @@ const styles = StyleSheet.create({
         marginLeft: 30,
         backgroundColor: "#E4E4E4",
         color: "black",
-        height: 150,
+        height: 90,
         justifyContent: "flex-start",
         paddingHorizontal: 8,
     },

@@ -52,7 +52,7 @@ function AddCommentForFoodTips({ route }) {
                 fontSize: 22,
                 fontWeight: 'bold',
                 color: 'black',
-                marginTop: -20
+                marginTop: 30
             }}>
                 Add Review
             </Text>

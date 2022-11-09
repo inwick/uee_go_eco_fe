@@ -1,8 +1,8 @@
 /* eslint-disable react-native/no-inline-styles */
-import React, {useState, useEffect} from 'react';
-import {StyleSheet, View, TouchableOpacity, Text, Image} from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { StyleSheet, View, TouchableOpacity, Text, Image } from 'react-native';
 import axios from 'react-native-axios';
-import {useNavigation} from '@react-navigation/native';
+import { useNavigation } from '@react-navigation/native';
 
 function ElectricitySaverDashBoard() {
   const [wallets, setWallets] = useState([]);
@@ -82,7 +82,7 @@ const styles = StyleSheet.create({
     paddingBottom: 2,
     backgroundColor: '#FA8072',
     borderRadius: 20,
-    marginTop: 20,
+    marginTop: 15,
     height: 60,
     justifyContent: 'center',
   },
