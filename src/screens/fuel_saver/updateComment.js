@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { StyleSheet, View, TouchableOpacity, Text, Image, TextInput, Button, ScrollView, ImageBackground } from "react-native";
+import { StyleSheet, View, TouchableOpacity, Text, Image, TextInput, Alert, } from "react-native";
 import axios from 'react-native-axios';
 import { useNavigation } from '@react-navigation/native';
 
@@ -71,7 +71,14 @@ function UpdateFuelComent({ route }) {
                         }
 
                         await axios.post(`http://10.0.2.2:5050/FuelComment/updateFuelTip/${cid}`, data)
-                        navigation.navigate("FuelTipView", { id: tip._id })
+
+                        Alert.alert(
+                            "Updated!",
+                            "Comment updated successfull",
+                            [
+                                { text: "OK", onPress: () => navigation.navigate("FuelTipView", { id: tip._id }) }
+                            ]
+                        );
 
                     } catch (error) {
                         alert(error);

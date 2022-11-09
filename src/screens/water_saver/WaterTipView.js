@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Button, StyleSheet, View, TouchableOpacity, Text, Image, ScrollView, SafeAreaView, TextInput, Alert } from "react-native";
 import axios from 'react-native-axios';
 import { useNavigation } from '@react-navigation/native';
-import  Modal  from "react-native-modal";
+import Modal from "react-native-modal";
 
 function WaterTipView({ route }) {
 
@@ -64,10 +64,12 @@ function WaterTipView({ route }) {
                 <View style={styles.infoContainer}>
                     <Text style={styles.name}> {title}</Text>
                 </View>
-                <Image
-                    style={styles.image}
-                    source={{ uri: image }}
-                />
+                <View style={{ alignItems: "center" }}>
+                    <Image
+                        style={styles.image}
+                        source={{ uri: image }}
+                    />
+                </View>
                 <View style={styles.infoContainer}>
 
                     <Text style={styles.description}> {description}</Text>
@@ -208,11 +210,12 @@ const styles = StyleSheet.create({
         marginVertical: 20,
     },
     image: {
-        height: 300,
-        width: '100%',
+        height: 280,
+        width: '92%',
         borderRadius: 20,
         marginTop: 10,
-        marginBottom: 10
+        marginBottom: 10,
+
     },
     infoContainer: {
         padding: 16,

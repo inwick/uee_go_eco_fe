@@ -38,10 +38,10 @@ function FuelSavingTips() {
 
                         <TouchableOpacity style={styles.cardButton} onPress={() => navigation.navigate("FuelTipView", { id: tip._id })}>
 
-                            <Text style={{ fontSize: 16, fontWeight: "700", color: "#26B787", alignSelf: "flex-start" }}>
+                            <Text style={{ fontSize: 16, fontWeight: "700", color: "#26B787", alignSelf: "flex-start", marginLeft: -10 }}>
                                 {tip.tipTitle}
                             </Text>
-                            <Text style={{ fontSize: 14, alignSelf: "flex-start", width: '95%', }}>
+                            <Text style={{ fontSize: 14, alignSelf: "flex-start", width: '95%', textAlign: 'justify', marginLeft: -10 }}>
                                 {tip.tipDescription.slice(0, 120)} ...
                             </Text>
 

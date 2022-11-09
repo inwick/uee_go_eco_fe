@@ -1,9 +1,9 @@
 /* eslint-disable react-native/no-inline-styles */
-import React, {useState, useEffect} from 'react';
-import {StyleSheet, View, TouchableOpacity, Text, Image} from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { StyleSheet, View, TouchableOpacity, Text, Image } from 'react-native';
 import axios from 'react-native-axios';
-import {useNavigation} from '@react-navigation/native';
-import {ScrollView} from 'react-native-gesture-handler';
+import { useNavigation } from '@react-navigation/native';
+import { ScrollView } from 'react-native-gesture-handler';
 
 function ElectricitySaverTips() {
   const [wallets, setWallets] = useState([]);
@@ -57,7 +57,7 @@ function ElectricitySaverTips() {
             borderBottomWidth: StyleSheet.hairlineWidth,
           }}
         />
-        <Text style={styles.titleText}>2. USE LED LIGHTS </Text>
+        <Text style={styles.titleTextTop}>2. USE LED LIGHTS </Text>
         <Text style={styles.text}>
           Many homes are moving towards smart LED lights as they not only look
           stylish and affordable but are also way more efficient than halogen
@@ -71,7 +71,7 @@ function ElectricitySaverTips() {
             borderBottomWidth: StyleSheet.hairlineWidth,
           }}
         />
-        <Text style={styles.titleText}>
+        <Text style={styles.titleTextTop}>
           3. SWITCHING TO EFFICIENT APPLIANCES
         </Text>
         <Text style={styles.text}>
@@ -91,7 +91,7 @@ function ElectricitySaverTips() {
             borderBottomWidth: StyleSheet.hairlineWidth,
           }}
         />
-        <Text style={styles.titleText}>4. UNPLUG DEVICES </Text>
+        <Text style={styles.titleTextTop}>4. UNPLUG DEVICES </Text>
         <Text style={styles.text}>
           Needless to say how important it is to unplug devices when not in use.
           Do not leave devices on standby but rather unplug them and save your
@@ -105,7 +105,7 @@ function ElectricitySaverTips() {
             borderBottomWidth: StyleSheet.hairlineWidth,
           }}
         />
-        <Text style={styles.titleText}>5. USE SMART AUTOMATED DEVICES </Text>
+        <Text style={styles.titleTextTop}>5. USE SMART AUTOMATED DEVICES </Text>
         <Text style={styles.text}>
           Smart automated devices can lower your energy bills even when you
           forget to. Smart automation systems will detect when you’re no longer
@@ -119,7 +119,7 @@ function ElectricitySaverTips() {
             borderBottomWidth: StyleSheet.hairlineWidth,
           }}
         />
-        <Text style={styles.titleText}>6. BRING IN SUNLIGHT </Text>
+        <Text style={styles.titleTextTop}>6. BRING IN SUNLIGHT </Text>
         <Text style={styles.text}>
           During daylight hours, switch off artificial lights and use windows
           and skylights to brighten your home.
@@ -132,7 +132,7 @@ function ElectricitySaverTips() {
             borderBottomWidth: StyleSheet.hairlineWidth,
           }}
         />
-        <Text style={styles.titleText}>7. SOLAR POWERED DEVICES </Text>
+        <Text style={styles.titleTextTop}>7. SOLAR POWERED DEVICES </Text>
         <Text style={styles.text}>
           These days you can find a solar-powered version of almost any
           electronic you use in your home. Making small shifts and using more
@@ -147,7 +147,7 @@ function ElectricitySaverTips() {
             borderBottomWidth: StyleSheet.hairlineWidth,
           }}
         />
-        <Text style={styles.titleText}>8. SET CLEAR ENERGY SAVING GOALS </Text>
+        <Text style={styles.titleTextTop}>8. SET CLEAR ENERGY SAVING GOALS </Text>
         <Text style={styles.text}>
           After you have an accurate assessment of your current energy use, set
           clear and attainable energy-saving goals for your business. Identify
@@ -186,31 +186,26 @@ const styles = StyleSheet.create({
   },
   text: {
     color: '#000000',
-    fontSize: 16,
+    fontSize: 14,
     fontWeight: '300',
     marginBottom: 10,
+    textAlign: 'justify',
   },
   endText: {
     color: '#FA8072',
-    fontSize: 20,
+    fontSize: 16,
     fontWeight: '400',
     marginBottom: 80,
     marginTop: 20,
     textAlign: 'center',
   },
-  titleText: {
-    color: '#FA8072',
-    fontSize: 20,
-    fontWeight: '500',
-    marginBottom: 10,
-    fontFamily: 'Roboto Extrabold',
-  },
   titleTextTop: {
     color: '#FA8072',
-    fontSize: 20,
+    fontSize: 16,
     fontWeight: '500',
     marginBottom: 10,
     marginTop: 10,
     fontFamily: 'Roboto Extrabold',
+    fontWeight: "700",
   },
 });
