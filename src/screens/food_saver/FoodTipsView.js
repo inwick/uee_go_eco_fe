@@ -24,7 +24,8 @@ function FoodSavingTipsView() {
     const [video, setVideo] = useState('');
     const [image, setImage] = useState('');
     const [category, setCategory] = useState('');
-    const [userId, setUserId] = useState('003');
+    const [userId, setUserId] = useState('');
+    const [userNo, setUserNo] = useState('003');
 
     const onChangeTextTitle = (value) => {
         setTitle(value)
@@ -67,6 +68,7 @@ function FoodSavingTipsView() {
     const handleEdit = (tip) => {
         // setVisible(true)
         setVisibleView(true)
+        setUserId(tip.userId)
         setId(tip._id)
         setTitle(tip.title)
         setDescription(tip.description)
@@ -78,6 +80,7 @@ function FoodSavingTipsView() {
     const viewUpdateDataBtn = () => {
         setVisible(true)
         setVisibleView(false)
+        setUserId(userId)
         setId(id)
         setTitle(title)
         setDescription(description)
@@ -102,35 +105,49 @@ function FoodSavingTipsView() {
         }).then((res) => {
             // setList(response.data)
             setVisible(false)
+
+            Alert.alert(
+                "Done",
+                "Successfully Updated!",
+                [
+                    { text: "OK", onPress: () => getFoodTips()}
+                ]
+            );
+
         })
 
-        Alert.alert(
-            "Done",
-            "Successfully Updated!",
-            [
-                { text: "OK", onPress: () => navigation.navigate("FoodSaverDashboard") }
-            ]
-        );
-
+        
     }
 
     const deleteData = () => {
 
-        axios({
-            url: "http://192.168.1.100:5050/FoodSaver/" + id,
-            method: "DELETE"
-        }).then((res) => {
-            // setList(response.data)
-            setVisible(false)
-            setVisibleView(false)
-            Alert.alert(
-                "Done",
-                "Successfully Deleted!",
-                [
-                    { text: "OK", onPress: () => navigation.navigate("FoodSaverDashboard") }
-                ]
-            );
-        })
+        Alert.alert(
+            "Delete Technique",
+            "Are you sure you want to permanently delete this technique? ",
+            [
+                {
+                    text: "Cancel",
+                    style: "cancel"
+                },
+                {
+                    text: "OK", onPress: () => axios({
+                        url: "http://192.168.1.100:5050/FoodSaver/" + id,
+                        method: "DELETE"
+                    }).then((res) => {
+                        // setList(response.data)
+                        setVisible(false)
+                        setVisibleView(false)
+                        Alert.alert(
+                            "Done",
+                            "Successfully Deleted!",
+                            [
+                                { text: "OK", onPress: () => getFoodTips() }
+                            ]
+                        );
+                    })
+                }
+            ]
+        );
 
     }
 
@@ -272,24 +289,48 @@ function FoodSavingTipsView() {
                             <Text style={styles.StstText}>{description}</Text>
                             <Text style={styles.StstText}>Video Link: {video}</Text>
 
-                            <View style={styles.fixToText1}>
-                                <TouchableOpacity style={styles.CalBtn} onPress={() => navigation.navigate("AddCommentForFoodSavingTips", { id: id })}>
-                                    <Text style={styles.CalBtnText}>Add Review</Text>
-                                </TouchableOpacity>
-                                <TouchableOpacity style={styles.CalBtn} onPress={() => navigation.navigate("ViewReviewsInFoodSavingTips", { id: id })}>
-                                    <Text style={styles.CalBtnText}>View Review</Text>
-                                </TouchableOpacity>
-                            </View>
-                            <View style={styles.fixToText2}>
-                                <TouchableOpacity onPress={viewUpdateDataBtn}>
-                                    <Image source={require('../../assets/food_waste_saver/edit.png')} style={{ marginTop: 100, marginLeft: 250 }} />
-                                </TouchableOpacity>
+                            {userId === userNo ?
+                                <View style={styles.fixToText1}>
+                                    <TouchableOpacity style={styles.CalBtn} onPress={() => navigation.navigate("ViewReviewsInFoodSavingTips", { id: id })}>
+                                        <Text style={styles.CalBtnText}>View Review</Text>
+                                    </TouchableOpacity>
+                                </View> :
+                                <View style={styles.fixToText4}>
+                                    <TouchableOpacity style={styles.CalBtn} onPress={() => navigation.navigate("AddCommentForFoodSavingTips", { id: id })}>
+                                        <Text style={styles.CalBtnText}>Add Review</Text>
+                                    </TouchableOpacity>
+                                    <TouchableOpacity style={styles.CalBtn} onPress={() => navigation.navigate("ViewReviewsInFoodSavingTips", { id: id })}>
+                                        <Text style={styles.CalBtnText}>View Review</Text>
+                                    </TouchableOpacity>
+                                </View>
+                            }
 
-                                <TouchableOpacity onPress={deleteData}>
-                                    <Image source={require('../../assets/food_waste_saver/delete.png')} style={{ marginTop: 100, marginLeft: -10 }} />
-                                </TouchableOpacity>
-                            </View>
-                            <Text style={styles.StstText2}>If you want to modify this?</Text>
+                            {userId === userNo ?
+                                <View>
+
+                                    <View style={{
+                                        width: 350,
+                                        height: 30,
+                                        alignItems: 'center',
+                                        borderBottomColor: '#ffc107',
+                                        borderBottomWidth: StyleSheet.hairlineWidth,
+                                        marginTop: -10,
+                                        marginBottom: 70
+                                    }}>
+                                    </View>
+                                    <View style={styles.fixToText2}>
+                                        <TouchableOpacity onPress={viewUpdateDataBtn}>
+                                            <Image source={require('../../assets/food_waste_saver/edit1.jpeg')} style={{ marginTop: 100, marginLeft: 100, height: 34, width: 37 }} />
+                                        </TouchableOpacity>
+
+                                        <TouchableOpacity onPress={deleteData}>
+                                            <Image source={require('../../assets/food_waste_saver/delete1.png')} style={{ marginTop: 100, marginLeft: 10 }} />
+                                        </TouchableOpacity>
+                                    </View>
+                                    <Text style={styles.StstText2}>If you want to modify this?</Text>
+                                </View>
+                                : null}
+
                         </View>
                         {/* <View style={styles.fixToText1}>
                             <TouchableOpacity style={styles.CalBtn} onPress={viewUpdateDataBtn}>
@@ -337,14 +378,17 @@ function FoodSavingTipsView() {
                                 <Text style={{ fontSize: 16, fontWeight: "700", color: "#ffc107", alignSelf: "flex-start" }}>
                                     {tip.title}
                                 </Text>
-                                <Text style={{ fontSize: 14, alignSelf: "flex-start" }}>
+                                <Text style={{ fontSize: 14, alignSelf: "flex-start", width: '95%', }}>
                                     {tip.description.slice(0, 120)} ...
                                 </Text>
 
-
                             </TouchableOpacity>
+                            <Image source={require('../../assets/food_waste_saver/arrow.png')} style={{ marginTop: -50, marginBottom: 12, marginLeft: 330 }} />
                         </View>
                     ))}
+                    <Text style={styles.csText} >
+                        Coming Soon ...
+                    </Text>
                 </ScrollView>
             </View>
         </SafeAreaView>
@@ -356,6 +400,12 @@ export default FoodSavingTipsView
 
 
 const styles = StyleSheet.create({
+    csText: {
+        marginBottom: 50,
+        marginTop: 40,
+        textAlign: "center",
+        color: "#ffc107"
+    },
     fixToText: {
         marginTop: 285,
         flexDirection: 'row',
@@ -364,17 +414,25 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
     },
     fixToText1: {
-        marginTop: -100,
-        flexDirection: 'row',
-        justifyContent: 'space-between',
+        marginTop: -70,
         alignItems: 'center',
-        marginBottom: 50
+        marginBottom: 50,
+        marginLeft: -20,
+        width: 400
+    },
+    fixToText4: {
+        marginTop: -70,
+        flexDirection: 'row',
+        alignItems: 'center',
+        marginBottom: 50,
+        marginLeft: 60
     },
     fixToText2: {
-        marginTop: -100,
+        marginTop: -140,
         flexDirection: 'row',
         alignItems: 'center',
-        marginBottom: 50
+        marginBottom: 50,
+        marginLeft: 100
     },
     tinyLogo: {
         width: '100%',
@@ -625,8 +683,8 @@ const styles = StyleSheet.create({
     StstText2: {
         color: '#000',
         fontSize: 14,
-        marginTop: -70,
-        marginBottom:30
-        // width: 380
+        marginTop: -77,
+        marginBottom: 30,
+        marginLeft: 10
     },
 });

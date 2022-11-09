@@ -11,6 +11,7 @@ function ViewReviewForFoodTips({ route }) {
 
     const [tips, setTips] = useState([]);
     const [tipId, setTipId] = useState(id);
+    const [userNo, setUserNo] = useState('003');
 
     const getFoodTips = async () => {
         try {
@@ -28,18 +29,43 @@ function ViewReviewForFoodTips({ route }) {
 
     const deleteData = (cid) => {
 
-        axios({
-            url: "http://192.168.1.100:5050/FoodSaver-comment/" + cid,
-            method: "DELETE"
-        }).then((res) => {
-            Alert.alert(
-                "Done",
-                "Successfully Deleted!",
-                [
-                    { text: "OK", onPress: () => navigation.navigate("FoodSaverDashboard") }
-                ]
-            );
-        })
+        Alert.alert(
+            "Delete Comment",
+            "Are you sure you want to permanently delete this comment?",
+            [
+                {
+                    text: "Cancel",
+                    style: "cancel"
+                },
+                {
+                    text: "OK", onPress: () => axios({
+                        url: "http://192.168.1.100:5050/FoodSaver-comment/" + cid,
+                        method: "DELETE"
+                    }).then((res) => {
+                        Alert.alert(
+                            "Done",
+                            "Successfully Deleted!",
+                            [
+                                { text: "OK", onPress: () => navigation.navigate("FoodSavingTips") }
+                            ]
+                        );
+                    })
+                }
+            ]
+        );
+
+        // axios({
+        //     url: "http://192.168.1.100:5050/FoodSaver-comment/" + cid,
+        //     method: "DELETE"
+        // }).then((res) => {
+        //     Alert.alert(
+        //         "Done",
+        //         "Successfully Deleted!",
+        //         [
+        //             { text: "OK", onPress: () => navigation.navigate("FoodSaverDashboard") }
+        //         ]
+        //     );
+        // })
 
     }
 
@@ -76,17 +102,21 @@ function ViewReviewForFoodTips({ route }) {
                                 <Text style={{ fontSize: 14, alignSelf: "flex-start", textAlign: 'center', height: 30, }}>
                                     {tip.comment.slice(0, 120)} ...
                                 </Text>
-                                <View style={styles.fixToText}>
-                                    {/* <TouchableOpacity onPress={() => totalCost()}>
+
+                                {tip.userId === userNo ?
+                                    <View style={styles.fixToText}>
+                                        {/* <TouchableOpacity onPress={() => totalCost()}>
                                         <Image source={require('../../../assets/food_waste_saver/edit.png')} style={{ marginTop: -17, marginLeft: 250 }} />
                                     </TouchableOpacity> */}
 
-                                    <TouchableOpacity
-                                        onPress={() => deleteData(tip._id)}
-                                    >
-                                        <Image source={require('../../../assets/food_waste_saver/delete.png')} style={{ marginTop: -17, marginLeft: 250 }} />
-                                    </TouchableOpacity>
-                                </View>
+                                        <TouchableOpacity
+                                            onPress={() => deleteData(tip._id)}
+                                        >
+                                            <Image source={require('../../../assets/food_waste_saver/delete1.png')} style={{ marginTop: -17, marginLeft: 250 }} />
+                                        </TouchableOpacity>
+                                    </View>
+                                    : null}
+
                             </TouchableOpacity>
                         </View>
                     ))}
@@ -155,7 +185,7 @@ const styles = StyleSheet.create({
         padding: 15,
         width: 300,
         alignItems: 'center',
-        marginTop: 10,
+        marginTop: -5,
         marginLeft: 5,
         borderBottomColor: 'black',
         borderBottomWidth: StyleSheet.hairlineWidth,
@@ -172,7 +202,7 @@ const styles = StyleSheet.create({
         marginTop: 15,
     },
     CalBtn: {
-        width: '35%',
+        width: '45%',
         paddingTop: 2,
         paddingBottom: 2,
         backgroundColor: '#ffc107',
@@ -318,9 +348,9 @@ const styles = StyleSheet.create({
         flexDirection: "row",
     },
     img: {
-        width: 220,
-        height: 220,
-        marginBottom: 0,
+        width: 200,
+        height: 200,
+        marginBottom: -10,
         marginTop: -10,
         marginLeft: 10
     },

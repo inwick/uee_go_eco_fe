@@ -182,7 +182,7 @@ function AddFoodWasteReducingTips() {
                     <TouchableOpacity style={styles.CalBtn} onPress={insertData}>
                         <Text style={styles.CalBtnText}>Save</Text>
                     </TouchableOpacity>
-                    <TouchableOpacity style={styles.CalBtn} onPress={() => navigation.navigate("FoodSaverDashboard")}>
+                    <TouchableOpacity style={styles.CalBtn1} onPress={() => navigation.navigate("FoodSaverDashboard")}>
                         <Text style={styles.CalBtnText}>Cancel</Text>
                     </TouchableOpacity>
                 </View>
@@ -209,6 +209,16 @@ const styles = StyleSheet.create({
         paddingTop: 2,
         paddingBottom: 2,
         backgroundColor: '#ffc107',
+        borderRadius: 10,
+        marginTop: 120,
+        marginLeft: 10,
+        height: 45
+    },
+    CalBtn1: {
+        width: '25%',
+        paddingTop: 2,
+        paddingBottom: 2,
+        backgroundColor: '#C3A037',
         borderRadius: 10,
         marginTop: 120,
         marginLeft: 10,
