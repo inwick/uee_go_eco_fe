@@ -84,8 +84,6 @@ function UpdateBillInformation({route}) {
         setMonth(res.data.month);
         setUnits(res.data.units);
       });
-
-      console.log(entry);
     } catch (error) {
       console.log(error);
     }
