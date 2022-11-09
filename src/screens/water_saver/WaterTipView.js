@@ -2,13 +2,13 @@ import React, { useState, useEffect } from "react";
 import { Button, StyleSheet, View, TouchableOpacity, Text, Image, ScrollView, SafeAreaView, TextInput,Alert} from "react-native";
 import axios from 'react-native-axios';
 import { useNavigation } from '@react-navigation/native';
-import Modal from "react-native-modal";
+import  Modal  from "react-native-modal";
 
 function WaterTipView({ route }) {
 
     const [title, setTitle] = useState('');
     const [description, setDescription] = useState('');
-    const [image, setImage] = useState('');
+    const [image, setImage] = useState('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQJ_jpm2wH9uiyelCXdOx_V3l-vRMzrsQqSzKKaCpg&s');
     const [comment, setComment] = useState('');
     const navigation = useNavigation();
     const { id } = route.params;
@@ -16,7 +16,7 @@ function WaterTipView({ route }) {
     const [isModalVisible, setIsModalVisible] = useState(false);
     const handleModal = () => setIsModalVisible(() => !isModalVisible);
 
-    const getWalletItems = async () => {
+    const getTips = async () => {
         try {
             const response = await axios.get(`http://10.0.2.2:5050/WaterTips/` + id);
             setTitle(response.data.tipTitle);
@@ -28,7 +28,7 @@ function WaterTipView({ route }) {
     };
 
     useEffect(() => {
-        getWalletItems();
+        getTips();
     }, [])
 
     const onChangeTextComment = (value) => {
@@ -42,7 +42,6 @@ function WaterTipView({ route }) {
             ideaId: id,
             comment: comment
         }
-        console.log('a', data)
         axios({
             url: "http://10.0.2.2:5050/WaterComments/add",
             method: "POST",
@@ -77,7 +76,7 @@ function WaterTipView({ route }) {
                         <TouchableOpacity style={styles.CalBtn} onPress={handleModal}>
                             <Text style={styles.CalBtnText}>ADD COMMENT</Text>
                         </TouchableOpacity>
-                        <TouchableOpacity style={styles.CalBtn} >
+                        <TouchableOpacity style={styles.CalBtn} onPress={() => navigation.navigate("WaterSaverComments", { id: id })}>
                             <Text style={styles.CalBtnText}>VIEW COMMENTS</Text>
                         </TouchableOpacity>
                     </View>
@@ -85,7 +84,6 @@ function WaterTipView({ route }) {
 
                 <View style={styles.container}>
                     <View style={styles.separator} />
-                    {/* <Button title="button" onPress={handleModal} /> */}
                     <Modal style={styles.modal} isVisible={isModalVisible}>
                         <View style={styles.vw}>
                             <Text style={styles.cmnttxt}> ADD COMMENT </Text>
