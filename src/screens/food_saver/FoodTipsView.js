@@ -155,7 +155,7 @@ function FoodSavingTipsView() {
         <SafeAreaView>
 
             {/* update delete form */}
-            <Modal
+            {/* <Modal
                 animationType="slide"
                 visible={visible}
             >
@@ -268,10 +268,10 @@ function FoodSavingTipsView() {
                         </View>
                     </ScrollView>
                 </SafeAreaView>
-            </Modal>
+            </Modal> */}
 
             {/* view details one by one */}
-            <Modal
+            {/* <Modal
                 animationType="slide"
                 visible={visibleView}
             >
@@ -356,7 +356,7 @@ function FoodSavingTipsView() {
 
                     </SafeAreaView>
                 </ScrollView>
-            </Modal>
+            </Modal> */}
 
 
 
@@ -387,7 +387,7 @@ function FoodSavingTipsView() {
                         <View key={tip._id}>
 
                             {/* <TouchableOpacity style={styles.cardButton} onPress={() => navigation.navigate("FoodSavingTipsGetOneByOne", { id: tip._id })}> */}
-                            <TouchableOpacity style={styles.cardButton} onPress={() => handleEdit(tip)}>
+                            <TouchableOpacity style={styles.cardButton} onPress={() => navigation.navigate("ViewTipsOneByOne", { id: tip._id })}>
 
                                 <Text style={{ fontSize: 16, fontWeight: "700", color: "#ffc107", alignSelf: "flex-start" }}>
                                     {tip.title}

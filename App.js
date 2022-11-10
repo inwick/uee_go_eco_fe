@@ -18,6 +18,8 @@ import AddFoodWasteReducingTips from './src/screens/food_saver/AddFoodWasteReduc
 import FoodSavingTipsView from './src/screens/food_saver/FoodTipsView';
 import AddCommentForFoodTips from './src/screens/food_saver/food_comments/AddCommentsFoeFoodTips';
 import ViewReviewForFoodTips from './src/screens/food_saver/food_comments/ViewCommentsForFoodTips';
+import UpdateFoodTip from './src/screens/food_saver/UpdateFoodTip';
+import FoodTipViewOneByOne from './src/screens/food_saver/FoodTipViewOneByOne';
 
 import WaterSaverDashBoard from './src/screens/water_saver/WaterSaverDashboard';
 import WaterSavingTips from './src/screens/water_saver/WaterSavingTips';
@@ -118,16 +120,10 @@ const Food = () => {
       <Stack.Screen name="FoodSaverDashboard" component={FoodSaverDashboard} options={{ title: '' }} />
       <Stack.Screen name="AddFoodSavingTips" component={AddFoodWasteReducingTips} options={{ title: '' }} />
       <Stack.Screen name="FoodSavingTips" component={FoodSavingTipsView} options={{ title: '' }} />
-      <Stack.Screen
-        name="AddCommentForFoodSavingTips"
-        component={AddCommentForFoodTips}
-        options={{ title: '' }}
-      />
-      <Stack.Screen
-        name="ViewReviewsInFoodSavingTips"
-        component={ViewReviewForFoodTips}
-        options={{ title: '' }}
-      />
+      <Stack.Screen name="AddCommentForFoodSavingTips" component={AddCommentForFoodTips} options={{ title: '' }} />
+      <Stack.Screen name="ViewReviewsInFoodSavingTips" component={ViewReviewForFoodTips} options={{ title: '' }} />
+      <Stack.Screen name="UpdateFoodTip" component={UpdateFoodTip} options={{ title: '' }} />
+      <Stack.Screen name="ViewTipsOneByOne" component={FoodTipViewOneByOne} options={{ title: '' }} />
     </Stack.Navigator>
   );
 }
