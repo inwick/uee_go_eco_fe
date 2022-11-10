@@ -123,7 +123,7 @@ function ViewReviewForFoodTips({ route }) {
 
                     <View style={styles.fixToText}>
                         <TouchableOpacity style={styles.CalBtn} onPress={() => navigation.navigate("FoodSavingTips")}>
-                            <Text style={styles.CalBtnText}>Cancel</Text>
+                            <Text style={styles.CalBtnText}>CANCEL</Text>
                         </TouchableOpacity>
                     </View>
 
