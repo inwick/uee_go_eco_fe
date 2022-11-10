@@ -191,11 +191,11 @@ function FoodTipViewOneByOne({ route }) {
                                     underlineColorAndroid='transparent' />
                             </View>
                             <View style={{ flexDirection: 'row', marginRight: 10 }}>
-                                <TouchableOpacity style={styles.btn} onPress={handleModal}>
-                                    <Text style={styles.CalBtnText}> CANCEL</Text>
-                                </TouchableOpacity>
                                 <TouchableOpacity style={styles.btn} onPress={insertData}>
                                     <Text style={styles.CalBtnText}> ADD</Text>
+                                </TouchableOpacity>
+                                <TouchableOpacity style={styles.btn1} onPress={handleModal}>
+                                    <Text style={styles.CalBtnText}> CANCEL</Text>
                                 </TouchableOpacity>
                             </View>
                         </View>
@@ -221,6 +221,16 @@ const styles = StyleSheet.create({
         paddingBottom: 5,
         paddingBottom: 5,
         backgroundColor: '#ffc107',
+        borderRadius: 10,
+        marginLeft: 10,
+        height: 40,
+        flex: 2
+    },
+    btn1: {
+        // width: '35%',
+        paddingBottom: 5,
+        paddingBottom: 5,
+        backgroundColor: '#C3A037',
         borderRadius: 10,
         marginLeft: 10,
         height: 40,
