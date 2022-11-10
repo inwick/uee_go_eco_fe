@@ -180,10 +180,10 @@ function AddFoodWasteReducingTips() {
 
                 <View style={styles.fixToText}>
                     <TouchableOpacity style={styles.CalBtn} onPress={insertData}>
-                        <Text style={styles.CalBtnText}>Save</Text>
+                        <Text style={styles.CalBtnText}>SAVE</Text>
                     </TouchableOpacity>
                     <TouchableOpacity style={styles.CalBtn1} onPress={() => navigation.navigate("FoodSaverDashboard")}>
-                        <Text style={styles.CalBtnText}>Cancel</Text>
+                        <Text style={styles.CalBtnText}>CANCEL</Text>
                     </TouchableOpacity>
                 </View>
             </ScrollView>

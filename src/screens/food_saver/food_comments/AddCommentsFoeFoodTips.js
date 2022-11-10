@@ -89,10 +89,10 @@ function AddCommentForFoodTips({ route }) {
 
             <View style={styles.fixToText2}>
                 <TouchableOpacity style={styles.CalBtn} onPress={insertData}>
-                    <Text style={styles.CalBtnText}>Save</Text>
+                    <Text style={styles.CalBtnText}>SAVE</Text>
                 </TouchableOpacity>
                 <TouchableOpacity style={styles.CalBtn} onPress={() => navigation.navigate("FoodSaverDashboard")}>
-                    <Text style={styles.CalBtnText}>Cancel</Text>
+                    <Text style={styles.CalBtnText}>CANCEL</Text>
                 </TouchableOpacity>
             </View>
         </View>

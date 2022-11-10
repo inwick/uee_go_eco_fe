@@ -11,7 +11,7 @@ function FoodTipViewOneByOne({ route }) {
     const [tipId, setTipId] = useState(id);
     const [title, setTitle] = useState('');
     const [description, setDescription] = useState('');
-    const [image, setImage] = useState('');
+    const [image, setImage] = useState('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQJ_jpm2wH9uiyelCXdOx_V3l-vRMzrsQqSzKKaCpg&s');
     const [category, setCategory] = useState('');
     const [video, setVideo] = useState('');
     const [userId, setUserId] = useState('');
@@ -107,10 +107,7 @@ function FoodTipViewOneByOne({ route }) {
                     <Text style={styles.name}> {title}</Text>
                 </View>
                 <View style={{ alignItems: "center" }}>
-                    <Image
-                        style={styles.image}
-                        source={{ uri: image }}
-                    />
+                    <Image style={styles.image} source={{ uri: image }} />
                 </View>
                 <View style={styles.infoContainer}>
 
