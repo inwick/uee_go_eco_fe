@@ -28,7 +28,7 @@ function AddCommentForFoodTips({ route }) {
             comment: comment,
         }
         axios({
-            url: "http://192.168.1.100:5050/FoodSaver-comment/add",
+            url: "http://10.0.2.2:5050/FoodSaver-comment/add",
             method: "POST",
             data: data
         }).then((response) => {
@@ -89,10 +89,10 @@ function AddCommentForFoodTips({ route }) {
 
             <View style={styles.fixToText2}>
                 <TouchableOpacity style={styles.CalBtn} onPress={insertData}>
-                    <Text style={styles.CalBtnText}>Save</Text>
+                    <Text style={styles.CalBtnText}>SAVE</Text>
                 </TouchableOpacity>
                 <TouchableOpacity style={styles.CalBtn} onPress={() => navigation.navigate("FoodSaverDashboard")}>
-                    <Text style={styles.CalBtnText}>Cancel</Text>
+                    <Text style={styles.CalBtnText}>CANCEL</Text>
                 </TouchableOpacity>
             </View>
         </View>
@@ -134,7 +134,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'space-between',
         marginBottom: 100,
-        marginTop:300,
+        marginTop: 300,
         marginLeft: -10
     },
     text: {

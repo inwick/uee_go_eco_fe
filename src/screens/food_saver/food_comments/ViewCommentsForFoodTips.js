@@ -15,7 +15,7 @@ function ViewReviewForFoodTips({ route }) {
 
     const getFoodTips = async () => {
         try {
-            const response = await axios.get(`http://192.168.1.100:5050/FoodSaver-comment/tip-comment/` + tipId);
+            const response = await axios.get(`http://10.0.2.2:5050/FoodSaver-comment/tip-comment/` + tipId);
             setTips(response.data);
         } catch (error) {
             console.log(error);
@@ -24,7 +24,7 @@ function ViewReviewForFoodTips({ route }) {
 
     useEffect(() => {
         getFoodTips();
-    }, [])
+    }, [tips])
 
 
     const deleteData = (cid) => {
@@ -39,7 +39,7 @@ function ViewReviewForFoodTips({ route }) {
                 },
                 {
                     text: "OK", onPress: () => axios({
-                        url: "http://192.168.1.100:5050/FoodSaver-comment/" + cid,
+                        url: "http://10.0.2.2:5050/FoodSaver-comment/" + cid,
                         method: "DELETE"
                     }).then((res) => {
                         Alert.alert(
@@ -55,7 +55,7 @@ function ViewReviewForFoodTips({ route }) {
         );
 
         // axios({
-        //     url: "http://192.168.1.100:5050/FoodSaver-comment/" + cid,
+        //     url: "http://10.0.2.2:5050/FoodSaver-comment/" + cid,
         //     method: "DELETE"
         // }).then((res) => {
         //     Alert.alert(
@@ -70,7 +70,7 @@ function ViewReviewForFoodTips({ route }) {
     }
 
     return (
-        <SafeAreaView>
+        <SafeAreaView style={{ height: 500 }}>
 
             <View style={styles.MainContainer}>
 
@@ -122,8 +122,8 @@ function ViewReviewForFoodTips({ route }) {
                     ))}
 
                     <View style={styles.fixToText}>
-                        <TouchableOpacity style={styles.CalBtn} onPress={() => navigation.navigate("FoodSaverDashboard")}>
-                            <Text style={styles.CalBtnText}>Cancel</Text>
+                        <TouchableOpacity style={styles.CalBtn} onPress={() => navigation.navigate("FoodSavingTips")}>
+                            <Text style={styles.CalBtnText}>CANCEL</Text>
                         </TouchableOpacity>
                     </View>
 
@@ -207,7 +207,7 @@ const styles = StyleSheet.create({
         paddingBottom: 2,
         backgroundColor: '#ffc107',
         borderRadius: 10,
-        marginTop: 120,
+        marginTop: 30,
         marginLeft: 10,
         height: 45
     },

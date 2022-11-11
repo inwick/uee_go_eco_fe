@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, View, TouchableOpacity, Text, Image } from 'react-native';
+import { StyleSheet, View, TouchableOpacity, Text, ImageBackground, Image } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
 function Home() {
@@ -8,48 +8,46 @@ function Home() {
   return (
     <View style={styles.MainContainer}>
       <Text style={{
-        fontSize: 30,
-        fontWeight: 'bold',
+        fontSize: 32,
+        fontWeight: '900',
         color: 'black',
         marginTop: 30,
       }}>
         GO ECO
       </Text>
-      <Text style={{
-        fontSize: 12,
-        color: 'black'
-      }}>
-        Together We Can
-      </Text>
+      <Image source={require('../assets/common/TogetherWeCan.png')} style={styles.img} />
 
-      <View style={styles.fixToText}>
 
-        <TouchableOpacity
-          style={styles.HomeBtnElec}
-          onPress={() => navigation.navigate('ElectricitySaverDashBoard')}>
-          <Text style={styles.ElecBtnText}>Electricity Saver</Text>
-        </TouchableOpacity>
+      <ImageBackground source={require('../assets/common/homeBg.png')} resizeMode="cover" style={styles.bgImage} blurRadius={1}>
 
-        <TouchableOpacity style={styles.HomeBtnWater} onPress={() => navigation.navigate("WaterSaverDashBoard")}>
-          <Text style={styles.WaterBtnText}>Water Saver</Text>
-        </TouchableOpacity>
+        <View style={styles.fixToText}>
 
-      </View>
+          <TouchableOpacity
+            style={styles.HomeBtnElec}
+            onPress={() => navigation.navigate('Electricity')}>
+            <Text style={styles.ElecBtnText}>Electricity Saver</Text>
+          </TouchableOpacity>
 
-      <View style={styles.fixToText}>
+          <TouchableOpacity style={styles.HomeBtnWater} onPress={() => navigation.navigate('Water')}>
+            <Text style={styles.WaterBtnText}>Water Saver</Text>
+          </TouchableOpacity>
 
-        <TouchableOpacity
-          style={styles.HomeBtnFuel}
-          onPress={() => navigation.navigate('FuelSaverDashBoard')}>
-          <Text style={styles.FuelBtnText}>Fuel Saver</Text>
-        </TouchableOpacity>
+        </View>
 
-        <TouchableOpacity style={styles.HomeBtnFood} onPress={() => navigation.navigate("FoodSaverDashboard")}>
-          <Text style={styles.FoodBtnText}>Food Saver</Text>
-        </TouchableOpacity>
+        <View style={styles.fixToText}>
 
-      </View>
+          <TouchableOpacity
+            style={styles.HomeBtnFuel}
+            onPress={() => navigation.navigate('Fuel')}>
+            <Text style={styles.FuelBtnText}>Fuel Saver</Text>
+          </TouchableOpacity>
 
+          <TouchableOpacity style={styles.HomeBtnFood} onPress={() => navigation.navigate('Food')}>
+            <Text style={styles.FoodBtnText}>Food Saver</Text>
+          </TouchableOpacity>
+
+        </View>
+      </ImageBackground>
     </View>
   );
 }
@@ -61,15 +59,20 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     marginTop: 20,
   },
-
+  bgImage: {
+    width: '100%',
+    height: 400,
+    marginTop: 120,
+  },
   HomeBtnElec: {
     width: '35%',
     paddingTop: 2,
     paddingBottom: 2,
     backgroundColor: '#FA8072',
     borderRadius: 10,
-    marginTop: 170,
-    height: 100
+    marginTop: 70,
+    height: 100,
+    marginLeft: 45,
   },
   ElecBtnText: {
     color: '#000',
@@ -85,8 +88,8 @@ const styles = StyleSheet.create({
     paddingBottom: 2,
     backgroundColor: '#52B1E2',
     borderRadius: 10,
-    marginTop: 170,
-    marginLeft: 20,
+    marginTop: 70,
+    marginLeft: 30,
     height: 100
   },
   WaterBtnText: {
@@ -99,7 +102,7 @@ const styles = StyleSheet.create({
   },
   fixToText: {
     flexDirection: 'row',
-    justifyContent: 'space-between',
+    // justifyContent: 'space-between',
   },
   HomeBtnFuel: {
     width: '35%',
@@ -108,6 +111,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#26B787',
     borderRadius: 10,
     marginTop: 20,
+    marginLeft: 45,
     height: 100
   },
   FuelBtnText: {
@@ -125,7 +129,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#FFC107',
     borderRadius: 10,
     marginTop: 20,
-    marginLeft: 20,
+    marginLeft: 30,
     height: 100
   },
   FoodBtnText: {
@@ -135,12 +139,5 @@ const styles = StyleSheet.create({
     padding: 10,
     fontWeight: "500",
     paddingTop: 33,
-  },
-
-  img: {
-    width: 150,
-    height: 150,
-    marginBottom: 5,
-    marginTop: 10,
   },
 });

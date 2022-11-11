@@ -52,7 +52,7 @@ function AddFoodWasteReducingTips() {
             userId: userId
         }
         axios({
-            url: "http://192.168.1.100:5050/FoodSaver/add",
+            url: "http://10.0.2.2:5050/FoodSaver/add",
             method: "POST",
             data: data
         }).then((response) => {
@@ -180,10 +180,10 @@ function AddFoodWasteReducingTips() {
 
                 <View style={styles.fixToText}>
                     <TouchableOpacity style={styles.CalBtn} onPress={insertData}>
-                        <Text style={styles.CalBtnText}>Save</Text>
+                        <Text style={styles.CalBtnText}>SAVE</Text>
                     </TouchableOpacity>
                     <TouchableOpacity style={styles.CalBtn1} onPress={() => navigation.navigate("FoodSaverDashboard")}>
-                        <Text style={styles.CalBtnText}>Cancel</Text>
+                        <Text style={styles.CalBtnText}>CANCEL</Text>
                     </TouchableOpacity>
                 </View>
             </ScrollView>
@@ -374,7 +374,7 @@ const styles = StyleSheet.create({
         height: 200,
         marginBottom: -20,
         marginTop: -30,
-        marginLeft:76
+        marginLeft: 76
     },
     // drop dow styles
     dropdown: {

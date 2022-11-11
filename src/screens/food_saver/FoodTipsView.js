@@ -4,6 +4,7 @@ import axios from 'react-native-axios';
 import { useNavigation } from '@react-navigation/native';
 import { ScrollView, TextInput } from 'react-native-gesture-handler';
 import { Dropdown } from 'react-native-element-dropdown';
+import { useIsFocused } from "@react-navigation/core"
 
 function FoodSavingTipsView() {
 
@@ -26,6 +27,7 @@ function FoodSavingTipsView() {
     const [category, setCategory] = useState('');
     const [userId, setUserId] = useState('');
     const [userNo, setUserNo] = useState('003');
+    const isFocused = useIsFocused();
 
     const onChangeTextTitle = (value) => {
         setTitle(value)
@@ -45,7 +47,7 @@ function FoodSavingTipsView() {
 
     const getFoodTips = async () => {
         try {
-            const response = await axios.get(`http://192.168.1.100:5050/FoodSaver/`);
+            const response = await axios.get(`http://10.0.2.2:5050/FoodSaver/`);
             setTips(response.data);
         } catch (error) {
             console.log(error);
@@ -53,8 +55,11 @@ function FoodSavingTipsView() {
     };
 
     useEffect(() => {
-        getFoodTips();
-    }, [])
+        if (isFocused) {
+
+            getFoodTips();
+        }
+    }, [isFocused])
 
     const handleVisibleModel = () => {
         setVisible(!visible)
@@ -99,7 +104,7 @@ function FoodSavingTipsView() {
             video: video
         }
         axios({
-            url: "http://192.168.1.100:5050/FoodSaver/updateFoodTip/" + id,
+            url: "http://10.0.2.2:5050/FoodSaver/updateFoodTip/" + id,
             method: "POST",
             data: data
         }).then((res) => {
@@ -131,7 +136,7 @@ function FoodSavingTipsView() {
                 },
                 {
                     text: "OK", onPress: () => axios({
-                        url: "http://192.168.1.100:5050/FoodSaver/" + id,
+                        url: "http://10.0.2.2:5050/FoodSaver/" + id,
                         method: "DELETE"
                     }).then((res) => {
                         // setList(response.data)
@@ -155,7 +160,7 @@ function FoodSavingTipsView() {
         <SafeAreaView>
 
             {/* update delete form */}
-            <Modal
+            {/* <Modal
                 animationType="slide"
                 visible={visible}
             >
@@ -268,12 +273,10 @@ function FoodSavingTipsView() {
                         </View>
                     </ScrollView>
                 </SafeAreaView>
-            </Modal>
-
-
+            </Modal> */}
 
             {/* view details one by one */}
-            <Modal
+            {/* <Modal
                 animationType="slide"
                 visible={visibleView}
             >
@@ -286,70 +289,79 @@ function FoodSavingTipsView() {
                     <SafeAreaView>
                         <View>
                             <TouchableOpacity
+
                                 onPress={handleVisibleModelViewMode}
-                            >
-                                <Text>Close</Text>
+                                style={{ alignSelf: "flex-end", marginTop: 20, width: 30, height: 35 }}>
+
+                                <Image source={require('../../assets/fuel_saver/cross.png')} style={{ width: 25, height: 25 }} />
+
                             </TouchableOpacity>
-                            <Text value={title} style={styles.title}> {title}</Text>
-                            <Image style={styles.tinyLogo} source={{ uri: image }} />
 
-                            <Text style={styles.StstText}>{description}</Text>
-                            <Text style={styles.StstText}>Video Link: {video}</Text>
+                            <View style={{ marginTop: -20 }}>
 
-                            {userId === userNo ?
-                                <View style={styles.fixToText1}>
-                                    <TouchableOpacity style={styles.CalBtn} onPress={() => navigation.navigate("ViewReviewsInFoodSavingTips", { id: id })}>
-                                        <Text style={styles.CalBtnText}>View Review</Text>
-                                    </TouchableOpacity>
-                                </View> :
-                                <View style={styles.fixToText4}>
-                                    <TouchableOpacity style={styles.CalBtn} onPress={() => navigation.navigate("AddCommentForFoodSavingTips", { id: id })}>
-                                        <Text style={styles.CalBtnText}>Add Review</Text>
-                                    </TouchableOpacity>
-                                    <TouchableOpacity style={styles.CalBtn} onPress={() => navigation.navigate("ViewReviewsInFoodSavingTips", { id: id })}>
-                                        <Text style={styles.CalBtnText}>View Review</Text>
-                                    </TouchableOpacity>
-                                </View>
-                            }
+                                <Text value={title} style={styles.title}> {title}</Text>
+                                <Image style={styles.tinyLogo} source={{ uri: image }} />
 
-                            {userId === userNo ?
-                                <View>
+                                <Text style={styles.StstText}>{description}</Text>
+                                <Text style={styles.StstText}>Video Link: {video}</Text>
 
-                                    <View style={{
-                                        width: 350,
-                                        height: 30,
-                                        alignItems: 'center',
-                                        borderBottomColor: '#ffc107',
-                                        borderBottomWidth: StyleSheet.hairlineWidth,
-                                        marginTop: -10,
-                                        marginBottom: 70
-                                    }}>
-                                    </View>
-                                    <View style={styles.fixToText2}>
-                                        <TouchableOpacity onPress={viewUpdateDataBtn}>
-                                            <Image source={require('../../assets/food_waste_saver/edit1.jpeg')} style={{ marginTop: 100, marginLeft: 100, height: 34, width: 37 }} />
+                                {userId === userNo ?
+                                    <View style={styles.fixToText1}>
+                                        <TouchableOpacity style={styles.CalBtn} onPress={() => navigation.navigate("ViewReviewsInFoodSavingTips", { id: id })}>
+                                            <Text style={styles.CalBtnText}>View Review</Text>
                                         </TouchableOpacity>
-
-                                        <TouchableOpacity onPress={deleteData}>
-                                            <Image source={require('../../assets/food_waste_saver/delete1.png')} style={{ marginTop: 100, marginLeft: 10 }} />
+                                    </View> :
+                                    <View style={styles.fixToText4}>
+                                        <TouchableOpacity style={styles.CalBtn} onPress={() => navigation.navigate("AddCommentForFoodSavingTips", { id: id })}>
+                                            <Text style={styles.CalBtnText}>Add Review</Text>
+                                        </TouchableOpacity>
+                                        <TouchableOpacity style={styles.CalBtn} onPress={() => navigation.navigate("ViewReviewsInFoodSavingTips", { id: id })}>
+                                            <Text style={styles.CalBtnText}>View Review</Text>
                                         </TouchableOpacity>
                                     </View>
-                                    <Text style={styles.StstText2}>If you want to modify this?</Text>
-                                </View>
-                                : null}
+                                }
+
+                                {userId === userNo ?
+                                    <View>
+
+                                        <View style={{
+                                            width: 350,
+                                            height: 30,
+                                            alignItems: 'center',
+                                            borderBottomColor: '#ffc107',
+                                            borderBottomWidth: StyleSheet.hairlineWidth,
+                                            marginTop: -10,
+                                            marginBottom: 70
+                                        }}>
+
+                                        </View>
+
+                                        <View style={styles.fixToText2}>
+                                            <View style={{ flex: 3, justifyContent: "center" }}>
+                                                <Text >If you want to modify this?</Text>
+                                            </View>
+                                            <View style={{ flex: 1 }}>
+                                                <TouchableOpacity onPress={viewUpdateDataBtn} >
+                                                    <Image source={require('../../assets/food_waste_saver/edit1.jpeg')} style={{ width: 40, height: 40 }} />
+                                                </TouchableOpacity>
+                                            </View>
+                                            <View style={{ flex: 1, marginLeft: -10 }}>
+                                                <TouchableOpacity onPress={deleteData} >
+                                                    <Image source={require('../../assets/food_waste_saver/delete1.png')} style={{ width: 40, height: 40 }} />
+                                                </TouchableOpacity>
+                                            </View>
+                                        </View>
+
+
+                                    </View>
+                                    : null}
+                            </View>
 
                         </View>
-                        {/* <View style={styles.fixToText1}>
-                            <TouchableOpacity style={styles.CalBtn} onPress={viewUpdateDataBtn}>
-                                <Text style={styles.CalBtnText}>Update</Text>
-                            </TouchableOpacity>
-                            <TouchableOpacity style={styles.CalBtn} onPress={deleteData}>
-                                <Text style={styles.CalBtnText}>Delete</Text>
-                            </TouchableOpacity>
-                        </View> */}
+
                     </SafeAreaView>
                 </ScrollView>
-            </Modal>
+            </Modal> */}
 
 
 
@@ -380,7 +392,7 @@ function FoodSavingTipsView() {
                         <View key={tip._id}>
 
                             {/* <TouchableOpacity style={styles.cardButton} onPress={() => navigation.navigate("FoodSavingTipsGetOneByOne", { id: tip._id })}> */}
-                            <TouchableOpacity style={styles.cardButton} onPress={() => handleEdit(tip)}>
+                            <TouchableOpacity style={styles.cardButton} onPress={() => navigation.navigate("ViewTipsOneByOne", { id: tip._id })}>
 
                                 <Text style={{ fontSize: 16, fontWeight: "700", color: "#ffc107", alignSelf: "flex-start" }}>
                                     {tip.title}
@@ -436,11 +448,10 @@ const styles = StyleSheet.create({
         marginLeft: 60
     },
     fixToText2: {
-        marginTop: -140,
+        marginTop: -40,
         flexDirection: 'row',
-        alignItems: 'center',
-        marginBottom: 50,
-        marginLeft: 100
+        marginLeft: 25,
+        marginHorizontal: 10
     },
     tinyLogo: {
         width: '100%',

@@ -10,7 +10,7 @@ function FoodSaverDashboard() {
 
     const getWalletItems = async () => {
         try {
-            const response = await axios.get(`http://192.168.1.100:5050/wallet`);
+            const response = await axios.get(`http://10.0.2.2:5050/wallet`);
             setWallets(response.data);
         } catch (error) {
             console.log(error);

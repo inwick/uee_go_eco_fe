@@ -16,8 +16,10 @@ import UpdateFuelComent from './src/screens/fuel_saver/updateComment';
 import FoodSaverDashboard from './src/screens/food_saver/FoodSaverDashboard';
 import AddFoodWasteReducingTips from './src/screens/food_saver/AddFoodWasteReducingTips';
 import FoodSavingTipsView from './src/screens/food_saver/FoodTipsView';
-import AddCommentForFoodTips from './src/screens/food_saver/food_comments/AddCommentsFoeFoodTips';
+// import AddCommentForFoodTips from './src/screens/food_saver/food_comments/AddCommentsFoeFoodTips';
 import ViewReviewForFoodTips from './src/screens/food_saver/food_comments/ViewCommentsForFoodTips';
+import UpdateFoodTip from './src/screens/food_saver/UpdateFoodTip';
+import FoodTipViewOneByOne from './src/screens/food_saver/FoodTipViewOneByOne';
 
 import WaterSaverDashBoard from './src/screens/water_saver/WaterSaverDashboard';
 import WaterSavingTips from './src/screens/water_saver/WaterSavingTips';
@@ -76,6 +78,8 @@ const Electricity = () => {
         component={ElectricitySaverReport}
         options={{ title: '' }}
       />
+      <Stack.Screen name="UpdateBillInformation" component={UpdateBillInformation} options={{ title: '' }} />
+
     </Stack.Navigator>
   );
 }
@@ -84,12 +88,11 @@ const Electricity = () => {
 const Water = () => {
   return (
     <Stack.Navigator >
-      <Stack.Screen name="WaterSaverDashBoard" component={WaterSaverDashBoard} options={{ title: 'Water Saver DashBoard' }} />
-      <Stack.Screen name="WaterSavingTips" component={WaterSavingTips} options={{ title: 'Water Saving Tips' }} />
-      <Stack.Screen name="WaterTipView" component={WaterTipView} options={{ title: 'Water Tip View' }} />
-      <Stack.Screen name="AddNewTip" component={AddNewTip} options={{ title: 'Add New Idea' }} />
-      <Stack.Screen name="WaterSaverCategories" component={WaterSaverCategories} options={{ title: 'Water Saver Categories' }} />
-      <Stack.Screen name="UpdateBillInformation" component={UpdateBillInformation} options={{ title: '' }} />
+      <Stack.Screen name="WaterSaverDashBoard" component={WaterSaverDashBoard} options={{ title: '' }} />
+      <Stack.Screen name="WaterSavingTips" component={WaterSavingTips} options={{ title: '' }} />
+      <Stack.Screen name="WaterTipView" component={WaterTipView} options={{ title: '' }} />
+      <Stack.Screen name="AddNewTip" component={AddNewTip} options={{ title: '' }} />
+      <Stack.Screen name="WaterSaverCategories" component={WaterSaverCategories} options={{ title: '' }} />
       <Stack.Screen name="WaterSaverComments" component={WaterComments} />
     </Stack.Navigator>
 
@@ -100,12 +103,12 @@ const Water = () => {
 const Fuel = () => {
   return (
     <Stack.Navigator >
-      <Stack.Screen name="FuelSaverDashBoard" component={FuelSaverDashBoard} options={{ title: 'Fuel Saver Dashboard' }} />
-      <Stack.Screen name="FuelSavingTips" component={FuelSavingTips} options={{ title: 'Fuel Saving Tips' }} />
-      <Stack.Screen name="FuelCostCalculator" component={FuelCostCalculator} options={{ title: 'Fuel Cost Calculator' }} />
-      <Stack.Screen name="FuelEfficiencyCalculator" component={FuelEfficiencyCalculator} options={{ title: 'Fuel Efficiency Calculator' }} />
-      <Stack.Screen name="FuelTipView" component={FuelTipView} options={{ title: 'Tip View' }} />
-      <Stack.Screen name="UpdateFuelComent" component={UpdateFuelComent} options={{ title: 'Update Comment' }} />
+      <Stack.Screen name="FuelSaverDashBoard" component={FuelSaverDashBoard} options={{ title: '' }} />
+      <Stack.Screen name="FuelSavingTips" component={FuelSavingTips} options={{ title: '' }} />
+      <Stack.Screen name="FuelCostCalculator" component={FuelCostCalculator} options={{ title: '' }} />
+      <Stack.Screen name="FuelEfficiencyCalculator" component={FuelEfficiencyCalculator} options={{ title: '' }} />
+      <Stack.Screen name="FuelTipView" component={FuelTipView} options={{ title: '' }} />
+      <Stack.Screen name="UpdateFuelComent" component={UpdateFuelComent} options={{ title: '' }} />
     </Stack.Navigator>
   );
 }
@@ -114,20 +117,13 @@ const Fuel = () => {
 const Food = () => {
   return (
     <Stack.Navigator >
-      <Stack.Screen name="FoodSaverDashboard" component={FoodSaverDashboard} options={{ title: 'Food  Waste Reduce DashBoard' }} />
-      <Stack.Screen name="AddFoodSavingTips" component={AddFoodWasteReducingTips} options={{ title: 'Add Food Waste Tips' }} />
-      <Stack.Screen name="FoodSavingTips" component={FoodSavingTipsView} options={{ title: 'Food Waste Reducing Tips' }} />
-      {/* <Stack.Screen name="FoodSavingTipsGetOneByOne" component={FoodWasteTipsViewOneByOne} options={{ title: 'Food Waste Reducing Tips Get One By One' }} /> */}
-      <Stack.Screen
-        name="AddCommentForFoodSavingTips"
-        component={AddCommentForFoodTips}
-        options={{ title: 'Add Review' }}
-      />
-      <Stack.Screen
-        name="ViewReviewsInFoodSavingTips"
-        component={ViewReviewForFoodTips}
-        options={{ title: 'Reviews' }}
-      />
+      <Stack.Screen name="FoodSaverDashboard" component={FoodSaverDashboard} options={{ title: '' }} />
+      <Stack.Screen name="AddFoodSavingTips" component={AddFoodWasteReducingTips} options={{ title: '' }} />
+      <Stack.Screen name="FoodSavingTips" component={FoodSavingTipsView} options={{ title: '' }} />
+      {/* <Stack.Screen name="AddCommentForFoodSavingTips" component={AddCommentForFoodTips} options={{ title: '' }} /> */}
+      <Stack.Screen name="ViewReviewsInFoodSavingTips" component={ViewReviewForFoodTips} options={{ title: '' }} />
+      <Stack.Screen name="UpdateFoodTip" component={UpdateFoodTip} options={{ title: '' }} />
+      <Stack.Screen name="ViewTipsOneByOne" component={FoodTipViewOneByOne} options={{ title: '' }} />
     </Stack.Navigator>
   );
 }
@@ -136,7 +132,7 @@ const Food = () => {
 const MainHome = () => {
   return (
     <Stack.Navigator initialRouteName="Home">
-      <Stack.Screen name="Home" component={Home} options={{ title: 'Go Eco' }} />
+      <Stack.Screen name="Home" component={Home} options={{ title: '' }} />
     </Stack.Navigator>
   );
 }
@@ -240,7 +236,7 @@ const App = () => {
 
           <Bottom.Screen
 
-            name="food"
+            name="Food"
             component={Food}
             options={{
               tabBarShowLabel: false,
