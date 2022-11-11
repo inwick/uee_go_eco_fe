@@ -4,6 +4,7 @@ import axios from 'react-native-axios';
 import { useNavigation } from '@react-navigation/native';
 import { ScrollView, TextInput } from 'react-native-gesture-handler';
 import { Dropdown } from 'react-native-element-dropdown';
+import { useIsFocused } from "@react-navigation/core"
 
 function FoodSavingTipsView() {
 
@@ -26,6 +27,7 @@ function FoodSavingTipsView() {
     const [category, setCategory] = useState('');
     const [userId, setUserId] = useState('');
     const [userNo, setUserNo] = useState('003');
+    const isFocused = useIsFocused();
 
     const onChangeTextTitle = (value) => {
         setTitle(value)
@@ -53,8 +55,11 @@ function FoodSavingTipsView() {
     };
 
     useEffect(() => {
-        getFoodTips();
-    }, [])
+        if (isFocused) {
+
+            getFoodTips();
+        }
+    }, [isFocused])
 
     const handleVisibleModel = () => {
         setVisible(!visible)
