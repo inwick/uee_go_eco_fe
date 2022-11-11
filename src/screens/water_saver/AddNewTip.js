@@ -123,7 +123,6 @@ function AddNewTip() {
                         itemTextStyle={styles.itemTextStyle}
                         selectedTextStyle={styles.itemTextStyle}
                         data={dataa}
-                        search
                         maxHeight={300}
                         labelField="label"
                         valueField="value"
