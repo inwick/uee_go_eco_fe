@@ -51,10 +51,14 @@ function WaterTipView({ route }) {
                 "Done",
                 "Successfully Inserted!",
                 [
-                    { text: "OK", onPress: () => navigation.navigate("WaterSavingTips") }
+                    { text: "OK", onPress: () => nav(id) }
                 ]
             );
         })
+    }
+
+    nav = (idd) => {
+        navigation.navigate("WaterSaverComments", { id: idd })
     }
 
     return (
@@ -97,11 +101,11 @@ function WaterTipView({ route }) {
                                     underlineColorAndroid='transparent' />
                             </View>
                             <View style={{ flexDirection: 'row', marginRight: 10 }}>
-                                <TouchableOpacity style={styles.btn} onPress={handleModal}>
-                                    <Text style={styles.CalBtnText}> CANCEL</Text>
-                                </TouchableOpacity>
                                 <TouchableOpacity style={styles.btn} onPress={insertData}>
                                     <Text style={styles.CalBtnText}> ADD</Text>
+                                </TouchableOpacity>
+                                <TouchableOpacity style={styles.btn} onPress={handleModal}>
+                                    <Text style={styles.CalBtnText}> CANCEL</Text>
                                 </TouchableOpacity>
                             </View>
                         </View>

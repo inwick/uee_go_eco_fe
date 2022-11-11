@@ -38,11 +38,11 @@ function WaterSaverCategories() {
                 <Text style={styles.text}>DOMESTIC IDEAS</Text>
             </TouchableOpacity>
 
-            <TouchableOpacity style={styles.button} onPress={() => navigation.navigate("WaterSaverCategories")}>
+            <TouchableOpacity style={styles.button} onPress={() => navigation.navigate("WaterSavingTips")}>
                 <Text style={styles.text}> MEDUIM SCALE IDEAS</Text>
             </TouchableOpacity>
 
-            <TouchableOpacity style={styles.button} onPress={() => navigation.navigate("AddNewTip")}>
+            <TouchableOpacity style={styles.button} onPress={() => navigation.navigate("WaterSavingTips")}>
                 <Text style={styles.text}> INDUSTRIAL IDEAS</Text>
             </TouchableOpacity>
 
