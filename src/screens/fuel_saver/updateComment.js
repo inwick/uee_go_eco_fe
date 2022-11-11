@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { StyleSheet, View, TouchableOpacity, Text, Image, TextInput, Alert, } from "react-native";
+import { StyleSheet, View, TouchableOpacity, Text, Image, TextInput, Alert, ScrollView } from "react-native";
 import axios from 'react-native-axios';
 import { useNavigation } from '@react-navigation/native';
 
@@ -88,6 +88,38 @@ function UpdateFuelComent({ route }) {
                 underlineColorAndroid='transparent'
                 style={styles.SmallTextInputStyleClass3}
             />
+
+            <ScrollView style={{ height: 180, opacity: 0.3 }}>
+
+                {comment.length === 0 ?
+                    <Text style={{ width: "100%", marginTop: 15 }}>
+                        Currently don't have any comments.
+                    </Text>
+                    :
+                    comment.map(cmt => (
+                        <View key={cmt._id} style={styles.cardButton}>
+
+                            <Text style={{ width: "80%" }}>
+                                {cmt.comments}
+                            </Text>
+
+                            {cmt.userId === UId ?
+                                <View style={styles.fixToText}>
+
+                                    <TouchableOpacity >
+                                        <Image source={require('../../assets/fuel_saver/pensil.png')} style={{ marginTop: -17, marginLeft: 250 }} />
+                                    </TouchableOpacity>
+
+                                    <TouchableOpacity >
+                                        <Image source={require('../../assets/fuel_saver/cross.png')} style={{ marginTop: -17, marginLeft: 7 }} />
+                                    </TouchableOpacity>
+                                </View>
+                                : null}
+                        </View>
+                    ))
+                }
+
+            </ScrollView>
 
         </View>
 
