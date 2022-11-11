@@ -42,31 +42,49 @@ function AddFoodWasteReducingTips() {
 
 
     const insertData = () => {
-
-        var data = {
-            title: title,
-            category: category,
-            description: description,
-            image: image,
-            video: video,
-            userId: userId
+        if (title == "") {
+            alert("Please Enter Title")
+            return false;
+        } else if (category == null) {
+            alert("Please Select the Category")
+            return false;
+        }else if (description == "") {
+            alert("Please Enter Description")
+            return false;
+        } else if (video == "") {
+            alert("Please Enter Video URL")
+            return false;
+        }else if (image == "") {
+            alert("Please enter Image URL")
+            return false;
         }
-        axios({
-            url: "http://10.0.2.2:5050/FoodSaver/add",
-            method: "POST",
-            data: data
-        }).then((response) => {
-            // setList(response.data)
-            Alert.alert(
-                "Done",
-                "Successfully Inserted!",
-                [
-                    { text: "OK", onPress: () => navigation.navigate("FoodSavingTips") }
-                ]
-            );
-        })
 
+        else {
 
+            var data = {
+                title: title,
+                category: category,
+                description: description,
+                image: image,
+                video: video,
+                userId: userId
+            }
+            axios({
+                url: "http://10.0.2.2:5050/FoodSaver/add",
+                method: "POST",
+                data: data
+            }).then((response) => {
+                // setList(response.data)
+                Alert.alert(
+                    "Done",
+                    "Successfully Inserted!",
+                    [
+                        { text: "OK", onPress: () => navigation.navigate("FoodSavingTips") }
+                    ]
+                );
+            })
+
+        }
 
     }
 
