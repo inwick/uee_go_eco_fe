@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, View, TouchableOpacity, Text, ImageBackground } from 'react-native';
+import { StyleSheet, View, TouchableOpacity, Text, ImageBackground, Image } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
 function Home() {
@@ -8,20 +8,15 @@ function Home() {
   return (
     <View style={styles.MainContainer}>
       <Text style={{
-        fontSize: 30,
+        fontSize: 32,
         fontWeight: '900',
         color: 'black',
         marginTop: 30,
       }}>
         GO ECO
       </Text>
-      <Text style={{
-        fontSize: 12,
-        color: 'black',
-        fontFamily: 'monospace'
-      }}>
-        Together We Can
-      </Text>
+      <Image source={require('../assets/common/TogetherWeCan.png')} style={styles.img} />
+
 
       <ImageBackground source={require('../assets/common/homeBg.png')} resizeMode="cover" style={styles.bgImage} blurRadius={1}>
 
