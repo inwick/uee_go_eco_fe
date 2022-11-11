@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { StyleSheet, View, TouchableOpacity, Text, Image, TextInput, Alert, ScrollView } from "react-native";
 import axios from 'react-native-axios';
 import { useNavigation } from '@react-navigation/native';
+import { useIsFocused } from "@react-navigation/core"
 
 function FuelTipView({ route }) {
 
@@ -11,6 +12,7 @@ function FuelTipView({ route }) {
     const navigation = useNavigation();
     const { id } = route.params;
     const UId = "1234";
+    const isFocused = useIsFocused();
 
     const getFuelTip = async () => {
         try {
@@ -36,9 +38,12 @@ function FuelTipView({ route }) {
     }
 
     useEffect(() => {
-        getFuelTip();
-        getComments();
-    }, [])
+        if (isFocused) {
+            getFuelTip();
+            getComments();
+        }
+
+    }, [isFocused])
 
     const onDeleteCmnt = async (did) => {
         await axios({
