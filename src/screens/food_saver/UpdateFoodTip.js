@@ -62,32 +62,49 @@ function UpdateFoodTip({ route }) {
 
     const updateData = () => {
 
-        var data = {
-            title: title,
-            category: category,
-            description: description,
-            image: image,
-            video: video
+        if (title == "") {
+            alert("Please Enter Title")
+            return false;
+        } else if (category == null) {
+            alert("Please Select the Category")
+            return false;
+        } else if (description == "") {
+            alert("Please Enter Description")
+            return false;
+        } else if (video == "") {
+            alert("Please Enter Video URL")
+            return false;
+        } else if (image == "") {
+            alert("Please enter Image URL")
+            return false;
         }
-        axios({
-            url: "http://10.0.2.2:5050/FoodSaver/updateFoodTip/" + tipId,
-            method: "POST",
-            data: data
-        }).then((res) => {
-            // setList(response.data)
-            // setVisible(false)
+        else {
+            var data = {
+                title: title,
+                category: category,
+                description: description,
+                image: image,
+                video: video
+            }
+            axios({
+                url: "http://10.0.2.2:5050/FoodSaver/updateFoodTip/" + tipId,
+                method: "POST",
+                data: data
+            }).then((res) => {
+                // setList(response.data)
+                // setVisible(false)
 
-            Alert.alert(
-                "Done",
-                "Successfully Updated!",
-                [
-                    { text: "OK", onPress: () => navigation.navigate("FoodSavingTips") }
-                ]
-            );
+                Alert.alert(
+                    "Done",
+                    "Successfully Updated!",
+                    [
+                        { text: "OK", onPress: () => navigation.navigate("FoodSavingTips") }
+                    ]
+                );
 
-        })
+            })
 
-
+        }
     }
 
 
@@ -443,7 +460,7 @@ const styles = {
         paddingHorizontal: 8,
         marginLeft: 38,
     },
-   
+
     itemTextStyle: {
         paddingLeft: 10
     },
@@ -501,7 +518,7 @@ const styles = {
         alignItems: 'center',
         marginHorizontal: 20,
         marginTop: 30,
-        marginLeft:20
+        marginLeft: 20
     },
     row: {
         flexDirection: "row"
