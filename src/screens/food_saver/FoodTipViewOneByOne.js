@@ -61,11 +61,15 @@ function FoodTipViewOneByOne({ route }) {
                 "Done",
                 "Successfully Inserted!",
                 [
-                    { text: "OK", onPress: () => navigation.navigate("FoodSavingTips") }
+                    { text: "OK", onPress: () => nav(tipId) }
                 ]
             );
         })
 
+    }
+
+    nav = (idd) => {
+        navigation.navigate("ViewReviewsInFoodSavingTips", { id: idd })
     }
 
     const deleteData = () => {

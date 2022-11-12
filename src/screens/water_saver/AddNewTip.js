@@ -30,26 +30,42 @@ function AddNewTip() {
 
     const insertData = () => {
 
-        var data = {
-            userId: '1234',
-            image: image,
-            tipTitle: title,
-            tipDescription: description,
-            tipCategory: category
+        if (title == "") {
+            alert("Please Enter Title")
+            return false;
+        } else if (description == "") {
+            alert("Please Enter Description")
+            return false;
+        } else if (category == "") {
+            alert("Please Select the Category")
+            return false;
+        } else if (image == "") {
+            alert("Please Enter Image URL")
+            return false;
+        } else {
+
+            var data = {
+                userId: '1234',
+                image: image,
+                tipTitle: title,
+                tipDescription: description,
+                tipCategory: category
+            }
+            axios({
+                url: "http://10.0.2.2:5050/Watertips/add",
+                method: "POST",
+                data: data
+            }).then((response) => {
+                Alert.alert(
+                    "Done",
+                    "Successfully Inserted!",
+                    [
+                        { text: "OK", onPress: () => navigation.navigate("WaterSavingTips") }
+                    ]
+                );
+            })
         }
-        axios({
-            url: "http://10.0.2.2:5050/Watertips/add",
-            method: "POST",
-            data: data
-        }).then((response) => {
-            Alert.alert(
-                "Done",
-                "Successfully Inserted!",
-                [
-                    { text: "OK", onPress: () => navigation.navigate("WaterSavingTips") }
-                ]
-            );
-        })
+
 
 
     }
@@ -93,7 +109,6 @@ function AddNewTip() {
                         defaultValue={description}
                         underlineColorAndroid='transparent'
                         style={styles.SmallTextInputStyleClass}
-                        keyboardType="numeric"
                     />
                 </View>
             </View>
@@ -108,7 +123,6 @@ function AddNewTip() {
                         itemTextStyle={styles.itemTextStyle}
                         selectedTextStyle={styles.itemTextStyle}
                         data={dataa}
-                        search
                         maxHeight={300}
                         labelField="label"
                         valueField="value"
@@ -131,7 +145,6 @@ function AddNewTip() {
                         defaultValue={image}
                         underlineColorAndroid='transparent'
                         style={styles.SmallTextInputStyleClass}
-                        keyboardType="numeric"
                     />
                 </View>
             </View>
@@ -196,7 +209,7 @@ const styles = {
     },
     "2col": {
         borderColor: "#fff",
-        borderWidth: 1,
+        // borderWidth: 1,
         flex: 2
     },
     SmallTextInputStyleClass: {
