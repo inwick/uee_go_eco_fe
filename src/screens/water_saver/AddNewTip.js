@@ -1,6 +1,6 @@
 import axios from 'react-native-axios';
 import React, { Component, useState } from 'react';
-import { Button, View, StyleSheet, Text, TextInput, TouchableOpacity, Alert } from 'react-native';
+import { Button, View, StyleSheet, Text, TextInput, TouchableOpacity, Alert, Image } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { Dropdown } from 'react-native-element-dropdown';
 
@@ -85,6 +85,7 @@ function AddNewTip() {
             }}>
                 Add New Tip
             </Text>
+            <Image source={require('../../assets/water_saver/addIcon.png')} style={styles.img} />
             <View style={styles.row}>
                 <View style={styles[`2col`]}>
                     <Text style={styles.texts}> Title :</Text>
@@ -230,6 +231,11 @@ const styles = {
         paddingLeft: 30,
         color: "Black",
         fontWeight: "600",
+    },
+    img: {
+        width: 130,
+        height: 130,
+        marginBottom: 30,
     }
 };
 
