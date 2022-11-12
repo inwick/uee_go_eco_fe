@@ -93,34 +93,38 @@ function ViewReviewForFoodTips({ route }) {
                         marginLeft: 20,
                         marginRight: 20,
                     }}>
+                    {tips.length === 0 ?
+                        <Text style={{ width: "100%", marginTop: 25, marginLeft: 20, fontSize: 16 }}>
+                            This Tips has no comments.
+                        </Text>
+                        :
+                        tips.map(tip => (
+                            <View key={tip._id}>
 
-                    {tips.map(tip => (
-                        <View key={tip._id}>
+                                <TouchableOpacity style={styles.cardButton}>
 
-                            <TouchableOpacity style={styles.cardButton}>
+                                    <Text style={{ fontSize: 14, alignSelf: "flex-start", textAlign: 'center', height: 30, }}>
+                                        {tip.comment.slice(0, 120)} ...
+                                    </Text>
 
-                                <Text style={{ fontSize: 14, alignSelf: "flex-start", textAlign: 'center', height: 30, }}>
-                                    {tip.comment.slice(0, 120)} ...
-                                </Text>
-
-                                {tip.userId === userNo ?
-                                    <View style={styles.fixToText}>
-                                        {/* <TouchableOpacity onPress={() => totalCost()}>
+                                    {tip.userId === userNo ?
+                                        <View style={styles.fixToText}>
+                                            {/* <TouchableOpacity onPress={() => totalCost()}>
                                         <Image source={require('../../../assets/food_waste_saver/edit.png')} style={{ marginTop: -17, marginLeft: 250 }} />
                                     </TouchableOpacity> */}
 
-                                        <TouchableOpacity
-                                            onPress={() => deleteData(tip._id)}
-                                        >
-                                            <Image source={require('../../../assets/food_waste_saver/delete1.png')} style={{ marginTop: -17, marginLeft: 250 }} />
-                                        </TouchableOpacity>
-                                    </View>
-                                    : null}
+                                            <TouchableOpacity
+                                                onPress={() => deleteData(tip._id)}
+                                            >
+                                                <Image source={require('../../../assets/food_waste_saver/delete1.png')} style={{ marginTop: -17, marginLeft: 250 }} />
+                                            </TouchableOpacity>
+                                        </View>
+                                        : null}
 
-                            </TouchableOpacity>
-                        </View>
-                    ))}
-
+                                </TouchableOpacity>
+                            </View>
+                        ))
+                    }
                     <View style={styles.fixToText}>
                         <TouchableOpacity style={styles.CalBtn} onPress={() => navigation.navigate("FoodSavingTips")}>
                             <Text style={styles.CalBtnText}>CANCEL</Text>
