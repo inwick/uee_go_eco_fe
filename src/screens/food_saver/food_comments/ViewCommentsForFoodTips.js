@@ -46,26 +46,13 @@ function ViewReviewForFoodTips({ route }) {
                             "Done",
                             "Successfully Deleted!",
                             [
-                                { text: "OK", onPress: () => navigation.navigate("FoodSavingTips") }
+                                { text: "OK", onPress: () => getFoodTips() }
                             ]
                         );
                     })
                 }
             ]
         );
-
-        // axios({
-        //     url: "http://10.0.2.2:5050/FoodSaver-comment/" + cid,
-        //     method: "DELETE"
-        // }).then((res) => {
-        //     Alert.alert(
-        //         "Done",
-        //         "Successfully Deleted!",
-        //         [
-        //             { text: "OK", onPress: () => navigation.navigate("FoodSaverDashboard") }
-        //         ]
-        //     );
-        // })
 
     }
 
