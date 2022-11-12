@@ -93,7 +93,7 @@ const Water = () => {
       <Stack.Screen name="WaterTipView" component={WaterTipView} options={{ title: '' }} />
       <Stack.Screen name="AddNewTip" component={AddNewTip} options={{ title: '' }} />
       <Stack.Screen name="WaterSaverCategories" component={WaterSaverCategories} options={{ title: '' }} />
-      <Stack.Screen name="WaterSaverComments" component={WaterComments} />
+      <Stack.Screen name="WaterSaverComments" component={WaterComments} options={{ title: '' }} />
     </Stack.Navigator>
 
   );
